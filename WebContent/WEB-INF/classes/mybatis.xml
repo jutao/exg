@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>  
+		<setting name="logImpl" value="LOG4J" /> <!-- sql日志输出配置 -->
+		<setting name="localCacheScope" value="SESSION"/> <!-- 一级缓存 作用域为SESSION，这位默认值 -->
+		<!-- <setting name="localCacheScope" value="STATEMENT"/> 一级缓存 作用域为STATEMENT,即作用域为SQL -->
+		<setting name="cacheEnabled" value="true"/> <!-- 打开二级缓存 -->
+	</settings>
+	<typeAliases>
+<typeAlias alias="V_addressBean" type="edu.jt.exg.logic.v_address.V_addressBean"/>
+<typeAlias alias="Category_masterBean" type="edu.jt.exg.logic.category_master.Category_masterBean"/>
+<typeAlias alias="CommentBean" type="edu.jt.exg.logic.comment.CommentBean"/>
+<typeAlias alias="Charge_detailBean" type="edu.jt.exg.logic.charge_detail.Charge_detailBean"/>		<typeAlias alias="CategoryBean" type="edu.jt.exg.logic.category.CategoryBean"/>
+<typeAlias alias="Mgr_userBean" type="edu.jt.exg.logic.mgr_user.Mgr_userBean"/>		
+<typeAlias alias="Order_masterBean" type="edu.jt.exg.logic.order_master.Order_masterBean"/>
+<typeAlias alias="Order_taskBean" type="edu.jt.exg.logic.order_task.Order_taskBean"/>
+<typeAlias alias="Re_serveBean" type="edu.jt.exg.logic.re_serve.Re_serveBean"/>
+<typeAlias alias="TaskBean" type="edu.jt.exg.logic.task.TaskBean"/>
+<typeAlias alias="UserBean" type="edu.jt.exg.logic.user.UserBean"/>
+<typeAlias alias="Withdrawals_detailBean" type="edu.jt.exg.logic.withdrawals_detail.Withdrawals_detailBean"/>
+<typeAlias alias="V_addressBean" type="edu.jt.exg.logic.v_address.V_addressBean"/>
+<typeAlias alias="V_commentBean" type="edu.jt.exg.logic.v_comment.V_commentBean"/>
+<typeAlias alias="V_charge_detailBean" type="edu.jt.exg.logic.v_charge_detail.V_charge_detailBean"/>
+<typeAlias alias="V_consume_detailBean" type="edu.jt.exg.logic.v_consume_detail.V_consume_detailBean"/>
+<typeAlias alias="Consume_detailBean" type="edu.jt.exg.logic.consume_detail.Consume_detailBean"/>
+<typeAlias alias="V_order_masterBean" type="edu.jt.exg.logic.v_order_master.V_order_masterBean"/>
+<typeAlias alias="V_order_taskBean" type="edu.jt.exg.logic.v_order_task.V_order_taskBean"/>
+<typeAlias alias="V_taskBean" type="edu.jt.exg.logic.v_task.V_taskBean"/>	</typeAliases>
+
+	<mappers>	
+<mapper resource="edu/jt/exg/logic/category/CategoryBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/category_master/Category_masterBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/comment/CommentBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/charge_detail/Charge_detailBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/mgr_user/Mgr_userBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/order_master/Order_masterBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/order_task/Order_taskBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/re_serve/Re_serveBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/task/TaskBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/user/UserBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/withdrawals_detail/Withdrawals_detailBatisMapper.xml"/>		
+<mapper resource="edu/jt/exg/logic/v_address/V_addressBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_comment/V_commentBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_charge_detail/V_charge_detailBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_consume_detail/V_consume_detailBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/consume_detail/Consume_detailBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_order_master/V_order_masterBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_order_task/V_order_taskBatisMapper.xml"/>
+<mapper resource="edu/jt/exg/logic/v_task/V_taskBatisMapper.xml"/>			
+<mapper resource="edu/jt/exg/logic/category_master/Category_masterBatisMapper.xml"/>
+	</mappers>
+</configuration>

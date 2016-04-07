@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+  	 	<property name="url" value="jdbc:mysql://localhost:3306/exg?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=utf8"/>
+		<property name="username" value="exg"/>
+		<property name="password" value="admin"/>
+		<property name="initialSize" value="10"/>
+		<property name="maxActive" value="3000"/>
+		<property name="maxIdle" value="200"/>
+		<property name="minIdle" value="2"/>
+   </bean>
+
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+	<!--dataSource属性指定要用到的连接池--> 
+	<property name="dataSource" ref="dataSource"/> 
+	<!--configLocation属性指定mybatis的核心配置文件--> 
+	<property name="configLocation" value="classpath:mybatis.xml"/> 
+</bean> 
+<bean id="categoryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+     <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+     <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+     <property name="mapperInterface" value="edu.jt.exg.logic.category.ICategory" />
+</bean>
+<bean id="category_masterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.category_master.ICategory_master" />
+</bean>
+<bean id="commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.comment.IComment" />
+</bean>
+<bean id="charge_detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.charge_detail.ICharge_detail" />
+</bean>	<bean id="mgr_userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.mgr_user.IMgr_user" />
+</bean>
+<bean id="order_masterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.order_master.IOrder_master" />
+</bean>
+<bean id="order_taskMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.order_task.IOrder_task" />
+</bean>
+<bean id="re_serveMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.re_serve.IRe_serve" />
+</bean>
+<bean id="taskMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.task.ITask" />
+</bean>
+<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.user.IUser" />
+</bean>
+<bean id="withdrawals_detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.withdrawals_detail.IWithdrawals_detail" />
+</bean>
+<bean id="v_commentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_comment.IV_comment" />
+</bean>
+<bean id="v_charge_detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_charge_detail.IV_charge_detail" />
+</bean>
+<bean id="v_consume_detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_consume_detail.IV_consume_detail" />
+</bean>
+<bean id="consume_detailMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.consume_detail.IConsume_detail" />
+</bean>
+<bean id="v_order_masterMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_order_master.IV_order_master" />
+</bean>
+<bean id="v_order_taskMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_order_task.IV_order_task" />
+</bean>
+<bean id="v_taskMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_task.IV_task" />
+</bean>
+<bean id="v_addressMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_address.IV_address" />
+</bean>
+</beans>

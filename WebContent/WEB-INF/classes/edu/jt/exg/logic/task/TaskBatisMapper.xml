@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.task.ITask" >
+	<resultMap type="TaskBean" id="resultTaskList">
+		<id column="Id" property="id"/>
+		
+<result column="Taskid" property="taskid"/>
+<result column="Userkey" property="userkey"/>
+<result column="Serverkey" property="serverkey"/>
+<result column="Tip" property="tip"/>
+<result column="Epson" property="epson"/>
+<result column="Pro_description" property="pro_description"/>
+<result column="Pro_image1" property="pro_image1"/>
+<result column="Pro_image2" property="pro_image2"/>
+<result column="Pro_image3" property="pro_image3"/>
+<result column="Pro_image4" property="pro_image4"/>
+<result column="Pro_image5" property="pro_image5"/>
+<result column="Solve_image1" property="solve_image1"/>
+<result column="Solve_image2" property="solve_image2"/>
+<result column="Solve_image3" property="solve_image3"/>
+<result column="Seat" property="seat"/>
+<result column="Status" property="status"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultTaskList" useCache="false">
+		select * from task
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from task
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="TaskBean" useCache="false">
+		select * from task where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultTaskList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from task where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from task where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="TaskBean">
+	    update task <set >
+		<if test="taskid!=null">taskid=#{taskid},</if>
+<if test="userkey!=null">userkey=#{userkey},</if>
+<if test="serverkey!=null">serverkey=#{serverkey},</if>
+<if test="tip!=null">tip=#{tip},</if>
+<if test="epson!=null">epson=#{epson},</if>
+<if test="pro_description!=null">pro_description=#{pro_description},</if>
+<if test="pro_image1!=null">pro_image1=#{pro_image1},</if>
+<if test="pro_image2!=null">pro_image2=#{pro_image2},</if>
+<if test="pro_image3!=null">pro_image3=#{pro_image3},</if>
+<if test="pro_image4!=null">pro_image4=#{pro_image4},</if>
+<if test="pro_image5!=null">pro_image5=#{pro_image5},</if>
+<if test="solve_image1!=null">solve_image1=#{solve_image1},</if>
+<if test="solve_image2!=null">solve_image2=#{solve_image2},</if>
+<if test="solve_image3!=null">solve_image3=#{solve_image3},</if>
+<if test="seat!=null">seat=#{seat},</if>
+<if test="status!=null">status=#{status},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="TaskBean">
+		insert into task
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="taskid!=null">taskid,</if>
+<if test="userkey!=null">userkey,</if>
+<if test="serverkey!=null">serverkey,</if>
+<if test="tip!=null">tip,</if>
+<if test="epson!=null">epson,</if>
+<if test="pro_description!=null">pro_description,</if>
+<if test="pro_image1!=null">pro_image1,</if>
+<if test="pro_image2!=null">pro_image2,</if>
+<if test="pro_image3!=null">pro_image3,</if>
+<if test="pro_image4!=null">pro_image4,</if>
+<if test="pro_image5!=null">pro_image5,</if>
+<if test="solve_image1!=null">solve_image1,</if>
+<if test="solve_image2!=null">solve_image2,</if>
+<if test="solve_image3!=null">solve_image3,</if>
+<if test="seat!=null">seat,</if>
+<if test="status!=null">status,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="taskid!=null">#{taskid},</if>
+<if test="userkey!=null">#{userkey},</if>
+<if test="serverkey!=null">#{serverkey},</if>
+<if test="tip!=null">#{tip},</if>
+<if test="epson!=null">#{epson},</if>
+<if test="pro_description!=null">#{pro_description},</if>
+<if test="pro_image1!=null">#{pro_image1},</if>
+<if test="pro_image2!=null">#{pro_image2},</if>
+<if test="pro_image3!=null">#{pro_image3},</if>
+<if test="pro_image4!=null">#{pro_image4},</if>
+<if test="pro_image5!=null">#{pro_image5},</if>
+<if test="solve_image1!=null">#{solve_image1},</if>
+<if test="solve_image2!=null">#{solve_image2},</if>
+<if test="solve_image3!=null">#{solve_image3},</if>
+<if test="seat!=null">#{seat},</if>
+<if test="status!=null">#{status},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>

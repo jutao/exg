@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<bean id="PageStatus" class="edu.jt.exg.logic.category.PageStatus" scope="prototype"/>
+
+
+<bean id="CategoryBatisDao" class="edu.jt.exg.logic.category.CategoryBatisDao" scope="prototype"/>
+
+<bean id="CategoryBean" class="edu.jt.exg.logic.category.CategoryBean" scope="prototype"/>
+<bean id="List_CategoryBean" class="java.util.ArrayList" scope="prototype"/>
+</beans>

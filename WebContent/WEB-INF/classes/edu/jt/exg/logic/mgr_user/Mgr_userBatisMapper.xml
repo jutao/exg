@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.mgr_user.IMgr_user" >
+	<resultMap type="Mgr_userBean" id="resultMgr_userList">
+		<id column="Id" property="id"/>
+		
+<result column="Usertype" property="usertype"/>
+<result column="Userid" property="userid"/>
+<result column="Name" property="name"/>
+<result column="Login_password" property="login_password"/>
+<result column="Yubei1" property="yubei1"/>
+<result column="Yubei2" property="yubei2"/>
+<result column="Yubei3" property="yubei3"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultMgr_userList" useCache="false">
+		select * from mgr_user
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from mgr_user
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="Mgr_userBean" useCache="false">
+		select * from mgr_user where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultMgr_userList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from mgr_user where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from mgr_user where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="Mgr_userBean">
+	    update mgr_user <set >
+		<if test="usertype!=null">usertype=#{usertype},</if>
+<if test="userid!=null">userid=#{userid},</if>
+<if test="name!=null">name=#{name},</if>
+<if test="login_password!=null">login_password=#{login_password},</if>
+<if test="yubei1!=null">yubei1=#{yubei1},</if>
+<if test="yubei2!=null">yubei2=#{yubei2},</if>
+<if test="yubei3!=null">yubei3=#{yubei3},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Mgr_userBean">
+		insert into mgr_user
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+<if test="id!=null">id,</if>
+<if test="usertype!=null">usertype,</if>
+<if test="userid!=null">userid,</if>
+<if test="name!=null">name,</if>
+<if test="login_password!=null">login_password,</if>
+<if test="yubei1!=null">yubei1,</if>
+<if test="yubei2!=null">yubei2,</if>
+<if test="yubei3!=null">yubei3,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+<if test="id!=null">#{id},</if>
+<if test="usertype!=null">#{usertype},</if>
+<if test="userid!=null">#{userid},</if>
+<if test="name!=null">#{name},</if>
+<if test="login_password!=null">#{login_password},</if>
+<if test="yubei1!=null">#{yubei1},</if>
+<if test="yubei2!=null">#{yubei2},</if>
+<if test="yubei3!=null">#{yubei3},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>

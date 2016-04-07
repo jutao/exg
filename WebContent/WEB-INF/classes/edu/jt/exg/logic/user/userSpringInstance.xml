@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<bean id="PageStatus" class="edu.jt.exg.logic.user.PageStatus" scope="prototype"/>
+
+
+<bean id="UserBatisDao" class="edu.jt.exg.logic.user.UserBatisDao" scope="prototype"/>
+
+<bean id="UserBean" class="edu.jt.exg.logic.user.UserBean" scope="prototype"/>
+<bean id="List_UserBean" class="java.util.ArrayList" scope="prototype"/>
+</beans>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.v_charge_detail.IV_charge_detail" >
+	<resultMap type="V_charge_detailBean" id="resultV_charge_detailList">
+		<id column="Id" property="id"/>
+		
+<result column="Chargeid" property="chargeid"/>
+<result column="Userkey" property="userkey"/>
+<result column="Amount" property="amount"/>
+<result column="Category" property="category"/>
+<result column="Status" property="status"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+<result column="Name" property="name"/>
+<result column="User_id" property="user_id"/>
+<result column="Icon" property="icon"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultV_charge_detailList" useCache="false">
+		select * from v_charge_detail
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from v_charge_detail
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="V_charge_detailBean" useCache="false">
+		select * from v_charge_detail where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultV_charge_detailList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from v_charge_detail where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from v_charge_detail where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="V_charge_detailBean">
+	    update v_charge_detail <set >
+		<if test="chargeid!=null">chargeid=#{chargeid},</if>
+<if test="userkey!=null">userkey=#{userkey},</if>
+<if test="amount!=null">amount=#{amount},</if>
+<if test="category!=null">category=#{category},</if>
+<if test="status!=null">status=#{status},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+<if test="name!=null">name=#{name},</if>
+<if test="user_id!=null">user_id=#{user_id},</if>
+<if test="icon!=null">icon=#{icon},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="V_charge_detailBean">
+		insert into v_charge_detail
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="chargeid!=null">chargeid,</if>
+<if test="userkey!=null">userkey,</if>
+<if test="amount!=null">amount,</if>
+<if test="category!=null">category,</if>
+<if test="status!=null">status,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+<if test="name!=null">name,</if>
+<if test="user_id!=null">user_id,</if>
+<if test="icon!=null">icon,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="chargeid!=null">#{chargeid},</if>
+<if test="userkey!=null">#{userkey},</if>
+<if test="amount!=null">#{amount},</if>
+<if test="category!=null">#{category},</if>
+<if test="status!=null">#{status},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+<if test="name!=null">#{name},</if>
+<if test="user_id!=null">#{user_id},</if>
+<if test="icon!=null">#{icon},</if>
+	    </trim>
+	  </insert>
+</mapper>

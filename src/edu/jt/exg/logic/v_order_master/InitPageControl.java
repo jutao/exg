@@ -1,0 +1,78 @@
+package edu.jt.exg.logic.v_order_master;
+import java.io.Serializable;
+import java.util.List;
+import utility.Utilities;
+import edu.jt.exg.action.V_order_masterAction;
+import core.ListKeyBean;
+
+//页面控件初始化设置
+public class InitPageControl implements Serializable{
+
+	private static final long serialVersionUID = 19761210;
+
+	public InitPageControl(){super();}
+	
+	/**
+	 * 初始化选择列字符串供hidden控件使用,动态列排序初始化,不包括主键
+	 */
+	public static String getColumnSetupAllStr(){
+		String tmp="Orderid|Repair_userkey|Outcome|Outcome_image1|Outcome_image2|Outcome_image3|Status|Invalid|Register_time|Update_time|Req_name|Req_id|Req_icon";
+		return tmp;
+	}
+
+	/**
+	 * 设置s:optiontransferselect集合初始化
+	 */
+	
+	
+	/**
+	 * s:combobox初始化
+	 */
+	
+	
+	/**
+	 * s:doubleselect初始化
+	 */
+	
+	
+	/**
+	 * s:select初始化,value和text显示项必须相同
+	 */
+	
+	
+	/**
+	 * timestamp初始化
+	 */
+	public static void initTimestamp(V_order_masterAction v_order_masterAction){
+		if(v_order_masterAction.action.equals("initmultiquery") || v_order_masterAction.action.equals("multiquery") ||
+				v_order_masterAction.action.equals("initsinglequery") || v_order_masterAction.action.equals("singlequery") ||
+				v_order_masterAction.action.equals("initquery") || v_order_masterAction.action.equals("query") || 
+				v_order_masterAction.action.equals("${action}")){
+
+				//auto timestamp init for query
+				v_order_masterAction.setRegister_timeHourMapFrom(v_order_masterAction.register_timeHourMapFrom);
+				v_order_masterAction.setRegister_timeMinuteMapFrom(v_order_masterAction.register_timeMinuteMapFrom);
+				v_order_masterAction.setRegister_timeHourMapTo(v_order_masterAction.register_timeHourMapTo);
+				v_order_masterAction.setRegister_timeMinuteMapTo(v_order_masterAction.register_timeMinuteMapTo);
+				//auto timestamp init for query
+				v_order_masterAction.setUpdate_timeHourMapFrom(v_order_masterAction.update_timeHourMapFrom);
+				v_order_masterAction.setUpdate_timeMinuteMapFrom(v_order_masterAction.update_timeMinuteMapFrom);
+				v_order_masterAction.setUpdate_timeHourMapTo(v_order_masterAction.update_timeHourMapTo);
+				v_order_masterAction.setUpdate_timeMinuteMapTo(v_order_masterAction.update_timeMinuteMapTo);
+
+		}else{
+
+		}
+	}
+
+	
+	/**
+	 * s:checkboxlist初始化
+	 */
+	
+	
+	/**
+	 * s:radio初始化
+	 */
+	
+}

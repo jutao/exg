@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="edu.jt.exg.action.v_charge_detail" namespace="/" extends="struts-default">
+    	<global-results>
+		    <result name="exception">/edu/jt/exg/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+        <action name="V_charge_detailAction" class="edu.jt.exg.action.V_charge_detailAction">
+        	<!-- 插入、更新跳转 -->
+        	<result name="toinitquery" type="redirectAction">
+     			<param name="actionName">V_charge_detailAction</param>
+     			<param name="namespace">/</param>
+     			<param name="action">${action}</param>
+  			</result>
+            <result name="initcreate">/edu/jt/exg/v_charge_detail/V_charge_detailCreate.jsp</result>
+            <result name="initupdate">/edu/jt/exg/v_charge_detail/V_charge_detailUpdate.jsp</result>
+            <result name="initmultiquery">/edu/jt/exg/v_charge_detail/V_charge_detailQueryMultiPopup.jsp</result>
+            <result name="initsinglequery">/edu/jt/exg/v_charge_detail/V_charge_detailQuerySinglePopup.jsp</result>
+            <result name="initquery">/edu/jt/exg/v_charge_detail/V_charge_detailQuery.jsp</result>
+            <result name="multiquery">/edu/jt/exg/v_charge_detail/V_charge_detailQueryMultiPopup.jsp</result>
+            <result name="singlequery">/edu/jt/exg/v_charge_detail/V_charge_detailQuerySinglePopup.jsp</result>
+            <result name="query">/edu/jt/exg/v_charge_detail/V_charge_detailQuery.jsp</result>
+            <result name="detail">/edu/jt/exg/v_charge_detail/V_charge_detailDetail.jsp</result>
+            <param name="action">${action}</param>
+            <param name="v_charge_detail_id">${v_charge_detail_id}</param>
+            <param name="export">${export}</param>
+            <param name="scope">${scope}</param>
+           	<!-- 局部异常映射 -->
+            <exception-mapping result="nullPoint" exception="java.lang.Exception"></exception-mapping>   
+            <result name="nullPoint">/edu/jt/exg/error.jsp</result>
+        </action>
+    </package>
+</struts>

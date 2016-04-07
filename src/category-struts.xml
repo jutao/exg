@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="edu.jt.exg.action.category" namespace="/" extends="struts-default">
+    	<global-results>
+		    <result name="exception">/edu/jt/exg/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+        <action name="CategoryAction" class="edu.jt.exg.action.CategoryAction">
+        	<!-- 插入、更新跳转 -->
+        	<result name="toinitquery" type="redirectAction">
+     			<param name="actionName">CategoryAction</param>
+     			<param name="namespace">/</param>
+     			<param name="action">${action}</param>
+  			</result>
+            <result name="initcreate">/edu/jt/exg/category/CategoryCreate.jsp</result>
+            <result name="initupdate">/edu/jt/exg/category/CategoryUpdate.jsp</result>
+            <result name="initmultiquery">/edu/jt/exg/category/CategoryQueryMultiPopup.jsp</result>
+            <result name="initsinglequery">/edu/jt/exg/category/CategoryQuerySinglePopup.jsp</result>
+            <result name="initquery">/edu/jt/exg/category/CategoryQuery.jsp</result>
+            <result name="multiquery">/edu/jt/exg/category/CategoryQueryMultiPopup.jsp</result>
+            <result name="singlequery">/edu/jt/exg/category/CategoryQuerySinglePopup.jsp</result>
+            <result name="query">/edu/jt/exg/category/CategoryQuery.jsp</result>
+            <result name="detail">/edu/jt/exg/category/CategoryDetail.jsp</result>
+            <param name="action">${action}</param>
+            <param name="category_id">${category_id}</param>
+            <param name="export">${export}</param>
+            <param name="scope">${scope}</param>
+           	<!-- 局部异常映射 -->
+            <exception-mapping result="nullPoint" exception="java.lang.Exception"></exception-mapping>   
+            <result name="nullPoint">/edu/jt/exg/error.jsp</result>
+        </action>
+    </package>
+</struts>

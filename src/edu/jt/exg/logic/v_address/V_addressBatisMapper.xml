@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.v_address.IV_address" >
+	<resultMap type="V_addressBean" id="resultV_addressList">
+	<id column="Province_code" property="province_code"/>
+		
+<result column="Province_name" property="province_name"/>
+<result column="City_code" property="city_code"/>
+<result column="City_name" property="city_name"/>
+<result column="Area_code" property="area_code"/>
+<result column="Area_name" property="area_name"/>
+	</resultMap>
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultV_addressList" useCache="false">
+		select * from v_address
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from v_address
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="V_addressBean" useCache="false">
+		select * from v_address where province_code=#{province_code}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultV_addressList" useCache="false">
+		${sql}
+	</select>
+	
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	<!-- 根据province查询省份名称  -->
+	<select id="finderProvince_name" parameterType="String" resultType="String" useCache="false">
+		SELECT DISTINCT(province_name) FROM `v_address` WHERE province_code=#{province_code}
+	</select>
+	<!-- 根据city查询城市名称  -->
+	<select id="finderCity_name" parameterType="String" resultType="String" useCache="false">
+		SELECT DISTINCT(city_name) FROM `v_address` WHERE city_code=#{city_code}
+	</select>
+	<!-- 根据area查询区名称  -->
+	<select id="finderArea_name" parameterType="String" resultType="String" useCache="false">
+		SELECT DISTINCT(area_name) FROM `v_address` WHERE area_code=#{area_code}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from v_address where province_code=#{province_code}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from v_address where province_code in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="V_addressBean">
+	    update v_address <set >
+		<if test="province_name!=null">province_name=#{province_name},</if>
+<if test="city_code!=null">city_code=#{city_code},</if>
+<if test="city_name!=null">city_name=#{city_name},</if>
+<if test="area_code!=null">area_code=#{area_code},</if>
+<if test="area_name!=null">area_name=#{area_name},</if>
+	    </set> where province_code=#{province_code}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="V_addressBean">
+		insert into v_address
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="province_code!=null">province_code,</if>
+<if test="province_name!=null">province_name,</if>
+<if test="city_code!=null">city_code,</if>
+<if test="city_name!=null">city_name,</if>
+<if test="area_code!=null">area_code,</if>
+<if test="area_name!=null">area_name,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="province_code!=null">#{province_code},</if>
+<if test="province_name!=null">#{province_name},</if>
+<if test="city_code!=null">#{city_code},</if>
+<if test="city_name!=null">#{city_name},</if>
+<if test="area_code!=null">#{area_code},</if>
+<if test="area_name!=null">#{area_name},</if>
+	    </trim>
+	  </insert>
+</mapper>

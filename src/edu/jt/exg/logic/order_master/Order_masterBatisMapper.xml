@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.order_master.IOrder_master" >
+	<resultMap type="Order_masterBean" id="resultOrder_masterList">
+		<id column="Id" property="id"/>
+		
+<result column="Orderid" property="orderid"/>
+<result column="Repair_userkey" property="repair_userkey"/>
+<result column="Outcome" property="outcome"/>
+<result column="Outcome_image1" property="outcome_image1"/>
+<result column="Outcome_image2" property="outcome_image2"/>
+<result column="Outcome_image3" property="outcome_image3"/>
+<result column="Status" property="status"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultOrder_masterList" useCache="false">
+		select * from order_master
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from order_master
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="Order_masterBean" useCache="false">
+		select * from order_master where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultOrder_masterList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from order_master where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from order_master where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="Order_masterBean">
+	    update order_master <set >
+		<if test="orderid!=null">orderid=#{orderid},</if>
+<if test="repair_userkey!=null">repair_userkey=#{repair_userkey},</if>
+<if test="outcome!=null">outcome=#{outcome},</if>
+<if test="outcome_image1!=null">outcome_image1=#{outcome_image1},</if>
+<if test="outcome_image2!=null">outcome_image2=#{outcome_image2},</if>
+<if test="outcome_image3!=null">outcome_image3=#{outcome_image3},</if>
+<if test="status!=null">status=#{status},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Order_masterBean">
+		insert into order_master
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="orderid!=null">orderid,</if>
+<if test="repair_userkey!=null">repair_userkey,</if>
+<if test="outcome!=null">outcome,</if>
+<if test="outcome_image1!=null">outcome_image1,</if>
+<if test="outcome_image2!=null">outcome_image2,</if>
+<if test="outcome_image3!=null">outcome_image3,</if>
+<if test="status!=null">status,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="orderid!=null">#{orderid},</if>
+<if test="repair_userkey!=null">#{repair_userkey},</if>
+<if test="outcome!=null">#{outcome},</if>
+<if test="outcome_image1!=null">#{outcome_image1},</if>
+<if test="outcome_image2!=null">#{outcome_image2},</if>
+<if test="outcome_image3!=null">#{outcome_image3},</if>
+<if test="status!=null">#{status},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>

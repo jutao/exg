@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.user.IUser" >
+	<resultMap type="UserBean" id="resultUserList">
+		<id column="Id" property="id"/>
+		
+<result column="Level" property="level"/>
+<result column="Userid" property="userid"/>
+<result column="Name" property="name"/>
+<result column="Nickname" property="nickname"/>
+<result column="Icon" property="icon"/>
+<result column="Id_number" property="id_number"/>
+<result column="Email" property="email"/>
+<result column="Gender" property="gender"/>
+<result column="Address_province" property="address_province"/>
+<result column="Address_city" property="address_city"/>
+<result column="Address_area" property="address_area"/>
+<result column="Address_details" property="address_details"/>
+<result column="Hometown" property="hometown"/>
+<result column="Occupation" property="occupation"/>
+<result column="Interest" property="interest"/>
+<result column="Bankname" property="bankname"/>
+<result column="Bank_branch" property="bank_branch"/>
+<result column="Card_number" property="card_number"/>
+<result column="Balance" property="balance"/>
+<result column="Point" property="point"/>
+<result column="Recommender_code" property="recommender_code"/>
+<result column="Login_password" property="login_password"/>
+<result column="Gesture_password" property="gesture_password"/>
+<result column="Trading_password" property="trading_password"/>
+<result column="Category" property="category"/>
+<result column="Usertype" property="usertype"/>
+<result column="Qualificat" property="qualificat"/>
+<result column="Yubei1" property="yubei1"/>
+<result column="Yubei2" property="yubei2"/>
+<result column="Yubei3" property="yubei3"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultUserList" useCache="false">
+		select * from user
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from user
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="UserBean" useCache="false">
+		select * from user where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultUserList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from user where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from user where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="UserBean">
+	    update user <set >
+		<if test="level!=null">level=#{level},</if>
+<if test="userid!=null">userid=#{userid},</if>
+<if test="name!=null">name=#{name},</if>
+<if test="nickname!=null">nickname=#{nickname},</if>
+<if test="icon!=null">icon=#{icon},</if>
+<if test="id_number!=null">id_number=#{id_number},</if>
+<if test="email!=null">email=#{email},</if>
+<if test="gender!=null">gender=#{gender},</if>
+<if test="address_province!=null">address_province=#{address_province},</if>
+<if test="address_city!=null">address_city=#{address_city},</if>
+<if test="address_area!=null">address_area=#{address_area},</if>
+<if test="address_details!=null">address_details=#{address_details},</if>
+<if test="hometown!=null">hometown=#{hometown},</if>
+<if test="occupation!=null">occupation=#{occupation},</if>
+<if test="interest!=null">interest=#{interest},</if>
+<if test="bankname!=null">bankname=#{bankname},</if>
+<if test="bank_branch!=null">bank_branch=#{bank_branch},</if>
+<if test="card_number!=null">card_number=#{card_number},</if>
+<if test="balance!=null">balance=#{balance},</if>
+<if test="point!=null">point=#{point},</if>
+<if test="recommender_code!=null">recommender_code=#{recommender_code},</if>
+<if test="login_password!=null">login_password=#{login_password},</if>
+<if test="gesture_password!=null">gesture_password=#{gesture_password},</if>
+<if test="trading_password!=null">trading_password=#{trading_password},</if>
+<if test="category!=null">category=#{category},</if>
+<if test="usertype!=null">usertype=#{usertype},</if>
+<if test="qualificat!=null">qualificat=#{qualificat},</if>
+<if test="yubei1!=null">yubei1=#{yubei1},</if>
+<if test="yubei2!=null">yubei2=#{yubei2},</if>
+<if test="yubei3!=null">yubei3=#{yubei3},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="UserBean">
+		insert into user
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="level!=null">level,</if>
+<if test="userid!=null">userid,</if>
+<if test="name!=null">name,</if>
+<if test="nickname!=null">nickname,</if>
+<if test="icon!=null">icon,</if>
+<if test="id_number!=null">id_number,</if>
+<if test="email!=null">email,</if>
+<if test="gender!=null">gender,</if>
+<if test="address_province!=null">address_province,</if>
+<if test="address_city!=null">address_city,</if>
+<if test="address_area!=null">address_area,</if>
+<if test="address_details!=null">address_details,</if>
+<if test="hometown!=null">hometown,</if>
+<if test="occupation!=null">occupation,</if>
+<if test="interest!=null">interest,</if>
+<if test="bankname!=null">bankname,</if>
+<if test="bank_branch!=null">bank_branch,</if>
+<if test="card_number!=null">card_number,</if>
+<if test="balance!=null">balance,</if>
+<if test="point!=null">point,</if>
+<if test="recommender_code!=null">recommender_code,</if>
+<if test="login_password!=null">login_password,</if>
+<if test="gesture_password!=null">gesture_password,</if>
+<if test="trading_password!=null">trading_password,</if>
+<if test="category!=null">category,</if>
+<if test="usertype!=null">usertype,</if>
+<if test="qualificat!=null">qualificat,</if>
+<if test="yubei1!=null">yubei1,</if>
+<if test="yubei2!=null">yubei2,</if>
+<if test="yubei3!=null">yubei3,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="level!=null">#{level},</if>
+<if test="userid!=null">#{userid},</if>
+<if test="name!=null">#{name},</if>
+<if test="nickname!=null">#{nickname},</if>
+<if test="icon!=null">#{icon},</if>
+<if test="id_number!=null">#{id_number},</if>
+<if test="email!=null">#{email},</if>
+<if test="gender!=null">#{gender},</if>
+<if test="address_province!=null">#{address_province},</if>
+<if test="address_city!=null">#{address_city},</if>
+<if test="address_area!=null">#{address_area},</if>
+<if test="address_details!=null">#{address_details},</if>
+<if test="hometown!=null">#{hometown},</if>
+<if test="occupation!=null">#{occupation},</if>
+<if test="interest!=null">#{interest},</if>
+<if test="bankname!=null">#{bankname},</if>
+<if test="bank_branch!=null">#{bank_branch},</if>
+<if test="card_number!=null">#{card_number},</if>
+<if test="balance!=null">#{balance},</if>
+<if test="point!=null">#{point},</if>
+<if test="recommender_code!=null">#{recommender_code},</if>
+<if test="login_password!=null">#{login_password},</if>
+<if test="gesture_password!=null">#{gesture_password},</if>
+<if test="trading_password!=null">#{trading_password},</if>
+<if test="category!=null">#{category},</if>
+<if test="usertype!=null">#{usertype},</if>
+<if test="qualificat!=null">#{qualificat},</if>
+<if test="yubei1!=null">#{yubei1},</if>
+<if test="yubei2!=null">#{yubei2},</if>
+<if test="yubei3!=null">#{yubei3},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>

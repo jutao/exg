@@ -1,0 +1,37 @@
+
+body#theme-default {
+background: #F5F5F5;
+}
+
+.switch_bar{
+	float:left;
+	background-color: transparent;
+	border-width:0;
+	box-shadow:none;
+}
+
+.header_left{
+	width:220px;
+}
+
+.header_right{
+	width:auto;
+}
+
+#widget_tab{
+	float:left;
+}
+
+.top_search{
+	width:auto;
+}
+
+#theme-default #container{
+	background:#FFF;
+	border-color:#ccc;
+}
+
+#theme-default .page_title{
+	margin-top:65px;
+}
+

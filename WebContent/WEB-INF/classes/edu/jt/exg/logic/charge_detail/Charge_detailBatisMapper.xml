@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.charge_detail.ICharge_detail" >
+	<resultMap type="Charge_detailBean" id="resultCharge_detailList">
+		<id column="Id" property="id"/>
+		
+<result column="Chargeid" property="chargeid"/>
+<result column="Userkey" property="userkey"/>
+<result column="Amount" property="amount"/>
+<result column="Category" property="category"/>
+<result column="Status" property="status"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultCharge_detailList" useCache="false">
+		select * from charge_detail
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from charge_detail
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="Charge_detailBean" useCache="false">
+		select * from charge_detail where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultCharge_detailList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from charge_detail where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from charge_detail where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="Charge_detailBean">
+	    update charge_detail <set >
+		<if test="chargeid!=null">chargeid=#{chargeid},</if>
+<if test="userkey!=null">userkey=#{userkey},</if>
+<if test="amount!=null">amount=#{amount},</if>
+<if test="category!=null">category=#{category},</if>
+<if test="status!=null">status=#{status},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Charge_detailBean">
+		insert into charge_detail
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="chargeid!=null">chargeid,</if>
+<if test="userkey!=null">userkey,</if>
+<if test="amount!=null">amount,</if>
+<if test="category!=null">category,</if>
+<if test="status!=null">status,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="chargeid!=null">#{chargeid},</if>
+<if test="userkey!=null">#{userkey},</if>
+<if test="amount!=null">#{amount},</if>
+<if test="category!=null">#{category},</if>
+<if test="status!=null">#{status},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>

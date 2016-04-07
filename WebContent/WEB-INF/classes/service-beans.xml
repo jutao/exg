@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+  xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+  xsi:schemaLocation="  
+    http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+	<bean id="categoryService" class="edu.jt.exg.service.CategoryServiceImpl" />	
+	<jaxrs:server id="exgService" address="/">
+	<jaxrs:serviceBeans>
+		<ref bean="categoryService" />	
+	</jaxrs:serviceBeans>
+		<jaxrs:inInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+		</jaxrs:inInterceptors>
+		<jaxrs:outInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
+		</jaxrs:outInterceptors>
+		<jaxrs:providers>
+			<bean class="org.apache.cxf.jaxrs.ext.search.SearchContextProvider"/>
+			<bean class="utility.JsonpProvider">
+				<property name="ignoreNamespaces" value="true" />
+				<property name="supportUnwrapped" value="true" />
+				<property name="dropRootElement" value="true"/> 
+        		<property name="dropCollectionWrapperElement" value="true"/> 
+				<property name="serializeAsArray" value="true"/> 
+			</bean>
+			<bean class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
+				<property name="allowOrigins" value="*"/>
+		    </bean>
+		</jaxrs:providers>
+		<jaxrs:extensionMappings>
+			<entry key="xml" value="application/xml" />
+			<entry key="json" value="application/json" />
+			<entry key="jsonp" value="application/javascript"/>
+   		</jaxrs:extensionMappings>
+	</jaxrs:server>
+</beans>

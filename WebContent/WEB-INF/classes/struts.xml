@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory"
+		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+	<!-- 对默认拦截器的引入 -->
+<include file="category-struts.xml" />
+<include file="order_master-struts.xml"/>
+<include file="v_task-struts.xml"/>
+<include file="order_task-struts.xml"/>
+<include file="v_order_task-struts.xml"/>	
+<include file="v_charge_detail-struts.xml"/>
+<include file="v_consume_detail-struts.xml"/>
+<include file="charge_detail-struts.xml"/>
+<include file="task-struts.xml"/>
+<include file="withdrawals_detail-struts.xml"/>
+<include file="v_comment-struts.xml"/>
+<include file="v_order_master-struts.xml"/>
+<include file="re_serve-struts.xml"/>
+<include file="v_address-struts.xml"/>
+<include file="comment-struts.xml"/>
+<include file="fileUpload-struts.xml" />
+<include file="category_master-struts.xml" />
+<include file="user-struts.xml"/>
+<include file="consume_detail-struts.xml"/>	
+<include file="mgr_user-struts.xml" />
+<include file="login-struts.xml" />
+</struts>

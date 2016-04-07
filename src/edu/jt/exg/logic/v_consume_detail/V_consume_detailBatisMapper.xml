@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.v_consume_detail.IV_consume_detail" >
+	<resultMap type="V_consume_detailBean" id="resultV_consume_detailList">
+		<id column="Id" property="id"/>
+		
+<result column="Detailid" property="detailid"/>
+<result column="Taskkey" property="taskkey"/>
+<result column="Quantity" property="quantity"/>
+<result column="Status" property="status"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+<result column="User_name" property="user_name"/>
+<result column="User_id" property="user_id"/>
+<result column="User_icon" property="user_icon"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultV_consume_detailList" useCache="false">
+		select * from v_consume_detail
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from v_consume_detail
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="V_consume_detailBean" useCache="false">
+		select * from v_consume_detail where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultV_consume_detailList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from v_consume_detail where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from v_consume_detail where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="V_consume_detailBean">
+	    update v_consume_detail <set >
+		<if test="detailid!=null">detailid=#{detailid},</if>
+<if test="taskkey!=null">taskkey=#{taskkey},</if>
+<if test="quantity!=null">quantity=#{quantity},</if>
+<if test="status!=null">status=#{status},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+<if test="user_name!=null">user_name=#{user_name},</if>
+<if test="user_id!=null">user_id=#{user_id},</if>
+<if test="user_icon!=null">user_icon=#{user_icon},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="V_consume_detailBean">
+		insert into v_consume_detail
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="detailid!=null">detailid,</if>
+<if test="taskkey!=null">taskkey,</if>
+<if test="quantity!=null">quantity,</if>
+<if test="status!=null">status,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+<if test="user_name!=null">user_name,</if>
+<if test="user_id!=null">user_id,</if>
+<if test="user_icon!=null">user_icon,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="detailid!=null">#{detailid},</if>
+<if test="taskkey!=null">#{taskkey},</if>
+<if test="quantity!=null">#{quantity},</if>
+<if test="status!=null">#{status},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+<if test="user_name!=null">#{user_name},</if>
+<if test="user_id!=null">#{user_id},</if>
+<if test="user_icon!=null">#{user_icon},</if>
+	    </trim>
+	  </insert>
+</mapper>

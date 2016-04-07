@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.jt.exg.logic.re_serve.IRe_serve" >
+	<resultMap type="Re_serveBean" id="resultRe_serveList">
+		<id column="Id" property="id"/>
+		
+<result column="Serveid" property="serveid"/>
+<result column="Name" property="name"/>
+<result column="Price" property="price"/>
+<result column="Varieties" property="varieties"/>
+<result column="Description" property="description"/>
+<result column="Top_pic1" property="top_pic1"/>
+<result column="Pic1" property="pic1"/>
+<result column="Pic2" property="pic2"/>
+<result column="Pic3" property="pic3"/>
+<result column="Pic4" property="pic4"/>
+<result column="Pic5" property="pic5"/>
+<result column="Yubei1" property="yubei1"/>
+<result column="Yubei2" property="yubei2"/>
+<result column="Yubei3" property="yubei3"/>
+<result column="Display" property="display"/>
+<result column="Invalid" property="invalid"/>
+<result column="Register_time" property="register_time"/>
+<result column="Update_time" property="update_time"/>
+	</resultMap>
+	
+	<!-- 全记录 useCache使用二级缓存开关 -->
+	<select id="findByAll" resultMap="resultRe_serveList" useCache="false">
+		select * from re_serve
+	</select>
+	
+	<!-- 全记录数量 useCache使用二级缓存开关  -->
+	<select id="findByAllCount" resultType="Long" useCache="false">
+		select count(1) from re_serve
+	</select>
+	
+	<!-- 根据主键查询记录 useCache使用二级缓存开关  -->
+	<select id="findByKey" parameterType="String" resultType="Re_serveBean" useCache="false">
+		select * from re_serve where id=#{id}
+	</select>
+	
+	<!-- 根据条件查询 useCache使用二级缓存开关  -->
+	<select id="finder" parameterType="String" resultMap="resultRe_serveList" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 查询条件记录数量 useCache使用二级缓存开关  -->
+	<select id="finderCount" resultType="Long" useCache="false">
+		${sql}
+	</select>
+	
+	<!-- 根据主键删除记录 -->
+	<delete id="deleteByKey" parameterType="String">
+    	delete from re_serve where id=#{id}
+	</delete>
+	
+	<!-- 根据主键批量删除记录 -->
+	<select id="deleteByKeys" parameterType="List">
+         delete from re_serve where id in
+         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+	</select>
+	
+	<!-- 根据主键更新记录 -->
+	<update id="updateByKey" parameterType="Re_serveBean">
+	    update re_serve <set >
+		<if test="serveid!=null">serveid=#{serveid},</if>
+<if test="name!=null">name=#{name},</if>
+<if test="price!=null">price=#{price},</if>
+<if test="varieties!=null">varieties=#{varieties},</if>
+<if test="description!=null">description=#{description},</if>
+<if test="top_pic1!=null">top_pic1=#{top_pic1},</if>
+<if test="pic1!=null">pic1=#{pic1},</if>
+<if test="pic2!=null">pic2=#{pic2},</if>
+<if test="pic3!=null">pic3=#{pic3},</if>
+<if test="pic4!=null">pic4=#{pic4},</if>
+<if test="pic5!=null">pic5=#{pic5},</if>
+<if test="yubei1!=null">yubei1=#{yubei1},</if>
+<if test="yubei2!=null">yubei2=#{yubei2},</if>
+<if test="yubei3!=null">yubei3=#{yubei3},</if>
+<if test="display!=null">display=#{display},</if>
+<if test="invalid!=null">invalid=#{invalid},</if>
+<if test="register_time!=null">register_time=#{register_time},</if>
+<if test="update_time!=null">update_time=#{update_time},</if>
+	    </set> where id=#{id}
+	</update>
+	
+	<!-- 插入记录 -->
+	<insert id="insert" parameterType="Re_serveBean">
+		insert into re_serve
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id!=null">id,</if>
+<if test="serveid!=null">serveid,</if>
+<if test="name!=null">name,</if>
+<if test="price!=null">price,</if>
+<if test="varieties!=null">varieties,</if>
+<if test="description!=null">description,</if>
+<if test="top_pic1!=null">top_pic1,</if>
+<if test="pic1!=null">pic1,</if>
+<if test="pic2!=null">pic2,</if>
+<if test="pic3!=null">pic3,</if>
+<if test="pic4!=null">pic4,</if>
+<if test="pic5!=null">pic5,</if>
+<if test="yubei1!=null">yubei1,</if>
+<if test="yubei2!=null">yubei2,</if>
+<if test="yubei3!=null">yubei3,</if>
+<if test="display!=null">display,</if>
+<if test="invalid!=null">invalid,</if>
+<if test="register_time!=null">register_time,</if>
+<if test="update_time!=null">update_time,</if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id!=null">#{id},</if>
+<if test="serveid!=null">#{serveid},</if>
+<if test="name!=null">#{name},</if>
+<if test="price!=null">#{price},</if>
+<if test="varieties!=null">#{varieties},</if>
+<if test="description!=null">#{description},</if>
+<if test="top_pic1!=null">#{top_pic1},</if>
+<if test="pic1!=null">#{pic1},</if>
+<if test="pic2!=null">#{pic2},</if>
+<if test="pic3!=null">#{pic3},</if>
+<if test="pic4!=null">#{pic4},</if>
+<if test="pic5!=null">#{pic5},</if>
+<if test="yubei1!=null">#{yubei1},</if>
+<if test="yubei2!=null">#{yubei2},</if>
+<if test="yubei3!=null">#{yubei3},</if>
+<if test="display!=null">#{display},</if>
+<if test="invalid!=null">#{invalid},</if>
+<if test="register_time!=null">#{register_time},</if>
+<if test="update_time!=null">#{update_time},</if>
+	    </trim>
+	  </insert>
+</mapper>
