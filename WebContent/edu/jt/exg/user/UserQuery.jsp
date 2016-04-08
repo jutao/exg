@@ -1,438 +1,523 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page contentType="text/html;charset=utf-8"%>
+<!DOCTYPE HTML>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="edu.jt.exg.logic.mgr_user.Mgr_userBean"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String userName = (String) (request.getSession()
+			.getAttribute("userName"));
 %>
 <html>
 <head>
-    <title>userquery</title>
-    <style>.doubleselect br{display:none}</style>
-    <meta http-equiv="Cache-Control" content="no-store">
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Expires" content="0">
-    <LINK href="../theme/style.css" rel="stylesheet" type="text/css">
-	<base href="<%=basePath%>">
-	<!--必须先加载否则js中的jquery脚本会报错未定义-->
-	<script language="javascript" src="edu/jt/exg/js/jquery-1.11.1.js"></script>
-    <script language="javascript" src="edu/jt/exg/js/public.js"></script>
-    <script language="javascript" src="edu/jt/exg/js/user.js"></script>
-    <style type="text/css">
-		<!--
-		  body {
-			margin-left: 0px;
-			margin-top: 0px;
-			margin-right: 0px;
-			margin-bottom: 0px;
-		  }
-		-->
-	</style>
-    <sx:head/>
-    <script language='javascript'>
-	    $(function(){
-		  	$("#form1").submit(function(){
-		  		return checkFormForQuery();
-			});
-			
-			$("#f").click(function(){
-				ShowDiv('fade');
-		  		finder();
-			});
-			
-			$("#f").dblclick(function(){
-				javascript:void(0);
-			});
-			
-			$("#r").click(function(){
-		  		window.setTimeout(function(){window.location='UserAction.action?action=initquery';return true;},0);
-			});
-			
-			$("#mmAll").click(function(){
-		  		checkAll(this,'mm');
-			});
-			
-			$("#a").click(function(){
-				getDeleteAllIds('edu/jt/exg/action/UserAction.action?action=deleteSelected&ids=','<s:text name="Common.Delete_All_Msg"/>');
-				window.location.reload();
-			});
-			
-			$("#mm").click(function(){
-		  		checkItem(this,'mmAll');
-			});
-			
-			$("#t").mouseout(function(){
-		  		rowOver(this);
-			});
-			
-			$("#t").mouseout(function(){
-		  		rowOut(this);
-			});
-			
-			$("#t").click(function(){
-		  		selectRow(this);
-			});
-		});
-	</script>
+<title><s:text name="User.Title_query" /></title>
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!--     <LINK href="../theme/style.css" rel="stylesheet" type="text/css"> -->
+
+<link href="<%=basePath%>edu/jt/exg//css/reset.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/layout.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/themes.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/typography.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/styles.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/shCore.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/bootstrap.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/jquery.jqplot.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/jquery-ui-1.8.18.custom.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/data-table.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/form.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/ui-elements.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/wizard.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/sprite.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/gradient.css" rel="stylesheet"
+	type="text/css">
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>edu/jt/exg//css/ie/ie7.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>edu/jt/exg//css/ie/ie8.css" />
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>edu/jt/exg//css/ie/ie9.css" />
+<![endif]-->
+
+<base href="<%=basePath%>">
+
+<script type="text/javascript" src="<%=basePath%>edu/jt/exg//js/jsAddress.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery-1.7.1.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery-ui-1.8.18.custom.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.ui.touch-punch.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/chosen.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/bootstrap-dropdown.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/bootstrap-colorpicker.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/sticky.full.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.noty.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/selectToUISlider.jQuery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/fg.menu.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.tagsinput.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.cleditor.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.tipsy.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.peity.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.simplemodal.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.jBreadCrumb.1.1.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.colorbox-min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.idTabs.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/jquery.multiFieldExtender.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.confirm.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/elfinder.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/accordion.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/autogrow.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/check-all.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/data-table.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/ZeroClipboard.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/TableTools.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jeditable.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/duallist.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/easing.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/full-calendar.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/input-limiter.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/inputmask.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/iphone-style-checkbox.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/meta-data.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/quicksand.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/raty.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/smart-wizard.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/stepy.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/treeview.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/ui-accordion.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/vaidation.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/mosaic.1.0.1.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.collapse.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.cookie.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.autocomplete.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/localdata.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/excanvas.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.jqplot.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.cursor.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.logAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.highlighter.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.pieRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.barRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.pointLabels.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.meterGaugeRenderer.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/custom-scripts.js"></script>
+<!--必须先加载否则js中的jquery脚本会报错未定义-->
+<%-- <script src="<%=basePath%>edu/jt/exg//js/jquery-1.11.1.js"></script> --%>
+<%-- <script src="<%=basePath%>edu/jt/exg//js/public.js"></script> --%>
+<script src="<%=basePath%>edu/jt/exg//js/user.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/common.js"></script>
+
+    
+   
 </head>
-<body>
-  <!--主键、附件、password不作为查询条件出列-->
-   <s:form id="form1" name="form1" action="edu/jt/exg/action/UserAction.action?action=query" namespace="/edu/jt/exg/action">
-<s:hidden id="start" name="start"></s:hidden><br>
-<s:text name="Logo.CurrentPosition"/>>>XXX
-	<TABLE id="queryTable" style="width:auto" border="1" bordercolordark="#FFFFFF" bordercolorlight="cccccc" cellpadding="3" cellspacing="0" align="center">
-		<TR><TD colspan="4" class="titlebg"><s:text name="Common.Query"/></TD></TR>
-		
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Level"/></s:div></TD>
-	<TD>
-		<s:textfield id="levelFrom" name="levelFrom" cssClass="text" size="15"/>-
-		<s:textfield id="levelTo" name="levelTo" cssClass="text" size="15"/>
-	</TD>
-</TR>
+<body id="theme-default" class="full_block">
+	<div id="actionsBox" class="actionsBox">
+		<div id="actionsBoxMenu" class="menu">
+			<span id="cntBoxMenu">0</span> <a id="delete"
+				class="button box_action"><s:text name="Common.Delete_Selected" /></a>
+		</div>
+	</div>
+	<s:include value="../common/header.jsp" />
+	<s:include value="../common/left_bar.jsp" />
+	<div id="container">
+		<div style="overflow: hidden; background-color: #FFF;">
+			<!--主键、附件、password不作为查询条件出列-->
+			<s:form id="form1" name="form1"
+				action="UserAction.action?action=query" namespace="/">
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Userid"/></s:div></TD>
-	<TD><s:textfield id="userid" name="userid" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Name"/></s:div></TD>
-	<TD><s:textfield id="name" name="name" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Nickname"/></s:div></TD>
-	<TD><s:textfield id="nickname" name="nickname" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Id_number"/></s:div></TD>
-	<TD><s:textfield id="id_number" name="id_number" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Email"/></s:div></TD>
-	<TD><s:textfield id="email" name="email" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Gender"/></s:div></TD>
-	<TD>
-		<s:hidden id="gender" name="gender"></s:hidden>
-		<s:select id="genderSelect" name="genderSelect" list="genderMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_province"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_province" name="address_province"></s:hidden>
-		<s:select id="address_provinceSelect" name="address_provinceSelect" list="address_provinceMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_city"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_city" name="address_city"></s:hidden>
-		<s:select id="address_citySelect" name="address_citySelect" list="address_cityMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_area"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_area" name="address_area"></s:hidden>
-		<s:select id="address_areaSelect" name="address_areaSelect" list="address_areaMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_details"/></s:div></TD>
-	<TD><s:textfield id="address_details" name="address_details" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Hometown"/></s:div></TD>
-	<TD><s:textfield id="hometown" name="hometown" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Occupation"/></s:div></TD>
-	<TD><s:textfield id="occupation" name="occupation" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Interest"/></s:div></TD>
-	<TD><s:textfield id="interest" name="interest" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Bankname"/></s:div></TD>
-	<TD>
-		<s:hidden id="bankname" name="bankname"></s:hidden>
-		<s:select id="banknameSelect" name="banknameSelect" list="banknameMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Bank_branch"/></s:div></TD>
-	<TD><s:textfield id="bank_branch" name="bank_branch" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Card_number"/></s:div></TD>
-	<TD><s:textfield id="card_number" name="card_number" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Balance"/></s:div></TD>
-	<TD>
-		<s:textfield id="balanceFrom" name="balanceFrom" cssClass="text" size="15"/>-
-		<s:textfield id="balanceTo" name="balanceTo" cssClass="text" size="15"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Point"/></s:div></TD>
-	<TD>
-		<s:textfield id="pointFrom" name="pointFrom" cssClass="text" size="15"/>-
-		<s:textfield id="pointTo" name="pointTo" cssClass="text" size="15"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Recommender_code"/></s:div></TD>
-	<TD><s:textfield id="recommender_code" name="recommender_code" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Login_password"/></s:div></TD>
-	<TD><s:textfield id="login_password" name="login_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Gesture_password"/></s:div></TD>
-	<TD><s:textfield id="gesture_password" name="gesture_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Trading_password"/></s:div></TD>
-	<TD><s:textfield id="trading_password" name="trading_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Category"/></s:div></TD>
-	<TD>
-		<s:hidden id="category" name="category"></s:hidden>
-		<s:select id="categorySelect" name="categorySelect" list="categoryMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Usertype"/></s:div></TD>
-	<TD><s:checkbox id="usertype" name="usertype"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei1"/></s:div></TD>
-	<TD><s:textfield id="yubei1" name="yubei1" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei2"/></s:div></TD>
-	<TD><s:textfield id="yubei2" name="yubei2" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei3"/></s:div></TD>
-	<TD><s:textfield id="yubei3" name="yubei3" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Invalid"/></s:div></TD>
-	<TD>
-		<s:hidden id="invalid" name="invalid"></s:hidden>
-		<s:select id="invalidSelect" name="invalidSelect" list="invalidMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Register_time"/></s:div></TD>
-	<TD>
-		<s:hidden id="register_timeFrom" name="register_timeFrom"></s:hidden>
-		<sx:datetimepicker id="register_timeDateFrom" name="register_timeDateFrom" displayFormat="yyyy-MM-dd"/>
-		<s:hidden id="register_timeHourFrom" name="register_timeHourFrom"></s:hidden>
-		<s:select id="register_timeHourSelectFrom" name="register_timeHourSelectFrom" list="register_timeHourMapFrom" cssClass="select"/>：
-		<s:hidden id="register_timeMinuteFrom" name="register_timeMinuteFrom"></s:hidden>
-		<s:select id="register_timeMinuteSelectFrom" name="register_timeMinuteSelectFrom" list="register_timeMinuteMapFrom" cssClass="select"/>-
-		<s:hidden id="register_timeTo" name="register_timeTo"></s:hidden>
-		<sx:datetimepicker id="register_timeDateTo" name="register_timeDateTo" displayFormat="yyyy-MM-dd"/>
-		<s:hidden id="register_timeHourTo" name="register_timeHourTo"></s:hidden>
-		<s:select id="register_timeHourSelectTo" name="register_timeHourSelectTo" list="register_timeHourMapTo" cssClass="select"/>：
-		<s:hidden id="register_timeMinuteTo" name="register_timeMinuteTo"></s:hidden>
-		<s:select id="register_timeMinuteSelectTo" name="register_timeMinuteSelectTo" list="register_timeMinuteMapTo" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Update_time"/></s:div></TD>
-	<TD>
-		<s:hidden id="update_timeFrom" name="update_timeFrom"></s:hidden>
-		<sx:datetimepicker id="update_timeDateFrom" name="update_timeDateFrom" displayFormat="yyyy-MM-dd"/>
-		<s:hidden id="update_timeHourFrom" name="update_timeHourFrom"></s:hidden>
-		<s:select id="update_timeHourSelectFrom" name="update_timeHourSelectFrom" list="update_timeHourMapFrom" cssClass="select"/>：
-		<s:hidden id="update_timeMinuteFrom" name="update_timeMinuteFrom"></s:hidden>
-		<s:select id="update_timeMinuteSelectFrom" name="update_timeMinuteSelectFrom" list="update_timeMinuteMapFrom" cssClass="select"/>-
-		<s:hidden id="update_timeTo" name="update_timeTo"></s:hidden>
-		<sx:datetimepicker id="update_timeDateTo" name="update_timeDateTo" displayFormat="yyyy-MM-dd"/>
-		<s:hidden id="update_timeHourTo" name="update_timeHourTo"></s:hidden>
-		<s:select id="update_timeHourSelectTo" name="update_timeHourSelectTo" list="update_timeHourMapTo" cssClass="select"/>：
-		<s:hidden id="update_timeMinuteTo" name="update_timeMinuteTo"></s:hidden>
-		<s:select id="update_timeMinuteSelectTo" name="update_timeMinuteSelectTo" list="update_timeMinuteMapTo" cssClass="select"/>
-	</TD>
-</TR>
-
-	</TABLE>
-	<p align="center">
-		<button id="f" class="button qing" style="width:110px; height:24px" title=<s:text name="Common.Submit"/>><s:text name="Common.Submit"/></button>&nbsp;
-		<button id="r" class="button qing" style="width:110px; height:24px" title=<s:text name="Common.Reset"/>><s:text name="Common.Reset"/></button>
-	</p>
-	<p align="center">
-		<a href="edu/jt/exg/action/UserAction.action?action=initcreate" target="_self"><img src ='<%=basePath%>edu/jt/exg/images/add.gif' border='0' title=<s:text name="Common.Create_New"/>/><s:text name="Common.Create_New"/></a>
-		<s:set id="showPage" name="showPage" value="ShowPage"/>
-		<s:if test="userList.size()>0">		
-			<table style="width:auto" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td align="center">
-						<s:if test="showPage.page.length()>0">
-							<table style="width:auto" border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td align="center">
-										<s:text name="Common.Total_Count"/><s:property value="showPage.page" escape="false"/>
-									</td>
-								</tr>
-							</table>
-						</s:if>
-					</td>
-				</tr>
-			</table>
-			<table id="ServiceListTable" style="width:auto" border="1" bordercolordark="#FFFFFF" bordercolorlight="cccccc" cellpadding="3" cellspacing="0">
-			<tr>
-				<td class="tdbg">
-					<input type="checkbox" id="mmAll" name="mmAll"><br>
-							<a id="a" href="#" target="_self"><s:text name="Common.Delete"/></a>
-				</td>
-				<td class="tdbg"><s:text name="Common.Serial_Number"/></td>
-						<td class="tdbg"><s:text name="User.Level"/></td>
-		<td class="tdbg"><s:text name="User.Userid"/></td>
-		<td class="tdbg"><s:text name="User.Name"/></td>
-		<td class="tdbg"><s:text name="User.Nickname"/></td>
-		<td class="tdbg"><s:text name="User.Icon"/></td>
-		<td class="tdbg"><s:text name="User.Id_number"/></td>
-		<td class="tdbg"><s:text name="User.Email"/></td>
-		<td class="tdbg"><s:text name="User.Gender"/></td>
-		<td class="tdbg"><s:text name="User.Address_province"/></td>
-		<td class="tdbg"><s:text name="User.Address_city"/></td>
-		<td class="tdbg"><s:text name="User.Address_area"/></td>
-		<td class="tdbg"><s:text name="User.Address_details"/></td>
-		<td class="tdbg"><s:text name="User.Hometown"/></td>
-		<td class="tdbg"><s:text name="User.Occupation"/></td>
-		<td class="tdbg"><s:text name="User.Interest"/></td>
-		<td class="tdbg"><s:text name="User.Bankname"/></td>
-		<td class="tdbg"><s:text name="User.Bank_branch"/></td>
-		<td class="tdbg"><s:text name="User.Card_number"/></td>
-		<td class="tdbg"><s:text name="User.Balance"/></td>
-		<td class="tdbg"><s:text name="User.Point"/></td>
-		<td class="tdbg"><s:text name="User.Recommender_code"/></td>
-		<td class="tdbg"><s:text name="User.Login_password"/></td>
-		<td class="tdbg"><s:text name="User.Gesture_password"/></td>
-		<td class="tdbg"><s:text name="User.Trading_password"/></td>
-		<td class="tdbg"><s:text name="User.Category"/></td>
-		<td class="tdbg"><s:text name="User.Usertype"/></td>
-		<td class="tdbg"><s:text name="User.Qualificat"/></td>
-		<td class="tdbg"><s:text name="User.Yubei1"/></td>
-		<td class="tdbg"><s:text name="User.Yubei2"/></td>
-		<td class="tdbg"><s:text name="User.Yubei3"/></td>
-		<td class="tdbg"><s:text name="User.Invalid"/></td>
-		<td class="tdbg"><s:text name="User.Register_time"/></td>
-		<td class="tdbg"><s:text name="User.Update_time"/></td>
-
-				<td class="tdbg"><s:text name="Common.Control"/></td>
-			</tr>
-			<s:iterator value="userList" status="stuts" id="R">               
-				<tr id="t">
-					<td>
-						<input type="checkbox" id="mm" name="mm" value='<s:property value="#R.id"/>'>&nbsp;
-					</td>
-					<td><s:property value="#R.rownum"/>&nbsp;</td>
-								<td><s:property value="#R.level"/>&nbsp;</td>
-		<td><s:property value="#R.userid"/>&nbsp;</td>
-		<td><s:property value="#R.name"/>&nbsp;</td>
-		<td><s:property value="#R.nickname"/>&nbsp;</td>
-		<td><s:property value="#R.icon" escape="false"/>&nbsp;</td>
-		<td><s:property value="#R.id_number"/>&nbsp;</td>
-		<td><s:property value="#R.email"/>&nbsp;</td>
-		<td><s:property value="#R.gender"/>&nbsp;</td>
-		<td><s:property value="#R.address_province"/>&nbsp;</td>
-		<td><s:property value="#R.address_city"/>&nbsp;</td>
-		<td><s:property value="#R.address_area"/>&nbsp;</td>
-		<td><s:property value="#R.address_details"/>&nbsp;</td>
-		<td><s:property value="#R.hometown"/>&nbsp;</td>
-		<td><s:property value="#R.occupation"/>&nbsp;</td>
-		<td><s:property value="#R.interest"/>&nbsp;</td>
-		<td><s:property value="#R.bankname"/>&nbsp;</td>
-		<td><s:property value="#R.bank_branch"/>&nbsp;</td>
-		<td><s:property value="#R.card_number"/>&nbsp;</td>
-			<td><s:property value="#R.balance"/>&nbsp;</td>
-			<td><s:property value="#R.point"/>&nbsp;</td>
-		<td><s:property value="#R.recommender_code"/>&nbsp;</td>
-		<td><s:property value="#R.login_password"/>&nbsp;</td>
-		<td><s:property value="#R.gesture_password"/>&nbsp;</td>
-		<td><s:property value="#R.trading_password"/>&nbsp;</td>
-		<td><s:property value="#R.category"/>&nbsp;</td>
-		<td><s:property value="#R.usertype"/>&nbsp;</td>
-		<td><s:property value="#R.qualificat" escape="false"/>&nbsp;</td>
-		<td><s:property value="#R.yubei1"/>&nbsp;</td>
-		<td><s:property value="#R.yubei2"/>&nbsp;</td>
-		<td><s:property value="#R.yubei3"/>&nbsp;</td>
-		<td><s:property value="#R.invalid"/>&nbsp;</td>
-		
-<td><s:date name="#R.register_time" format="yyyy-MM-dd hh:mm:ss"/>&nbsp;</td>
-
-		
-<td><s:date name="#R.update_time" format="yyyy-MM-dd hh:mm:ss"/>&nbsp;</td>
-
-
-					<td>
-						<a href="edu/jt/exg/action/UserAction.action?action=detail&id=<s:property value="#R.id"/>" target="_blank"><img src='<%=basePath%>edu/jt/exg/images/detail.gif' border='0' title=<s:text name="Common.Detail"/>></a>
-						<a href="edu/jt/exg/action/UserAction.action?action=initupdate&id=<s:property value="#R.id"/>" target="_self"><img src='<%=basePath%>edu/jt/exg/images/update.gif' border='0' title=<s:text name="Common.Modify"/>></a>
-						<a href="edu/jt/exg/action/UserAction.action?action=delete&id=<s:property value="#R.id"/>" target="_self"><img src ='<%=basePath%>edu/jt/exg/images/del.gif' border='0' title=<s:text name="Common.Delete"/> onclick="return rusure('<s:text name="Common.Alert_Del"/>');"/></a>
-					</td>
-				</tr>
-			</s:iterator>
-		</table>
-		</s:if>
-		<table style="width:auto" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td align="center">
-					<s:if test="showPage.page1.length()>0">
-						<table style="width:auto" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td align="center">
-									<s:text name="Common.Total_Count"/><s:property value="showPage.page1" escape="false"/>
-								</td>
-							</tr>
-						</table>
-					</s:if>
-				</td>
-			</tr>
-		</table>
-</s:form>
-<div id="fade" class="black_overlay" style="text-align:center;">
-<img src="<%=basePath%>/edu/jt/exg/images/loading51.gif" width="124" height="124" style=" margin-top:20%"></div>
-<%@ include file="../html/TableMovingChangeColor.html"%>
+				<div class="page_title gray_sai1" >
+					<div class="top_search" style="position:absolute;z-index:1000;">
+						<ul id="search_box">
+							<li style="margin-right: 10px;"><s:textfield id="userid" name="userid" cssClass="search_input" style="width:110px;"
+									placeholder="请输入用户ID" /></li>
+								
+							<li style="margin-right: 10px;"><s:textfield id="name" name="name" cssClass="search_input1" style="width:110px;"
+									placeholder="请输入用户名称" /></li>
+							
+							<li style="margin-right: 10px;">
+								<div class="form_input" style="display:none">
+										<s:textfield id="adressJson" name="adressJson" maxlength="110" />
+										<span id="adressJson_valid" class="red">&nbsp;</span>
+								</div>
+								<div class="form_input">
+									<s:hidden id="address_province" name="address_province"></s:hidden>
+									<s:select id="address_provinceSelect" name="address_provinceSelect" list="address_provinceMap"  data-placeholder="地址(省份)"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
+							<li style="margin-right: 10px;">
+								<div class="form_input">
+									<s:hidden id="address_city" name="address_city"></s:hidden>
+									<s:select id="address_citySelect" name="address_citySelect" list="address_cityMap"  data-placeholder="地址(市)"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li> 
+							<li style="margin-right: 10px;">
+								<div class="form_input">
+									<s:hidden id="address_area" name="address_area"></s:hidden>
+									<s:select id="address_areaSelect" name="address_areaSelect" list="address_areaMap"  data-placeholder="地址(区)"
+										style=" width:90px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li> 
+							<li style="margin-right: 10px;">
+								<div class="form_input">
+									<s:hidden id="invalid" name="invalid"></s:hidden>
+									<s:select id="invalidSelect" name="invalidSelect" list="invalidMap"  data-placeholder="有效无效区分"
+										style=" width:120px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
+							<li style="margin-right: 5px;">
+								<button id="search" name="search" class="btn_small btn_blue">
+									<s:text name="Common.Query"></s:text>
+								</button>
+							</li>
+							<li style="margin-right: 5px;">
+								<button id="reset" name="reset" class="btn_small btn_gray">
+									<s:text name="Common.Reset"></s:text>
+								</button>
+							</li>
+							<li style="margin-right: 5px;"><input id="create_parent"
+								name="create_parent" type="button" class="btn_small btn_blue"
+								value="创建">
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div id="content">
+					<div class="grid_container">
+						<div class="grid_12">
+							<div class="widget_wrap tabby">
+								<div class="widget_top">
+									<span class="h_icon blocks_images"></span>
+									<h6><s:text name="User_table"/></h6>
+								</div>
+								<div class="widget_content">
+							   		<s:if test="userList.size()>=0">         
+										<table id="action_tbl" class="display">
+											<thead>
+												<tr>
+													<th style="width:40px;"><input name="checkbox" type="checkbox" class="checkall"><br> <s:text name="Common.Select" /></th>
+													<th style="display: none"><s:text name="Common.Serial_Number" /></th>
+													<th><s:text name="User.Userid" /></th>
+													<th><s:text name="User.Name" /></th>
+													<th><s:text name="User.Id_number" /></th>
+													<th><s:text name="User.Level" /></th>
+													<th><s:text name="User.Gender" /></th>
+													<th><s:text name="User.Qualificat" /></th>
+													<th><s:text name="User.Usertype" /></th>
+													<th><s:text name="User.Address_province" /></th>
+													<th><s:text name="User.Address_city" /></th>
+													<th><s:text name="User.Address_area" /></th>
+													<th><s:text name="User.Category" /></th>
+													<th><s:text name="User.Invalid" /></th>
+													<th><s:text name="Common.Control" /></th>
+												</tr>
+											</thead>
+											<tbody>
+												<s:iterator value="userList" status="stuts" id="R">
+													<tr class="t">
+														<td class="center tr_select"><input id="mm" name="mm" type="checkbox"  value='<s:property value="#R.id"/>' >
+															<s:hidden id="r_code" name="r_code" class="r_code">
+																<s:param name="value"><s:property value="#R.id" /></s:param>
+															</s:hidden>
+														</td>
+														<td align="center" style="display: none"><s:property value="#R.id" /></td>	
+														<td align="center"><s:property value="#R.userid" /></td>
+														<td align="center"><a href="UserAction.action?action=detail&id=<s:property value="#R.id"/>" target="_self"><s:property value="#R.name" /></a></td>
+														<td align="center"><s:property value="#R.id_number" /></td>
+														<td align="center"><s:property value="#R.level" /></td>
+														<td align="center"><s:property value="#R.gender" /></td>
+														<td align="center"><s:property value="#R.qualificat" /></td>
+														<td align="center"><s:property value="#R.usertype" /></td>
+														<td align="center"><s:property value="#R.address_province" /></td>
+														<td align="center"><s:property value="#R.address_city" /></td>
+														<td align="center"><s:property value="#R.address_area" /></td>
+														<td align="center"><s:property value="#R.category" /></td>
+														<td align="center"><s:property value="#R.invalid" /></td>
+														<td align="center">
+															<a href="UserAction.action?action=detail&id=<s:property value="#R.id"/>" target="_self"><img src='<%=basePath%>edu/jt/exg//images/detail.png' border='0' title=<s:text name="Common.Detail"/>></a>
+						                                    <a href="UserAction.action?action=initupdate&id=<s:property value="#R.id"/>" target="_self"><img src='<%=basePath%>edu/jt/exg//images/update.png' border='0' title=<s:text name="Common.Modify"/>></a>
+															<a href="UserAction.action?action=delete&id=<s:property value="#R.id"/>" target="_self"><img src ='<%=basePath%>edu/jt/exg//images/del.png' border='0' title=<s:text name="Common.Delete"/> onclick="return rusure('<s:text name="Common.Alert_Del"/>');"/></a>
+														</td>
+													</tr>
+												</s:iterator>
+											</tbody>
+										</table>
+									</s:if> 
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</s:form>
+			<div id="fade" class="black_overlay" style="text-align: center;">
+				<img src="<%=basePath%>/edu/jt/exg//images/loading51.gif" width="124"
+					height="124" style="margin-top: 20%">
+			</div>
+			<%@ include file="../html/TableMovingChangeColor.html"%>			
+		</div>
+	</div>
 </body>
+ <script language='javascript'>
+	   	$(function() {
+	   		var adressJson=$("#adressJson").val();
+			var obj = eval(adressJson);
+			  var provinceSelector =$("#address_provinceSelect");
+	        var citySelector = $("#address_citySelect");
+	        var areaSelector=$("#address_areaSelect");
+
+	        
+	        var indexProvince=0;
+	        var indexCity=0;
+	        initprovince(obj,provinceSelector);
+	        provinceSelector.trigger("liszt:updated");
+	        areaSelector.empty();
+	        areaSelector.trigger("liszt:updated");
+	        citySelector.empty();
+	        citySelector.trigger("liszt:updated");
+	        provinceSelector.change(function(){
+	        	areaSelector.empty();
+	        	areaSelector.trigger("liszt:updated");
+	        	areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>");
+	        	var code=$(this).find("option:selected").val();
+	        	for(var i=0;i<obj.length;i++){
+	        		if(obj[i].province_code==code){
+	        			chageCity(obj[i].city_list,citySelector);
+	        			citySelector.trigger("liszt:updated");
+	        			indexProvince=i;
+	        			break;
+	        		}
+	        	}
+	        });
+	        citySelector.change(function(){
+	        	var code=$(this).find("option:selected").val();
+	        	
+	        	var objCity=obj[indexProvince].city_list;
+	        	for(var i=0;i<objCity.length;i++){
+	        		if(objCity[i].city_code==code){
+	        			chageArea(objCity[i].area_list,areaSelector);
+	        			areaSelector.trigger("liszt:updated")
+	        			indexCity=i;
+	        			break;
+	        		}
+	        	}
+	        });
+	   	    
+		$("#form1").submit(function() {
+			return checkFormForQuery();
+		});
+		
+		$("#search").click(function() {
+			ShowDiv('fade');
+			finder();
+		});
+		$("#search").dblclick(function() {
+			javascript: void (0);
+		});
+		$("#reset").click(function() {
+			window.setTimeout(function() {
+				window.location = '<%=basePath%>UserAction.action?action=initquery';
+				return true;
+			}, 0);
+		});
+			$("#create_parent").click(function() {
+			window.setTimeout(function() {
+				window.location = '<%=basePath%>UserAction.action?action=initcreate'; 
+				return true;
+			}, 0);
+		});
+			$("#create_comment").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var userkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						userkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>CommentAction.action?action=initcreate&userkey='+userkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+		});
+		$("#create").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var userkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						userkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>Charge_detailAction.action?action=initcreate&userkey='+userkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+		});
+		
+		$("#create_event").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var userkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						userkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>EventAction.action?action=initcreate&userkey='+userkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+			
+		});
+		
+		$("#create_myshare").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var userkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						userkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>MyshareAction.action?action=initcreate&userkey='+userkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+			
+		});
+		
+		$("#create_ordermaster").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var userkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						userkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>Order_masterAction.action?action=initcreate&userkey='+userkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+			
+		});
+		
+		$("#create_talk").click(function(){
+			if($('#action_tbl .tr_select input:checked').length==1){
+				var selfkey;
+				var chks=$('#action_tbl .tr_select input:checkbox');
+				var codes=$('#action_tbl #r_code');
+				for (var i = 0; i < chks.size(); i++) {
+					if(chks[i].checked){
+						selfkey=codes[i].value;
+						break;
+					}
+				}
+				window.setTimeout(function() {
+					window.location = '<%=basePath%>TalkAction.action?action=initcreate&selfkey='+selfkey;
+					return true;
+				}, 0);
+				
+			}else{
+				alert("选择一个用户ID!");
+			}
+			
+		});
+				$("#delete").click(function() {
+			getDeleteAllIds('<%=basePath%>UserAction.action?action=deleteSelected&ids=',
+									'<s:text name="Common.Delete_All_Msg"/>');
+						});
+
+	});
+	   	function initprovince(obj,provinceSelector){
+    		provinceSelector.empty();
+    		provinceSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+    		for(var i=0;i<obj.length;i++){
+    			provinceSelector.append("<option value="+obj[i].province_code+">"+obj[i].province_name+"</option>"); 
+    		}
+    	} 
+    	function chageCity(obj,citySelector){
+    		citySelector.empty();
+    		citySelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+    		for(var i=0;i<obj.length;i++){
+    			citySelector.append("<option value="+obj[i].city_code+">"+obj[i].city_name+"</option>"); 
+    		}
+    	}
+    	function chageArea(obj,areaSelector){
+    		areaSelector.empty();
+    		areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+    		for(var i=0;i<obj.length;i++){
+    			areaSelector.append("<option value="+obj[i].area_code+">"+obj[i].area_name+"</option>"); 
+    		}
+    	}
+	</script>
 </html>
+			

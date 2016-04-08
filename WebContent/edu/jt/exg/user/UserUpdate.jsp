@@ -1,264 +1,751 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page contentType="text/html; charset=utf-8"%>
+<!DOCTYPE HTML>
+<%-- <%@ taglib prefix="sx" uri="/struts-dojo-tags"%> --%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String userName = (String) (request.getSession()
+			.getAttribute("userName"));
 %>
 <html>
 <head>
-    <title>User</title>
-    <style>.doubleselect br{display:none}</style>
-    <meta http-equiv="Cache-Control" content="no-store">
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Expires" content="0">
-    <LINK href="../theme/style.css" rel="stylesheet" type="text/css">
-	<base href="<%=basePath%>">
-	<!--必须先加载否则js中的jquery脚本会报错未定义-->
-	<script language="javascript" src="edu/jt/exg/js/jquery-1.11.1.js"></script>
-    <script language="javascript" src="edu/jt/exg/js/public.js"></script>
-    <script language="javascript" src="edu/jt/exg/js/user.js"></script>
-    <style type="text/css">
-		<!--
-		  body {
-			margin-left: 0px;
-			margin-top: 0px;
-			margin-right: 0px;
-			margin-bottom: 0px;
-		  }
-		-->
-	</style>
-    <sx:head/>
-    <script language="javascript">
-    	//等待加载editor控件
-    	$(function(){
-			//等待加载editor控件
-    		document.body.style.display='none';   
-		window.setTimeout('show()',2000);
-	  		
-		var ajaxFlag=true;//通过所有ajax验证的标志位
-		$("#s").click(function(){
-			if(checkFormForCreateOrUpdate()==true){
-			    			var data1="";
+<title><s:text name="User.Title_update" /></title>
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<!--     <LINK href="../theme/style.css" rel="stylesheet" type="text/css"> -->
 
-					//所有需要ajax验证的都要在这里完成
-					if(ajaxFlag==true){//只要=false就认为有验证不通过
-						//防止重复提交
-						ShowDiv('fade');
-						$("#form1").attr("action", "edu/jt/exg/action/UserAction.action?action=update").submit();
-					}else alert('<s:text name="Common.ValidationFailAlert"/>');
-				}
-			});
-			
-			$("#b").click(function(){
-				window.location.href='<%=basePath%>/edu/jt/exg/action/UserAction.action?action=initquery';
-			});
-		});
-	function show(){   
-	      	$(document.body).css('display', ''); 
-	      	//EDiaryEditor必须延时加载
-		
-	}
-    </script>
+<link href="<%=basePath%>edu/jt/exg//css/reset.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/layout.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/themes.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/typography.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/styles.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/shCore.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/bootstrap.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/jquery.jqplot.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/jquery-ui-1.8.18.custom.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/data-table.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/form.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/ui-elements.css"
+	rel="stylesheet" type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/wizard.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/sprite.css" rel="stylesheet"
+	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/gradient.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>edu/jt/exg//css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>edu/jt/exg//css/diyUpload.css">
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="edu/jt/exg//css/ie/ie7.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="edu/jt/exg//css/ie/ie8.css" />
+<![endif]-->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="edu/jt/exg//css/ie/ie9.css" />
+<![endif]-->
+
+<base href="<%=basePath%>">
+<script type="text/javascript" src="<%=basePath%>edu/jt/exg//js/jsAddress.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery-1.7.1.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery-ui-1.8.18.custom.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.ui.touch-punch.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/chosen.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/bootstrap-dropdown.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/bootstrap-colorpicker.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/sticky.full.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.noty.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/selectToUISlider.jQuery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/fg.menu.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.tagsinput.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.cleditor.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.tipsy.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.peity.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.simplemodal.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.jBreadCrumb.1.1.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.colorbox-min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.idTabs.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/jquery.multiFieldExtender.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.confirm.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/elfinder.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/accordion.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/autogrow.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/check-all.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/data-table.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/ZeroClipboard.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/TableTools.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jeditable.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/duallist.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/easing.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/full-calendar.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/input-limiter.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/inputmask.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/iphone-style-checkbox.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/meta-data.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/quicksand.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/raty.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/smart-wizard.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/stepy.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/treeview.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/ui-accordion.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/vaidation.jquery.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/mosaic.1.0.1.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.collapse.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.cookie.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.autocomplete.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/localdata.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/excanvas.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.jqplot.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.cursor.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.logAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.highlighter.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.pieRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.barRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.pointLabels.min.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/chart-plugins/jqplot.meterGaugeRenderer.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/custom-scripts.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/jquery.validate.js"></script>
+<script	src="<%=basePath%>edu/jt/exg//js/webuploader.html5only.min.js"></script>
+<script	src="<%=basePath%>edu/jt/exg//js/diyUpload.js"></script>
+<!--必须先加载否则js中的jquery脚本会报错未定义-->
+<%-- <script src="edu/jt/exg//js/jquery-1.11.1.js"></script> --%>
+<script src="edu/jt/exg//js/public.js"></script>
+<script src="edu/jt/exg//js/user.js"></script>
+<script src="edu/jt/exg//js/user_zz.js"></script>
+<%-- <script src="edu/jt/exg//js/common.js"></script> --%>
 </head>
-<body>
-<s:form id="form1" name="form1" action="" namespace="/edu/jt/exg/action"><br>
-<s:text name="Logo.CurrentPosition"/>>>XXX
-		<TABLE style="width:auto" border="1" bordercolordark="#FFFFFF" bordercolorlight="cccccc" cellpadding="3" cellspacing="0" align="center">
-			<TR><TD colspan="2" class="titlebg"><s:text name="Common.Modify"/></TD></TR>
-			
-<s:hidden id="id" name="id"></s:hidden>
+<body id="theme-default" class="full_block">
+	<s:include value="../common/header.jsp" />
+	<s:include value="../common/left_bar.jsp" />
+	<div id="container">
+		<div style="overflow: hidden; background-color: #FFF;">
+			<div class="page_title gray_sai">
+				<div class="top_search">
+					<ul id="search_box">
+						<li style="margin-left: 10px;">
+							<button id="publish_new" name="publish_new"
+								class="btn_small btn_blue">
+								<s:text name="Action_publish_new" />
+							</button>
+						</li>
+						<li style="margin-left: 10px;">
+							<button id="back" name="back" class="btn_small btn_gray">
+								<s:text name="Common.Back" />
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="content">
+				<div class="grid_container">
+					<div class="grid_12 form_container left_label field_set">
+						<s:form id="form1" name="form1" action="" namespace="/">
+							<s:hidden id="status" name="status" />
+							<div class="widget_wrap tabby">
+								<div class="widget_top">
+									<span class="h_icon blocks_images"></span>
+									<h6>
+										<s:text name="User.Title_update"></s:text>
+									</h6>
+								</div>
+								<fieldset>
+									<legend><s:text name="Common.basic" /></legend>
+									<ul>
+										<li class="clearfix">
+											<div class="form_grid_6" style="display:none">
+												<label class="field_title"><s:text
+														name="User.Id" /><span class="req">*</span></label>
+												<div class="form_input">
+													<s:textfield id="id" name="id" maxlength="100" />
+													<span id="id_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text name="User.Icon" /><span class="req">*</span></label>
+												<s:hidden id="icon" name="icon"></s:hidden>
+												<div id="mybox"><div id="mybox_icon" ></div></div>
+												<div id="box"><div id="box_icon" ></div></div>
+											    <script type="text/javascript">
+											    var dataSrc2=$("#icon").val();
+											    dataSrc2=dataSrc2.split('/');
+											    if(dataSrc2[3]!=null){
+												    var s=dataSrc2[3].indexOf(".");
+												    if(s==-1){
+												    	dataSrc2[3]="";
+												    }
+												    }else{
+												    	dataSrc2[3]="";
+												    }
+													$('#box_icon').diyUpload({
+														
+														url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=icon&filename='+dataSrc2[3],
+														success:function( data ) {
+														console.info( data );	
+														/*  var location = (window.location+'').split('/'); 
+											    		var bPath = location[0]+'//'+location[2]+'/'+location[3];  */
+														for (var i = 0; i < data.length; i++) {
+															var filepath = data[i].filepath;
+															console.info( filepath );
+																	 									 
+																	 console.info( filepath );  
+																	 $("#icon").val(filepath); 
+															}
+															$("#icon").val(filepath);
+																									
+														},
+														error:function( err ) {
+															console.info( err );	
+														},
+														fileNumLimit:1,
+														fileSizeLimit:170 * 150,
+														fileSingleSizeLimit:170 * 150
+																						
+													});
+												</script>
+												<span id="icon_valid" class="red">&nbsp;</span>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text name="User.Level" /><span class="req">*</span></label>
+												<div class="form_input">
+													<s:textfield id="level" name="level" maxlength="100" />
+													<span id="level_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text name="User.Userid" /><span class="req">*</span></label>
+												<div class="form_input">
+													<s:textfield id="userid" name="userid" maxlength="100" />
+													<span id="userid_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Name" /></label>
+												<div class="form_input">
+													<s:textfield id="name" name="name" maxlength="100"/>
+													<span id="name_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Nickname" /></label>
+												<div class="form_input">
+													<s:textfield id="nickname" name="nickname" maxlength="100" />
+													<span id="nickname_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Id_number" /></label>
+												<div class="form_input">
+													<s:textfield id="id_number" name="id_number" maxlength="100"/>
+													<span id="id_number_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Email" /></label>
+												<div class="form_input">
+													<s:textfield id="email" name="email" maxlength="100"/>
+													<span id="email_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Level"/></s:div></TD>
-	<TD><s:textfield id="level" name="level" cssClass="text" size="15"/></TD>
-</TR>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Gender" /></label>
+												<div class="form_input">
+													<s:hidden id="gender" name="gender"></s:hidden>
+													<s:select id="genderSelect" name="genderSelect"
+														list="genderMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<span id="gender_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Category" /></label>
+												<div class="form_input">
+													<s:hidden id="category" name="category"></s:hidden>
+													<s:select id="categorySelect" name="categorySelect"
+														list="categoryMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<span id="category_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Usertype" /></label>
+												<div class="form_input">
+													<s:hidden id="usertype" name="usertype"></s:hidden>
+													<s:checkbox id="usertype" name="usertype"/>
+													<span id="usertype_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+										<div class="form_grid_6">
+												<label class="field_title"><s:text name="User.Qualificat" /><span class="req">*</span></label>
+												<s:hidden id="qualificat" name="qualificat"></s:hidden>
+												<div id="mybox1"><div id="mybox1_icon" ></div></div>
+												<div id="box1"><div id="box1_icon" ></div></div>
+											    <script type="text/javascript">
+											    var dataSrc2=$("#qualificat").val();
+											    dataSrc2=dataSrc2.split('/');
+											    if(dataSrc2[3]!=null){
+												    var s=dataSrc2[3].indexOf(".");
+												    if(s==-1){
+												    	dataSrc2[3]="";
+												    }
+												    }else{
+												    	dataSrc2[3]="";
+												    }
+													$('#box1_icon').diyUpload({
+														
+														url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=icon&filename='+dataSrc2[3],
+														success:function( data ) {
+														console.info( data );	
+														/*  var location = (window.location+'').split('/'); 
+											    		var bPath = location[0]+'//'+location[2]+'/'+location[3];  */
+														for (var i = 0; i < data.length; i++) {
+															var filepath = data[i].filepath;
+															console.info( filepath );
+																	 									 
+																	 console.info( filepath );  
+																	 $("#qualificat").val(filepath); 
+															}
+															$("#qualificat").val(filepath);
+																									
+														},
+														error:function( err ) {
+															console.info( err );	
+														},
+														fileNumLimit:1,
+														fileSizeLimit:170 * 150,
+														fileSingleSizeLimit:170 * 150
+																						
+													});
+												</script>
+												<span id="qualificat_valid" class="red">&nbsp;</span>
+											</div>
+										</li>
+										
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Interest" /></label>
+												<div class="form_input">
+													<s:textfield id="interest" name="interest" maxlength="100"/>
+													<span id="interest_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Occupation" /></label>
+												<div class="form_input">
+													<s:textfield id="occupation" name="occupation" maxlength="100" />
+													<span id="occupation_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6" style="display:none">
+												<label class="field_title"><s:text
+														name="User.AdressJson" /></label>
+												<div class="form_input" >
+													<s:textfield id="adressJson" name="adressJson"
+														maxlength="100" />
+													<span id="adressJson_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Address_province" /></label>
+												<div class="form_input">
+													<s:hidden id="address_province" name="address_province"></s:hidden>
+													<s:select id="address_provinceSelect" name="address_provinceSelect"
+														list="address_provinceMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<br> <span id="address_province_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Address_city" /></label>
+												<div class="form_input">
+													<s:hidden id="address_city" name="address_city"></s:hidden>
+													<s:select id="address_citySelect" name="address_citySelect"
+														list="address_cityMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<br> <span id="address_city_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Address_area" /></label>
+												<div class="form_input">
+													<s:hidden id="address_area" name="address_area"></s:hidden>
+													<s:select id="address_areaSelect" name="address_areaSelect"
+														list="address_areaMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<br> <span id="address_area_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Address_details" /></label>
+												<div class="form_input">
+													<s:textfield id="address_details" name="address_details"
+														maxlength="100"/>
+													<span id="address_details_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li> 
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Userid"/></s:div></TD>
-	<TD><s:textfield id="userid" name="userid" cssClass="text" size="15"/></TD>
-</TR>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Hometown" /></label>
+												<div class="form_input">
+													<s:textfield id="hometown" name="hometown" maxlength="100"/>
+													<span id="hometown_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Recommender_code" /></label>
+												<div class="form_input">
+													<s:textfield id="recommender_code" name="recommender_code"
+														maxlength="100"/>
+													<span id="recommender_code_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Name"/></s:div></TD>
-	<TD><s:textfield id="name" name="name" cssClass="text" size="15"/></TD>
-</TR>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Yubei1" /></label>
+												<div class="form_input">
+													<s:textfield id="yubei1" name="yubei1" maxlength="100"/>
+													<span id="yubei1_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Yubei2" /></label>
+												<div class="form_input">
+													<s:textfield id="yubei2" name="yubei2" maxlength="100" />
+													<span id="yubei2_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Nickname"/></s:div></TD>
-	<TD><s:textfield id="nickname" name="nickname" cssClass="text" size="15"/></TD>
-</TR>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Yubei3" /></label>
+												<div class="form_input">
+													<s:textfield id="yubei3" name="yubei3" maxlength="100"/>
+													<span id="yubei3_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Invalid" /><span class="req">*</span></label>
+												<div class="form_input">
+													<s:hidden id="invalid" name="invalid"></s:hidden>
+													<s:select id="invalidSelect" name="invalidSelect"
+														list="invalidMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<span id="invalid_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Icon"/></s:div></TD>
-	<TD>
-		<s:hidden id="icon" name="icon"></s:hidden>
-		<iframe id="iconFileUpload" src="${pageContext.request.contextPath}/upload/fileUpload.action?action=getFile&readMode=no&type=img&id=icon" frameBorder="0" marginHeight="0" marginWidth="0" scrolling="Yes" width="600" height="300"></iframe>		
-	</TD>
-</TR>
+								<fieldset>
+									<legend>
+										<s:text name="Common.account"></s:text>
+									</legend>
+									<ul>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Balance" /></label>
+												<div class="form_input">
+													<s:textfield id="balance" name="balance"
+														cssClass="moneytype" maxlength="100">
+														<s:param name="value">
+															<f:formatNumber type="number" value="${balance}"
+																pattern="#,##0.00#" />
+														</s:param>
+													</s:textfield>
+													<span id="balance_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Id_number"/></s:div></TD>
-	<TD><s:textfield id="id_number" name="id_number" cssClass="text" size="15"/></TD>
-</TR>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Point" /></label>
+												<div class="form_input">
+													<s:textfield id="point" name="point" maxlength="100"/>
+													<%-- <s:textfield id="point" name="point" cssClass="moneytype"
+														maxlength="100">
+														<s:param name="value">
+															<f:formatNumber type="number" value="${point}"
+																pattern="#,##0.00#" />
+														</s:param>
+													</s:textfield> --%>
+													<span id="point_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Email"/></s:div></TD>
-	<TD><s:textfield id="email" name="email" cssClass="text" size="15"/></TD>
-</TR>
+								<fieldset>
+									<legend>
+										<s:text name="Common.bank"></s:text>
+									</legend>
+									<ul>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Bankname" /></label>
+												<div class="form_input">
+													<s:hidden id="bankname" name="bankname"></s:hidden>
+													<s:select id="banknameSelect" name="banknameSelect"
+														list="banknameMap" cssClass="chzn-select"
+														style=" width:200px" />
+													<span id="bankname_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Gender"/></s:div></TD>
-	<TD>
-		<s:hidden id="gender" name="gender"></s:hidden>
-		<s:select id="genderSelect" name="genderSelect" list="genderMap" cssClass="select"/>
-	</TD>
-</TR>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Card_number" /></label>
+												<div class="form_input">
+													<s:textfield id="card_number" name="card_number"
+														maxlength="100"/>
+													<span id="card_number_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Bank_branch" /></label>
+												<div class="form_input">
+													<s:textfield id="bank_branch" name="bank_branch"
+														maxlength="100"/>
+													<span id="bank_branch_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</fieldset>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_province"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_province" name="address_province"></s:hidden>
-		<s:select id="address_provinceSelect" name="address_provinceSelect" list="address_provinceMap" cssClass="select"/>
-	</TD>
-</TR>
+								<fieldset>
+									<legend>
+										<s:text name="Common.password"></s:text>
+									</legend>
+									<ul>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Login_password" /></label>
+												<div class="form_input">
+													<s:textfield id="login_password" name="login_password"
+														cssClass="text" maxlength="100"/>
+													<span id="login_password_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
 
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_city"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_city" name="address_city"></s:hidden>
-		<s:select id="address_citySelect" name="address_citySelect" list="address_cityMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_area"/></s:div></TD>
-	<TD>
-		<s:hidden id="address_area" name="address_area"></s:hidden>
-		<s:select id="address_areaSelect" name="address_areaSelect" list="address_areaMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Address_details"/></s:div></TD>
-	<TD><s:textfield id="address_details" name="address_details" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Hometown"/></s:div></TD>
-	<TD><s:textfield id="hometown" name="hometown" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Occupation"/></s:div></TD>
-	<TD><s:textfield id="occupation" name="occupation" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Interest"/></s:div></TD>
-	<TD><s:textfield id="interest" name="interest" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Bankname"/></s:div></TD>
-	<TD>
-		<s:hidden id="bankname" name="bankname"></s:hidden>
-		<s:select id="banknameSelect" name="banknameSelect" list="banknameMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Bank_branch"/></s:div></TD>
-	<TD><s:textfield id="bank_branch" name="bank_branch" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Card_number"/></s:div></TD>
-	<TD><s:textfield id="card_number" name="card_number" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Balance"/></s:div></TD>
-	<TD><s:textfield id="balance" name="balance" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Point"/></s:div></TD>
-	<TD><s:textfield id="point" name="point" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Recommender_code"/></s:div></TD>
-	<TD><s:textfield id="recommender_code" name="recommender_code" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Login_password"/></s:div></TD>
-	<TD><s:textfield id="login_password" name="login_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Gesture_password"/></s:div></TD>
-	<TD><s:textfield id="gesture_password" name="gesture_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Trading_password"/></s:div></TD>
-	<TD><s:textfield id="trading_password" name="trading_password" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Category"/></s:div></TD>
-	<TD>
-		<s:hidden id="category" name="category"></s:hidden>
-		<s:select id="categorySelect" name="categorySelect" list="categoryMap" cssClass="select"/>
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Usertype"/></s:div></TD>
-	<TD><s:checkbox id="usertype" name="usertype"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Qualificat"/></s:div></TD>
-	<TD>
-		<s:hidden id="qualificat" name="qualificat"></s:hidden>
-		<iframe id="qualificatFileUpload" src="${pageContext.request.contextPath}/upload/fileUpload.action?action=getFile&readMode=no&type=img&id=qualificat" frameBorder="0" marginHeight="0" marginWidth="0" scrolling="Yes" width="600" height="300"></iframe>		
-	</TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei1"/></s:div></TD>
-	<TD><s:textfield id="yubei1" name="yubei1" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei2"/></s:div></TD>
-	<TD><s:textfield id="yubei2" name="yubei2" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Yubei3"/></s:div></TD>
-	<TD><s:textfield id="yubei3" name="yubei3" cssClass="text" size="15"/></TD>
-</TR>
-
-<TR class="trbg">
-	<TD class="tdbg"><s:div cssClass="center"><s:text name="User.Invalid"/></s:div></TD>
-	<TD>
-		<s:hidden id="invalid" name="invalid"></s:hidden>
-		<s:select id="invalidSelect" name="invalidSelect" list="invalidMap" cssClass="select"/>
-	</TD>
-</TR>
-
-		</TABLE>
-	</s:form>
-		<p align="center">
-			<button id="s" class="button qing" style="width:110px; height:24px" ondblclick="javascript:void(0);"><s:text name="Common.Submit"/></button>&nbsp;&nbsp;&nbsp;
-			<button id="b" class="button qing" style="width:110px; height:24px" title=<s:text name="Common.Back"/>><s:text name="Common.Back"/></button>
-		</p>
-<div id="fade" class="black_overlay" style="text-align:center;">
-<img src="<%=basePath%>/edu/jt/exg/images/loading51.gif" width="124" height="124" style=" margin-top:20%"></div>
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Gesture_password" /></label>
+												<div class="form_input">
+													<s:textfield id="gesture_password" name="gesture_password"
+														cssClass="text" maxlength="100"/>
+													<span id="gesture_password_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+											<div class="form_grid_6">
+												<label class="field_title"><s:text
+														name="User.Trading_password" /></label>
+												<div class="form_input">
+													<s:textfield id="trading_password" name="trading_password"
+														maxlength="100"/>
+													<span id="trading_password_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										
+									</ul>
+								</fieldset>
+							</div>
+						</s:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="zzz" class="black_overlay12" style="text-align: center;"><%-- 
+			<img src="<%=basePath%>/edu/jt/exg//images/loading51.gif" width="124"
+				height="124" style="margin-top: 20%"> --%>
+		</div>
+	</div>
 </body>
+<script language="javascript">
+$(function(){
+	var location = (window.location+'').split('/'); 
+	var bPath = location[0]+'//'+location[2]+'/'+location[3]; 
+
+	var dataSrc=bPath+$("#icon").val();
+	$("#mybox").append('<img src="'+dataSrc+'" >');
+
+	var dataSrc=bPath+$("#qualificat").val();
+	$("#mybox1").append('<img src="'+dataSrc+'" >');
+	
+	var adressJson=$("#adressJson").val();
+	var obj = eval(adressJson);
+	
+    var provinceSelector =$("#address_provinceSelect");
+    var citySelector = $("#address_citySelect");
+    var areaSelector=$("#address_areaSelect");
+    
+    
+    var indexProvince=0;
+    var indexCity=0;
+    initprovince(obj,provinceSelector);
+    provinceSelector.trigger("liszt:updated");
+    areaSelector.empty();
+    citySelector.empty();
+    provinceSelector.change(function(){
+    	areaSelector.empty();
+    	areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>");
+    	areaSelector.trigger("liszt:updated");
+    	var code=$(this).find("option:selected").val();
+    	for(var i=0;i<obj.length;i++){
+    		if(obj[i].province_code==code){
+    			chageCity(obj[i].city_list,citySelector);
+    			citySelector.trigger("liszt:updated")
+    			indexProvince=i;
+    			break;
+    		}
+    	}
+    });
+    citySelector.change(function(){
+    	var code=$(this).find("option:selected").val();
+    	
+    	var objCity=obj[indexProvince].city_list;
+    	for(var i=0;i<objCity.length;i++){
+    		if(objCity[i].city_code==code){
+    			chageArea(objCity[i].area_list,areaSelector);
+    			areaSelector.trigger("liszt:updated")
+    			indexCity=i;
+    			break;
+    		}
+    	}
+    });
+	//等待加载editor控件
+	//************************************************************************************************************
+	var ajaxFlag=true;//通过所有ajax验证的标志位
+
+	$("#publish_new").click(function(){
+		if(checkFormForCreateOrUpdate()==true){
+			ShowDiv('zzz');
+			$("#form1").attr("action", "UserAction.action?action=update").submit();
+		}
+	});
+	$("#back").click(function(){
+		<%-- window.location.href='<%=basePath%>UserAction.action?action=initquery'; --%>
+		window.history.back(-1);
+				});
+	var addressArea=$("#address_area").val();
+	var addressCity=$("#address_city").val();
+	var addressProvince=$("#address_province").val();
+	provinceSelector.attr('value',addressProvince);
+	provinceSelector.trigger("liszt:updated");
+	provinceSelector.change();
+	citySelector.attr('value',addressCity);
+	citySelector.trigger("liszt:updated");
+	citySelector.change();
+	areaSelector.attr('value',addressArea);
+	areaSelector.trigger("liszt:updated"); 
+});
+function initprovince(obj,provinceSelector){
+	provinceSelector.empty();
+	provinceSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+	for(var i=0;i<obj.length;i++){
+		provinceSelector.append("<option value="+obj[i].province_code+">"+obj[i].province_name+"</option>"); 
+	}
+} 
+function chageCity(obj,citySelector){
+	citySelector.empty();
+	citySelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+	for(var i=0;i<obj.length;i++){
+		citySelector.append("<option value="+obj[i].city_code+">"+obj[i].city_name+"</option>"); 
+	}
+}
+function chageArea(obj,areaSelector){
+	areaSelector.empty();
+	areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
+	for(var i=0;i<obj.length;i++){
+		areaSelector.append("<option value="+obj[i].area_code+">"+obj[i].area_name+"</option>"); 
+	}
+}
+</script>
 </html>
