@@ -181,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body id="theme-default" class="full_block" onkeydown="keyLogin();">
 	<div id="login_page">
 		<div class="login_container" align="center">
-			<img src="<%=basePath%>/edu/jt/exg/images/logo1.png" >
+			<img src="<%=basePath%>/edu/jt/exg/images/logo.png" >
 <!-- 			<div class="login_header black_w"> -->
 <!-- 				<div class="header_left logo"> -->
 <%-- 					<img src="<%=basePath%>/edu/jt/exg/images/logo1.png" height="50"> --%>
