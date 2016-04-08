@@ -135,7 +135,6 @@ public class CommonMethod {
 		Category_masterBatisDao category_masterBatisDao = Category_masterUtility.getIocHandel().getBean("Category_masterBatisDao", Category_masterBatisDao.class);
 		List<Category_masterBean> list = category_masterBatisDao.finder(category_masterBean);
 		selectMap.put("","");
-
 		for (int i = 0; i < list.size(); i++) {
 			Category_masterBean category = list.get(i);
 			selectMap.put(category.getCode(),category.getName());

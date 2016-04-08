@@ -239,8 +239,6 @@ String path = request.getContextPath();
 													<th><s:text name="User.Id_number" /></th>
 													<th><s:text name="User.Level" /></th>
 													<th><s:text name="User.Gender" /></th>
-													<th><s:text name="User.Qualificat" /></th>
-													<th><s:text name="User.Usertype" /></th>
 													<th><s:text name="User.Address_province" /></th>
 													<th><s:text name="User.Address_city" /></th>
 													<th><s:text name="User.Address_area" /></th>
@@ -263,8 +261,6 @@ String path = request.getContextPath();
 														<td align="center"><s:property value="#R.id_number" /></td>
 														<td align="center"><s:property value="#R.level" /></td>
 														<td align="center"><s:property value="#R.gender" /></td>
-														<td align="center"><s:property value="#R.qualificat" /></td>
-														<td align="center"><s:property value="#R.usertype" /></td>
 														<td align="center"><s:property value="#R.address_province" /></td>
 														<td align="center"><s:property value="#R.address_city" /></td>
 														<td align="center"><s:property value="#R.address_area" /></td>

@@ -1,15 +1,12 @@
 package edu.jt.exg.logic.user;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.UserAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -84,6 +81,7 @@ public class PageStatus implements Serializable{
 		InitPageControl.initCategoryMap(userAction);
 		InitPageControl.initInvalidMap(userAction);
 		InitPageControl.initTimestamp(userAction);
+		InitPageControl.initUsertypeMap(userAction);
 	
 	}
 	
@@ -450,6 +448,15 @@ public class PageStatus implements Serializable{
 		InitPageControl.initInvalidMap(userAction);
 		userBean.setInvalid(Utilities.getWrapperSelect(userBean.getInvalid(),userAction.invalidMap));
 
+		// s:checkboxlist********************************************************************
+				InitPageControl.initUsertypeMap(userAction);
+				if (type.equals("show"))
+					userBean.setUsertype(Utilities.getWrapperCheckboxlist(
+							userBean.getUsertype(), ",", userAction.usertypeMap,
+							"<br>"));
+				else
+					userBean.setUsertype(Utilities.getWrapperCheckboxlist(
+							userBean.getUsertype(), ",", userAction.usertypeMap, "|"));
 		return userBean;
 	}
 	
@@ -581,12 +588,40 @@ public class PageStatus implements Serializable{
 			}
 		}
 		//checkbox
-		if(userBean.getUsertype()!=null){
-			if(userBean.getUsertype().trim().length()>0){
-				if(!userAction.action.equals("detail")){
-					if(!userBean.getUsertype().equals("false")) userAction.setUsertype("true");//checkbox选中
-					else userAction.setUsertype("false");
-				}else userAction.setUsertype(Utilities.getWrapperCheckbox(userBean.getUsertype(),"Y","N"));
+		if (userBean.getUsertype() != null) {
+
+			String usertype = userBean.getUsertype();
+			if (usertype.indexOf(",") != -1 && usertype.indexOf("V") != -1){
+				usertype = usertype.substring(2, usertype.length() - 1);
+				userBean.setUsertype(usertype);
+			}
+				
+			if (userBean.getUsertype().trim().length() > 0) {
+				if (userAction.usertypeList == null){
+					userAction.usertypeList = Utilities.csi
+							.getArrayList_String();
+				}
+				// 以,为分隔符
+				StringTokenizer usertypeSt = Utilities.csi.getStringTokenizer(
+						userBean.getUsertype(), ",");
+				if (!userAction.action.equals("detail")){
+					while (usertypeSt.hasMoreTokens())
+						userAction.usertypeList.add(usertypeSt.nextToken()
+								.trim());
+					}
+				else{
+					while (usertypeSt.hasMoreTokens())
+						userAction.usertypeList.add(userAction.usertypeMap
+								.get(usertypeSt.nextToken().trim()));
+				}
+				userAction.setUsertypeList(userAction.usertypeList);
+				usertype = new String();
+
+				for (String susertype : userAction.usertypeList) {
+					usertype += "," + susertype;
+				}
+				usertype = usertype.substring(1, usertype.length());
+				userAction.setUsertype(usertype);
 			}
 		}
 		//img upload

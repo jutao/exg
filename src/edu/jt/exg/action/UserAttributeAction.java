@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.user.PageStatus;
 import edu.jt.exg.logic.user.UserBean;
-
-
 import edu.jt.exg.logic.user.UserBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -171,11 +172,16 @@ public class UserAttributeAction extends ActionSupport{
 	/**
 	 * s:checkbox
 	 */
-			public String usertype="";
+		
+		public String usertype="";
 		public String getUsertype(){return usertype;}
 		public void setUsertype(String usertype){this.usertype = usertype;}
-		
-
+		public LinkedHashMap<String, String> usertypeMap=null;
+		public LinkedHashMap<String, String> getUsertypeMap(){return usertypeMap;}
+		public void setUsertypeMap(LinkedHashMap<String, String> usertypeMap){this.usertypeMap = usertypeMap;}
+		public List<String> usertypeList=null;
+		public List<String> getUsertypeList(){return usertypeList;}
+		public void setUsertypeList(List<String> usertypeList){this.usertypeList = usertypeList;}
 	
 	/**
 	 * s:textarea

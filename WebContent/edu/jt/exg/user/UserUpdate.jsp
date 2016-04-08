@@ -323,7 +323,7 @@
 														name="User.Usertype" /></label>
 												<div class="form_input">
 													<s:hidden id="usertype" name="usertype"></s:hidden>
-													<s:checkbox id="usertype" name="usertype"/>
+													<s:checkboxlist id="usertypecheck" name="usertypecheck" list="usertypeMap" value="usertypeList"/>
 													<span id="usertype_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
@@ -650,56 +650,6 @@
 </body>
 <script language="javascript">
 $(function(){
-	var location = (window.location+'').split('/'); 
-	var bPath = location[0]+'//'+location[2]+'/'+location[3]; 
-
-	var dataSrc=bPath+$("#icon").val();
-	$("#mybox").append('<img src="'+dataSrc+'" >');
-
-	var dataSrc=bPath+$("#qualificat").val();
-	$("#mybox1").append('<img src="'+dataSrc+'" >');
-	
-	var adressJson=$("#adressJson").val();
-	var obj = eval(adressJson);
-	
-    var provinceSelector =$("#address_provinceSelect");
-    var citySelector = $("#address_citySelect");
-    var areaSelector=$("#address_areaSelect");
-    
-    
-    var indexProvince=0;
-    var indexCity=0;
-    initprovince(obj,provinceSelector);
-    provinceSelector.trigger("liszt:updated");
-    areaSelector.empty();
-    citySelector.empty();
-    provinceSelector.change(function(){
-    	areaSelector.empty();
-    	areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>");
-    	areaSelector.trigger("liszt:updated");
-    	var code=$(this).find("option:selected").val();
-    	for(var i=0;i<obj.length;i++){
-    		if(obj[i].province_code==code){
-    			chageCity(obj[i].city_list,citySelector);
-    			citySelector.trigger("liszt:updated")
-    			indexProvince=i;
-    			break;
-    		}
-    	}
-    });
-    citySelector.change(function(){
-    	var code=$(this).find("option:selected").val();
-    	
-    	var objCity=obj[indexProvince].city_list;
-    	for(var i=0;i<objCity.length;i++){
-    		if(objCity[i].city_code==code){
-    			chageArea(objCity[i].area_list,areaSelector);
-    			areaSelector.trigger("liszt:updated")
-    			indexCity=i;
-    			break;
-    		}
-    	}
-    });
 	//等待加载editor控件
 	//************************************************************************************************************
 	var ajaxFlag=true;//通过所有ajax验证的标志位
@@ -714,38 +664,6 @@ $(function(){
 		<%-- window.location.href='<%=basePath%>UserAction.action?action=initquery'; --%>
 		window.history.back(-1);
 				});
-	var addressArea=$("#address_area").val();
-	var addressCity=$("#address_city").val();
-	var addressProvince=$("#address_province").val();
-	provinceSelector.attr('value',addressProvince);
-	provinceSelector.trigger("liszt:updated");
-	provinceSelector.change();
-	citySelector.attr('value',addressCity);
-	citySelector.trigger("liszt:updated");
-	citySelector.change();
-	areaSelector.attr('value',addressArea);
-	areaSelector.trigger("liszt:updated"); 
 });
-function initprovince(obj,provinceSelector){
-	provinceSelector.empty();
-	provinceSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
-	for(var i=0;i<obj.length;i++){
-		provinceSelector.append("<option value="+obj[i].province_code+">"+obj[i].province_name+"</option>"); 
-	}
-} 
-function chageCity(obj,citySelector){
-	citySelector.empty();
-	citySelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
-	for(var i=0;i<obj.length;i++){
-		citySelector.append("<option value="+obj[i].city_code+">"+obj[i].city_name+"</option>"); 
-	}
-}
-function chageArea(obj,areaSelector){
-	areaSelector.empty();
-	areaSelector.append("<option value="+"0"+">"+"---请选择---"+"</option>"); 
-	for(var i=0;i<obj.length;i++){
-		areaSelector.append("<option value="+obj[i].area_code+">"+obj[i].area_name+"</option>"); 
-	}
-}
 </script>
 </html>

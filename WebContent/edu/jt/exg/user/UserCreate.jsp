@@ -315,7 +315,7 @@ String path = request.getContextPath();
 														name="User.Usertype" /></label>
 												<div class="form_input">
 													<s:hidden id="usertype" name="usertype"></s:hidden>
-													<s:checkbox id="usertype" name="usertype"/>
+													<s:checkboxlist id="usertypecheck" name="usertypecheck" list="usertypeMap" value="usertypeList"/>
 													<span id="usertype_valid" class="red">&nbsp;</span>
 												</div>
 											</div>

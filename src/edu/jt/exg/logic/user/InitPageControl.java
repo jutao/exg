@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.user;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.UserAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -40,10 +40,7 @@ public class InitPageControl implements Serializable{
 	 */
 	public static void initGenderMap(UserAction userAction){
 		if(userAction.genderMap==null) userAction.genderMap=Utilities.csi.getLinkedHashMap_String_String();
-		userAction.genderMap.put("","");
-		userAction.genderMap.put("1","value1");
-		userAction.genderMap.put("2","value2");
-		userAction.genderMap.put("3","value3");
+		CommonMethod.getSelectMap(userAction.genderMap, "1013");//性别区分：1013
 		userAction.setGenderMap(userAction.genderMap);
 	}
 
@@ -76,28 +73,19 @@ public static void initAddress_areaMap(UserAction userAction){
 
 public static void initBanknameMap(UserAction userAction){
 		if(userAction.banknameMap==null) userAction.banknameMap=Utilities.csi.getLinkedHashMap_String_String();
-		userAction.banknameMap.put("","");
-		userAction.banknameMap.put("1","value1");
-		userAction.banknameMap.put("2","value2");
-		userAction.banknameMap.put("3","value3");
+		CommonMethod.getSelectMap(userAction.banknameMap, "1012");//银行区分：1012
 		userAction.setBanknameMap(userAction.banknameMap);
 	}
 
 public static void initCategoryMap(UserAction userAction){
 		if(userAction.categoryMap==null) userAction.categoryMap=Utilities.csi.getLinkedHashMap_String_String();
-		userAction.categoryMap.put("","");
-		userAction.categoryMap.put("1","value1");
-		userAction.categoryMap.put("2","value2");
-		userAction.categoryMap.put("3","value3");
+		CommonMethod.getSelectMap(userAction.categoryMap, "1002");//用户区分：1002
 		userAction.setCategoryMap(userAction.categoryMap);
 	}
 
 public static void initInvalidMap(UserAction userAction){
 		if(userAction.invalidMap==null) userAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
-		userAction.invalidMap.put("","");
-		userAction.invalidMap.put("1","value1");
-		userAction.invalidMap.put("2","value2");
-		userAction.invalidMap.put("3","value3");
+		CommonMethod.getSelectMap(userAction.invalidMap, "1004");//有效无效区分：1004
 		userAction.setInvalidMap(userAction.invalidMap);
 	}
 
@@ -132,7 +120,11 @@ public static void initInvalidMap(UserAction userAction){
 	/**
 	 * s:checkboxlist初始化
 	 */
-	
+	public static void initUsertypeMap(UserAction userAction){
+		if(userAction.usertypeMap==null) userAction.usertypeMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getCheckMap(userAction.usertypeMap, "1003");//已认证资格：1003
+		userAction.setUsertypeMap(userAction.usertypeMap);
+		}
 	
 	/**
 	 * s:radio初始化
