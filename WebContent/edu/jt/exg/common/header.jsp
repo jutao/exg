@@ -10,7 +10,7 @@
 	<div id="header" class="black_gel">
 			<div class="header_left" >
 				<div class="logo">
-					<img src="<%=basePath%>/edu/jt/exg//images/logo1.png" height="60">
+					<img src="<%=basePath%>/edu/jt/exg//images/logo.png" height="60">
 				</div>
 			</div>
 			<div class="header_right">
