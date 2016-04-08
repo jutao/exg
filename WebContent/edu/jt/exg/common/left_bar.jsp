@@ -25,10 +25,6 @@
 									name="MenuBar.CategoryList" /></a></li>
 						<li><a href="Category_masterAction.action?action=initquery"><s:text
 									name="MenuBar.CategorymasterList" /></a></li>
-						<li><a href="Charge_detailAction.action?action=initquery"><s:text
-									name="MenuBar.Charge_detailList" /></a></li>
-						<li><a href="Consume_detailAction.action?action=initquery"><s:text
-									name="MenuBar.Consume_detailList" /></a></li>
 						<li><a href="Withdrawals_detailAction.action?action=initquery"><s:text
 									name="MenuBar.Withdrawals_detailList" /></a></li>
 						<li><a href="V_consume_detailAction.action?action=initquery"><s:text
