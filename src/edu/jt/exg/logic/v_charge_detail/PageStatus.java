@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_charge_detail;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_charge_detailAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -76,6 +72,9 @@ public class PageStatus implements Serializable{
 	 * @param V_charge_detailAction action句柄
 	 */
 	public void setControlsValues(V_charge_detailAction v_charge_detailAction){
+			InitPageControl.initCategoryMap(v_charge_detailAction);
+			InitPageControl.initStatusMap(v_charge_detailAction);
+			InitPageControl.initInvalidMap(v_charge_detailAction);
 			InitPageControl.initTimestamp(v_charge_detailAction);
 	
 	}
@@ -301,7 +300,15 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_charge_detailBean wrapperV_charge_detailBean(V_charge_detailAction v_charge_detailAction,V_charge_detailBean v_charge_detailBean,String type){
-		
+		//s:select***************************************************************************
+				InitPageControl.initCategoryMap(v_charge_detailAction);
+				v_charge_detailBean.setCategory(Utilities.getWrapperSelect(v_charge_detailBean.getCategory(),v_charge_detailAction.categoryMap));
+				//s:select***************************************************************************
+				InitPageControl.initStatusMap(v_charge_detailAction);
+				v_charge_detailBean.setStatus(Utilities.getWrapperSelect(v_charge_detailBean.getStatus(),v_charge_detailAction.statusMap));
+				//s:select***************************************************************************
+				InitPageControl.initInvalidMap(v_charge_detailAction);
+				v_charge_detailBean.setInvalid(Utilities.getWrapperSelect(v_charge_detailBean.getInvalid(),v_charge_detailAction.invalidMap));
 		return v_charge_detailBean;
 	}
 	
@@ -335,15 +342,6 @@ public class PageStatus implements Serializable{
 		if(v_charge_detailBean.getUserkey()!=null)
 			if(v_charge_detailBean.getUserkey().trim().length()>0) v_charge_detailAction.setUserkey(v_charge_detailBean.getUserkey());
 		//textfield
-		if(v_charge_detailBean.getCategory()!=null)
-			if(v_charge_detailBean.getCategory().trim().length()>0) v_charge_detailAction.setCategory(v_charge_detailBean.getCategory());
-		//textfield
-		if(v_charge_detailBean.getStatus()!=null)
-			if(v_charge_detailBean.getStatus().trim().length()>0) v_charge_detailAction.setStatus(v_charge_detailBean.getStatus());
-		//textfield
-		if(v_charge_detailBean.getInvalid()!=null)
-			if(v_charge_detailBean.getInvalid().trim().length()>0) v_charge_detailAction.setInvalid(v_charge_detailBean.getInvalid());
-		//textfield
 		if(v_charge_detailBean.getName()!=null)
 			if(v_charge_detailBean.getName().trim().length()>0) v_charge_detailAction.setName(v_charge_detailBean.getName());
 		//textfield
@@ -352,7 +350,33 @@ public class PageStatus implements Serializable{
 		//textfield
 		if(v_charge_detailBean.getIcon()!=null)
 			if(v_charge_detailBean.getIcon().trim().length()>0) v_charge_detailAction.setIcon(v_charge_detailBean.getIcon());
-
+		//select
+		if(v_charge_detailBean.getCategory()!=null){
+			if(v_charge_detailBean.getCategory().trim().length()>0){
+				if(!v_charge_detailAction.action.equals("detail")){
+					v_charge_detailAction.setCategory(v_charge_detailBean.getCategory());
+					v_charge_detailAction.setCategorySelect(v_charge_detailBean.getCategory());
+				}else v_charge_detailAction.setCategory(Utilities.getWrapperSelect(v_charge_detailBean.getCategory(),v_charge_detailAction.categoryMap));
+			}
+		}
+		//select
+		if(v_charge_detailBean.getStatus()!=null){
+			if(v_charge_detailBean.getStatus().trim().length()>0){
+				if(!v_charge_detailAction.action.equals("detail")){
+					v_charge_detailAction.setStatus(v_charge_detailBean.getStatus());
+					v_charge_detailAction.setStatusSelect(v_charge_detailBean.getStatus());
+				}else v_charge_detailAction.setStatus(Utilities.getWrapperSelect(v_charge_detailBean.getStatus(),v_charge_detailAction.statusMap));
+			}
+		}
+		//select
+		if(v_charge_detailBean.getInvalid()!=null){
+			if(v_charge_detailBean.getInvalid().trim().length()>0){
+				if(!v_charge_detailAction.action.equals("detail")){
+					v_charge_detailAction.setInvalid(v_charge_detailBean.getInvalid());
+					v_charge_detailAction.setInvalidSelect(v_charge_detailBean.getInvalid());
+				}else v_charge_detailAction.setInvalid(Utilities.getWrapperSelect(v_charge_detailBean.getInvalid(),v_charge_detailAction.invalidMap));
+			}
+		}
 	}
 	
 	/**

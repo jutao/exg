@@ -90,7 +90,11 @@ public class UserAttributeAction extends ActionSupport{
 	/**
 	 * s:textfield
 	 */
-			public String userid="";
+		public String adressJson="";
+		public String getAdressJson(){return adressJson;}
+		public void setAdressJson(String adressJson){this.adressJson = adressJson;}
+	
+		public String userid="";
 		public String getUserid(){return userid;}
 		public void setUserid(String userid){this.userid = userid;}
 		

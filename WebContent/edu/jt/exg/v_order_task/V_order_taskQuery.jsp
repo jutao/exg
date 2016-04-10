@@ -130,6 +130,7 @@
 	src="<%=basePath%>edu/jt/exg/js/chart-plugins/jqplot.pointLabels.min.js"></script>
 <script
 	src="<%=basePath%>edu/jt/exg/js/chart-plugins/jqplot.meterGaugeRenderer.min.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/v_order_task.js"></script>	
 <script src="<%=basePath%>edu/jt/exg/js/custom-scripts.js"></script>
 <!--必须先加载否则js中的jquery脚本会报错未定义-->
 <%-- <script src="<%=basePath%>edu/jt/exg/js/jquery-1.11.1.js"></script> --%>
@@ -167,9 +168,13 @@
 							<li style="margin-right: 5px;"><s:textfield id="User_name" 
 									name="User_name" cssClass="search_input" style="width:100px;"
 									placeholder="请输入用户名" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="invalid" 
-									name="invalid" cssClass="search_input" style="width:100px;"
-									placeholder="请输入有效无效区分" /></li>
+							<li style="margin-right: 5px;">
+							<div class="form_input">
+									<s:hidden id="invalid" name="invalid"></s:hidden>
+									<s:select id="invalidSelect" name="invalidSelect" list="invalidMap"  data-placeholder="有效无效区分"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+									</li>
 			<li style="margin-right: 5px;">
 								<button id="search" name="search" class="btn_small btn_blue">
 									<s:text name="Common.Query"></s:text>

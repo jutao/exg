@@ -244,7 +244,7 @@
 						<ul id="search_box">
 							<li style="margin-right: 5px;"><s:textfield id="orderid"
 									name="orderid" cssClass="search_input" style="width:100px;"
-									placeholder="请输入订单号" /></li>
+									placeholder="请输入接单号" /></li>
 							<li style="margin-right: 5px;"><s:textfield id="req_name"
 									name="req_name" cssClass="search_input" style="width:100px;"
 									placeholder="请输入维修员名称" /></li>
@@ -254,13 +254,21 @@
 							<li style="margin-right: 5px;"><s:textfield id="outcome"
 									name="outcome" cssClass="search_input" style="width:100px;"
 									placeholder="请输入解决结果" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="status"
-									name="status" cssClass="search_input" style="width:100px;"
-									placeholder="请输入状态" /></li>
-									
-							<li style="margin-right: 5px;"><s:textfield id="invalid"
-									name="invalid" cssClass="search_input" style="width:100px;"
-									placeholder="请输入有效无效区分" /></li>
+						<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="status" name="status"></s:hidden>
+									<s:select id="statusSelect" name="statusSelect" list="statusMap"  data-placeholder="请选择状态"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
+							
+							<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="invalid" name="invalid"></s:hidden>
+									<s:select id="invalidSelect" name="invalidSelect" list="invalidMap"  data-placeholder="有效无效区分"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
 									<li style="margin-right: 5px;">
 								<button id="search" name="search" class="btn_small btn_blue">
 									<s:text name="Common.Query"></s:text>

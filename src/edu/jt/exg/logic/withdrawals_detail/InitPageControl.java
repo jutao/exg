@@ -1,6 +1,8 @@
 package edu.jt.exg.logic.withdrawals_detail;
 import java.io.Serializable;
 import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.Withdrawals_detailAction;
 import core.ListKeyBean;
@@ -40,19 +42,13 @@ public class InitPageControl implements Serializable{
 	 */
 	public static void initStatusMap(Withdrawals_detailAction withdrawals_detailAction){
 		if(withdrawals_detailAction.statusMap==null) withdrawals_detailAction.statusMap=Utilities.csi.getLinkedHashMap_String_String();
-		withdrawals_detailAction.statusMap.put("","");
-		withdrawals_detailAction.statusMap.put("1","value1");
-		withdrawals_detailAction.statusMap.put("2","value2");
-		withdrawals_detailAction.statusMap.put("3","value3");
+		CommonMethod.getSelectMap(withdrawals_detailAction.statusMap, "1011");//体现状态：1011
 		withdrawals_detailAction.setStatusMap(withdrawals_detailAction.statusMap);
 	}
 
 public static void initInvalidMap(Withdrawals_detailAction withdrawals_detailAction){
 		if(withdrawals_detailAction.invalidMap==null) withdrawals_detailAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
-		withdrawals_detailAction.invalidMap.put("","");
-		withdrawals_detailAction.invalidMap.put("1","value1");
-		withdrawals_detailAction.invalidMap.put("2","value2");
-		withdrawals_detailAction.invalidMap.put("3","value3");
+		CommonMethod.getSelectMap(withdrawals_detailAction.invalidMap, "1004");//有效无效 区分：1004
 		withdrawals_detailAction.setInvalidMap(withdrawals_detailAction.invalidMap);
 	}
 

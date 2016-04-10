@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.v_charge_detail.PageStatus;
 import edu.jt.exg.logic.v_charge_detail.V_charge_detailBean;
-
-
 import edu.jt.exg.logic.v_charge_detail.V_charge_detailBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -97,17 +98,6 @@ public class V_charge_detailAttributeAction extends ActionSupport{
 		public String getUserkey(){return userkey;}
 		public void setUserkey(String userkey){this.userkey = userkey;}
 		
-		public String category="";
-		public String getCategory(){return category;}
-		public void setCategory(String category){this.category = category;}
-		
-		public String status="";
-		public String getStatus(){return status;}
-		public void setStatus(String status){this.status = status;}
-		
-		public String invalid="";
-		public String getInvalid(){return invalid;}
-		public void setInvalid(String invalid){this.invalid = invalid;}
 		
 		public String name="";
 		public String getName(){return name;}
@@ -122,48 +112,44 @@ public class V_charge_detailAttributeAction extends ActionSupport{
 		public void setIcon(String icon){this.icon = icon;}
 		
 
-	
-	/**
-	 * s:password
-	 */
-	
-	
-	/**
-	 * s:checkbox
-	 */
-	
-	
-	/**
-	 * s:textarea
-	 */
-	
 
-	/**
-	 * editor
-	 */
-	
-	
-	/**
-	 * s:hidden iframe use s:file(textarea,editor)
-	 */
-	
-	
-	/**
-	 * s:combobox
-	 */
-	
-	
+		/**
+		 * s:select
+		 */
+			public String category=null;
+			public String getCategory(){return category;}
+			public void setCategory(String category){this.category = category;}
+			public String categorySelect=null;
+			public String getCategorySelect(){return categorySelect;}
+			public void setCategorySelect(String categorySelect){this.categorySelect = categorySelect;}
+			public LinkedHashMap<String, String> categoryMap=null;
+			public LinkedHashMap<String, String> getCategoryMap(){return categoryMap;}
+			public void setCategoryMap(LinkedHashMap<String, String> categoryMap){this.categoryMap = categoryMap;}
+			
+			public String status=null;
+			public String getStatus(){return status;}
+			public void setStatus(String status){this.status = status;}
+			public String statusSelect=null;
+			public String getStatusSelect(){return statusSelect;}
+			public void setStatusSelect(String statusSelect){this.statusSelect = statusSelect;}
+			public LinkedHashMap<String, String> statusMap=null;
+			public LinkedHashMap<String, String> getStatusMap(){return statusMap;}
+			public void setStatusMap(LinkedHashMap<String, String> statusMap){this.statusMap = statusMap;}
+			
+			public String invalid=null;
+			public String getInvalid(){return invalid;}
+			public void setInvalid(String invalid){this.invalid = invalid;}
+			public String invalidSelect=null;
+			public String getInvalidSelect(){return invalidSelect;}
+			public void setInvalidSelect(String invalidSelect){this.invalidSelect = invalidSelect;}
+			public LinkedHashMap<String, String> invalidMap=null;
+			public LinkedHashMap<String, String> getInvalidMap(){return invalidMap;}
+			public void setInvalidMap(LinkedHashMap<String, String> invalidMap){this.invalidMap = invalidMap;}
+			
+
+			
 	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-			public Double amount=null;
+		public Double amount=null;
 		public Double getAmount(){return amount;}
 		public void setAmount(Double amount){this.amount = amount;}
 		//for query

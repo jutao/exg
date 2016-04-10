@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_order_task;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_order_taskAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -77,7 +73,7 @@ public class PageStatus implements Serializable{
 	 */
 	public void setControlsValues(V_order_taskAction v_order_taskAction){
 			InitPageControl.initTimestamp(v_order_taskAction);
-	
+			InitPageControl.initInvalidMap(v_order_taskAction);
 	}
 	
 	/**
@@ -281,7 +277,10 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_order_taskBean wrapperV_order_taskBean(V_order_taskAction v_order_taskAction,V_order_taskBean v_order_taskBean,String type){
-		
+		// s:select***************************************************************************
+				InitPageControl.initInvalidMap(v_order_taskAction);
+				v_order_taskBean.setInvalid(Utilities.getWrapperSelect(v_order_taskBean.getInvalid(),
+						v_order_taskAction.invalidMap));
 		return v_order_taskBean;
 	}
 	
@@ -315,9 +314,6 @@ public class PageStatus implements Serializable{
 		if(v_order_taskBean.getOrderkey()!=null)
 			if(v_order_taskBean.getOrderkey().trim().length()>0) v_order_taskAction.setOrderkey(v_order_taskBean.getOrderkey());
 		//textfield
-		if(v_order_taskBean.getInvalid()!=null)
-			if(v_order_taskBean.getInvalid().trim().length()>0) v_order_taskAction.setInvalid(v_order_taskBean.getInvalid());
-		//textfield
 		if(v_order_taskBean.getReq_name()!=null)
 			if(v_order_taskBean.getReq_name().trim().length()>0) v_order_taskAction.setReq_name(v_order_taskBean.getReq_name());
 		//textfield
@@ -329,7 +325,17 @@ public class PageStatus implements Serializable{
 		//textfield
 		if(v_order_taskBean.getUser_name()!=null)
 			if(v_order_taskBean.getUser_name().trim().length()>0) v_order_taskAction.setUser_name(v_order_taskBean.getUser_name());
-
+		// select
+		if (v_order_taskBean.getInvalid() != null) {
+			if (v_order_taskBean.getInvalid().trim().length() > 0) {
+				if (!v_order_taskAction.action.equals("detail")) {
+					v_order_taskAction.setInvalid(v_order_taskBean.getInvalid());
+					v_order_taskAction.setInvalidSelect(v_order_taskBean.getInvalid());
+				} else
+					v_order_taskAction.setInvalid(Utilities.getWrapperSelect(
+							v_order_taskBean.getInvalid(), v_order_taskAction.invalidMap));
+			}
+		}
 	}
 	
 	/**

@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.v_comment.PageStatus;
 import edu.jt.exg.logic.v_comment.V_commentBean;
-
-
 import edu.jt.exg.logic.v_comment.V_commentBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -113,14 +114,6 @@ public class V_commentAttributeAction extends ActionSupport{
 		public String getPic3(){return pic3;}
 		public void setPic3(String pic3){this.pic3 = pic3;}
 		
-		public String category="";
-		public String getCategory(){return category;}
-		public void setCategory(String category){this.category = category;}
-		
-		public String invalid="";
-		public String getInvalid(){return invalid;}
-		public void setInvalid(String invalid){this.invalid = invalid;}
-		
 		public String user_key="";
 		public String getUser_key(){return user_key;}
 		public void setUser_key(String user_key){this.user_key = user_key;}
@@ -147,35 +140,6 @@ public class V_commentAttributeAction extends ActionSupport{
 		
 
 	
-	/**
-	 * s:password
-	 */
-	
-	
-	/**
-	 * s:checkbox
-	 */
-	
-	
-	/**
-	 * s:textarea
-	 */
-	
-
-	/**
-	 * editor
-	 */
-	
-	
-	/**
-	 * s:hidden iframe use s:file(textarea,editor)
-	 */
-	
-	
-	/**
-	 * s:combobox
-	 */
-	
 	
 	//s:textfield
 			public Integer display=null;
@@ -189,46 +153,29 @@ public class V_commentAttributeAction extends ActionSupport{
 		public Integer getDisplayTo(){return displayTo;}
 		public void setDisplayTo(Integer displayTo){this.displayTo = displayTo;}
 		
-
+		
+		/**
+		 * s:select
+		 */
+		public String category=null;
+		public String getCategory(){return category;}
+		public void setCategory(String category){this.category = category;}
+		public String categorySelect=null;
+		public String getCategorySelect(){return categorySelect;}
+		public void setCategorySelect(String categorySelect){this.categorySelect = categorySelect;}
+		public LinkedHashMap<String, String> categoryMap=null;
+		public LinkedHashMap<String, String> getCategoryMap(){return categoryMap;}
+		public void setCategoryMap(LinkedHashMap<String, String> categoryMap){this.categoryMap = categoryMap;}
 	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	/**
-	 * s:doubleselect
-	 */
-	
-	
-	/**
-	 * s:radio
-	 */
-	
-	
-	/**
-	 * s:checkboxlist
-	 */
-	
-	
-	/**
-	 * s:select
-	 */
-	
-	
-	/**
-	 * s:optiontransferselect
-	 */
-	
-	
-	/**
-	 * sx:datetimepicker
-	 */
-	
+		public String invalid=null;
+		public String getInvalid(){return invalid;}
+		public void setInvalid(String invalid){this.invalid = invalid;}
+		public String invalidSelect=null;
+		public String getInvalidSelect(){return invalidSelect;}
+		public void setInvalidSelect(String invalidSelect){this.invalidSelect = invalidSelect;}
+		public LinkedHashMap<String, String> invalidMap=null;
+		public LinkedHashMap<String, String> getInvalidMap(){return invalidMap;}
+		public void setInvalidMap(LinkedHashMap<String, String> invalidMap){this.invalidMap = invalidMap;}
 	
 	/**
 	 * 设置日历当前时间显示
@@ -237,9 +184,6 @@ public class V_commentAttributeAction extends ActionSupport{
 	
 	}
 	
-	/**
-	 * manual timestamp
-	 */
 	
 
 	/**

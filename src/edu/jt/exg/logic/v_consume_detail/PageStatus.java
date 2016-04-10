@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_consume_detail;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_consume_detailAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -77,6 +73,7 @@ public class PageStatus implements Serializable{
 	 */
 	public void setControlsValues(V_consume_detailAction v_consume_detailAction){
 			InitPageControl.initTimestamp(v_consume_detailAction);
+			InitPageControl.initInvalidMap(v_consume_detailAction);
 	
 	}
 	
@@ -230,6 +227,14 @@ public class PageStatus implements Serializable{
 		//auto timestamp
 		if(v_consume_detailAction.action.equals("detail")) v_consume_detailAction.setUpdate_time(v_consume_detailBean.getUpdate_time());//auto timestamp只作detail显示
 
+		if(v_consume_detailBean.getInvalid()!=null){
+			if(v_consume_detailBean.getInvalid().trim().length()>0){
+				if(!v_consume_detailAction.action.equals("detail")){
+					v_consume_detailAction.setInvalid(v_consume_detailBean.getInvalid());
+					v_consume_detailAction.setInvalidSelect(v_consume_detailBean.getInvalid());
+				}else v_consume_detailAction.setInvalid(Utilities.getWrapperSelect(v_consume_detailBean.getInvalid(),v_consume_detailAction.invalidMap));
+			}
+		}
 	}
 	
 	/**
@@ -297,7 +302,8 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_consume_detailBean wrapperV_consume_detailBean(V_consume_detailAction v_consume_detailAction,V_consume_detailBean v_consume_detailBean,String type){
-		
+		InitPageControl.initInvalidMap(v_consume_detailAction);
+		v_consume_detailBean.setInvalid(Utilities.getWrapperSelect(v_consume_detailBean.getInvalid(),v_consume_detailAction.invalidMap));
 		return v_consume_detailBean;
 	}
 	

@@ -1,6 +1,9 @@
 package edu.jt.exg.logic.v_charge_detail;
 import java.io.Serializable;
 import java.util.List;
+
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.V_charge_detailAction;
 import core.ListKeyBean;
@@ -21,24 +24,25 @@ public class InitPageControl implements Serializable{
 	}
 
 	/**
-	 * 设置s:optiontransferselect集合初始化
-	 */
-	
-	
-	/**
-	 * s:combobox初始化
-	 */
-	
-	
-	/**
-	 * s:doubleselect初始化
-	 */
-	
-	
-	/**
 	 * s:select初始化,value和text显示项必须相同
 	 */
-	
+	public static void initCategoryMap(V_charge_detailAction v_charge_detailAction){
+		if(v_charge_detailAction.categoryMap==null) v_charge_detailAction.categoryMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_charge_detailAction.categoryMap, "1009");//充值记录区分 区分：1009
+		v_charge_detailAction.setCategoryMap(v_charge_detailAction.categoryMap);
+	}
+
+public static void initStatusMap(V_charge_detailAction v_charge_detailAction){
+	if(v_charge_detailAction.statusMap==null) v_charge_detailAction.statusMap=Utilities.csi.getLinkedHashMap_String_String();
+	CommonMethod.getSelectMap(v_charge_detailAction.statusMap, "1010");//充值状态 区分：1010
+	v_charge_detailAction.setStatusMap(v_charge_detailAction.statusMap);
+	}
+
+public static void initInvalidMap(V_charge_detailAction v_charge_detailAction){
+	if(v_charge_detailAction.invalidMap==null) v_charge_detailAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
+	CommonMethod.getSelectMap(v_charge_detailAction.invalidMap, "1004");//有效无效 区分：1004
+	v_charge_detailAction.setInvalidMap(v_charge_detailAction.invalidMap);
+	}
 	
 	/**
 	 * timestamp初始化

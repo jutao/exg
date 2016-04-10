@@ -136,7 +136,7 @@
 <!--必须先加载否则js中的jquery脚本会报错未定义-->
 <%-- <script src="<%=basePath%>edu/jt/exg//js/jquery-1.11.1.js"></script> --%>
 <%-- <script src="<%=basePath%>edu/jt/exg//js/public.js"></script> --%>
-<script src="<%=basePath%>edu/jt/exg//js/V_task.js"></script>
+<script src="<%=basePath%>edu/jt/exg//js/v_task.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/common.js"></script>
 <script language='javascript'>
 	$(function() {
@@ -157,70 +157,6 @@ $("#search").dblclick(function() {
 				return true;
 			}, 0);
 		});
-		$("#create_parent").click(function() {
-			window.setTimeout(function() {
-				window.location = '<%=basePath%>V_taskAction.action?action=initcreate'; 
-				return true;
-			}, 0);
-		});
-		$("#update_parent").click(function(){
-	  		if($('#action_tbl .tr_select input:checked').length==1){
-				var id=$('#action_tbl .tr_select input:checked').val();
-				window.setTimeout(function() {
-					window.location = '<%=basePath%>V_taskAction.action?action=initupdate&id='+id;
-					return true;
-				}, 0);
-			}else{
-				alert("选择一个用户ID!");
-			}
-		});
-		
-		$("#create_child").click(function(){
-			if($('#action_tbl .tr_select input:checked').length==1){
-				var parent_code;
-				var chks=$('#action_tbl .tr_select input:checkbox');
-				var codes=$('#action_tbl #r_code');
-				for (var i = 0; i < chks.size(); i++) {
-					if(chks[i].checked){
-						parent_code=codes[i].value;
-						break;
-					}
-				}
-				window.setTimeout(function() {
-					window.location = '<%=basePath%>V_taskAction.action?action=initcreate&parent_code='+parent_code;
-					return true;
-				}, 0);
-				
-			}else{
-				alert("选择一个用户ID!");
-			}
-		});
-		$("#create_orderdetail").click(function(){
-			if($('#action_tbl .tr_select input:checked').length==1){
-				var orderkey;
-				var chks=$('#action_tbl .tr_select input:checkbox');
-				var codes=$('#action_tbl #r_code');
-				for (var i = 0; i < chks.size(); i++) {
-					if(chks[i].checked){
-						orderkey=codes[i].value;
-						break;
-					}
-				}
-				window.setTimeout(function() {
-					window.location = '<%=basePath%>V_taskAction.action?action=initcreate&orderkey='+orderkey;
-					return true;
-				}, 0);
-				
-			}else{
-				alert("选择一个用户ID!");
-			}
-			
-		});
-
-		$("#delete").click(function() {
-			getDeleteAllIds('<%=basePath%>V_taskAction.action?action=deleteSelected&ids=',
-									'<s:text name="Common.Delete_All_Msg"/>');
-						});
 
 	});
 </script>
@@ -242,25 +178,33 @@ $("#search").dblclick(function() {
 			<div class="page_title gray_sai">
 					<div class="top_search" style="position:absolute;z-index:1000;">
 						<ul id="search_box">
-							<li style="margin-right: 5px;"><s:textfield id="orderid"
-									name="orderid" cssClass="search_input" style="width:100px;"
-									placeholder="请输入任务id" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="req_name"
-									name="req_name" cssClass="search_input" style="width:100px;"
+							<li style="margin-right: 5px;"><s:textfield id="taskid"
+									name="taskid" cssClass="search_input" style="width:100px;"
+									placeholder="请输入任务号" /></li>
+							<li style="margin-right: 5px;"><s:textfield id="user_id"
+									name="user_id" cssClass="search_input" style="width:100px;"
 									placeholder="请输入用户id" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="req_id"
-									name="req_id" cssClass="search_input" style="width:100px;"
+							<li style="margin-right: 5px;"><s:textfield id="name"
+									name="name" cssClass="search_input" style="width:100px;"
 									placeholder="请输入名称" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="outcome"
-									name="outcome" cssClass="search_input" style="width:100px;"
+							<li style="margin-right: 5px;"><s:textfield id="server_name"
+									name="server_name" cssClass="search_input" style="width:100px;"
 									placeholder="请输入服务名称" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="status"
-									name="status" cssClass="search_input" style="width:100px;"
-									placeholder="请输入状态" /></li>
+							<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="status" name="status"></s:hidden>
+									<s:select id="statusSelect" name="statusSelect" list="statusMap"  data-placeholder="请选择状态"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
 									
-							<li style="margin-right: 5px;"><s:textfield id="invalid"
-									name="invalid" cssClass="search_input" style="width:100px;"
-									placeholder="请输入有效无效区分" /></li>
+							<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="invalid" name="invalid"></s:hidden>
+									<s:select id="invalidSelect" name="invalidSelect" list="invalidMap"  data-placeholder="有效无效区分"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
 							
 		<li style="margin-right: 5px;">
 								<button id="search" name="search" class="btn_small btn_blue">

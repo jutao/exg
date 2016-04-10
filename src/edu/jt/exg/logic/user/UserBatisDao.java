@@ -289,103 +289,21 @@ public class UserBatisDao {
 	 */
 	private static String getWhereString(UserBean queryConditionsBean,String sql){
 		StringBuffer s=new StringBuffer(sql).append(ConstSetup.DATABASE_OWNER).append(".").append(TABLE).append(" where 1=1 and ");
-				if(queryConditionsBean.getLevelFrom()!=null)
-			s.append("level>=").append(queryConditionsBean.getLevelFrom().toString()).append(" and ");
-		if(queryConditionsBean.getLevelTo()!=null)
-			s.append("level<=").append(queryConditionsBean.getLevelTo().toString()).append(" and ");
 		if(queryConditionsBean.getUserid().trim().length()>0)
 			s.append("userid like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getUserid().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getName().trim().length()>0)
 			s.append("name like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getName().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getNickname().trim().length()>0)
-			s.append("nickname like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getNickname().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getIcon().trim().length()>0)
-			s.append("icon like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getIcon().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getId_number().trim().length()>0)
-			s.append("id_number like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getId_number().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getEmail().trim().length()>0)
-			s.append("email like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getEmail().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getGender().trim().length()>0)
-			s.append("gender like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getGender().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getAddress_province().trim().length()>0)
+		if(queryConditionsBean.getAddress_province().trim().length()>1)
 			s.append("address_province like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getAddress_province().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getAddress_city().trim().length()>0)
 			s.append("address_city like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getAddress_city().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getAddress_area().trim().length()>0)
 			s.append("address_area like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getAddress_area().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getAddress_details().trim().length()>0)
-			s.append("address_details like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getAddress_details().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getHometown().trim().length()>0)
-			s.append("hometown like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getHometown().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getOccupation().trim().length()>0)
-			s.append("occupation like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getOccupation().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getInterest().trim().length()>0)
-			s.append("interest like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getInterest().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getBankname().trim().length()>0)
-			s.append("bankname like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getBankname().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getBank_branch().trim().length()>0)
-			s.append("bank_branch like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getBank_branch().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getCard_number().trim().length()>0)
-			s.append("card_number like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getCard_number().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getBalanceFrom()!=null)
-			s.append("balance>=").append(queryConditionsBean.getBalanceFrom().toString()).append(" and ");
-		if(queryConditionsBean.getBalanceTo()!=null)
-			s.append("balance<=").append(queryConditionsBean.getBalanceTo().toString()).append(" and ");
-		if(queryConditionsBean.getPointFrom()!=null)
-			s.append("point>=").append(queryConditionsBean.getPointFrom().toString()).append(" and ");
-		if(queryConditionsBean.getPointTo()!=null)
-			s.append("point<=").append(queryConditionsBean.getPointTo().toString()).append(" and ");
-		if(queryConditionsBean.getRecommender_code().trim().length()>0)
-			s.append("recommender_code like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getRecommender_code().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getLogin_password().trim().length()>0)
-			s.append("login_password like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getLogin_password().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getGesture_password().trim().length()>0)
-			s.append("gesture_password like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getGesture_password().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getTrading_password().trim().length()>0)
-			s.append("trading_password like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getTrading_password().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getCategory().trim().length()>0)
-			s.append("category like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getCategory().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getUsertype().trim().length()>0)
 			if(!queryConditionsBean.getUsertype().trim().equals("false"))
 				s.append("usertype = '").append(queryConditionsBean.getUsertype().trim()).append("' and ");
-		if(queryConditionsBean.getQualificat().trim().length()>0)
-			s.append("qualificat like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getQualificat().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getYubei1().trim().length()>0)
-			s.append("yubei1 like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getYubei1().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getYubei2().trim().length()>0)
-			s.append("yubei2 like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getYubei2().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getYubei3().trim().length()>0)
-			s.append("yubei3 like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getYubei3().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getInvalid().trim().length()>0)
 			s.append("invalid like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getInvalid().trim())).append("%' escape '/' and ");
-		if(queryConditionsBean.getRegister_timeFrom()!=null){
-			if(ConstSetup.DATABASE.toUpperCase().equals("ORACLE")) s.append("to_char(register_time,'yyyy-MM-dd hh:mm:ss')>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("DB2")) s.append("char(register_time)>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("SQLSERVER")) s.append("CONVERT(varchar(20),register_time,120)>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("MYSQL") || ConstSetup.DATABASE.toUpperCase().equals("SYBASE")) s.append("register_time>='");
-			s.append(Utilities.getDateString("yyyy-MM-dd hh:mm:ss", queryConditionsBean.getRegister_timeFrom())).append("' and ");
-		}
-		if(queryConditionsBean.getRegister_timeTo()!=null){
-			if(ConstSetup.DATABASE.toUpperCase().equals("ORACLE")) s.append("to_char(register_time,'yyyy-MM-dd hh:mm:ss')<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("DB2")) s.append("char(register_time)<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("SQLSERVER")) s.append("CONVERT(varchar(20),register_time,120)<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("MYSQL") || ConstSetup.DATABASE.toUpperCase().equals("SYBASE")) s.append("register_time<='");
-			s.append(Utilities.getDateString("yyyy-MM-dd hh:mm:ss", queryConditionsBean.getRegister_timeTo())).append("' and ");
-		}
-		if(queryConditionsBean.getUpdate_timeFrom()!=null){
-			if(ConstSetup.DATABASE.toUpperCase().equals("ORACLE")) s.append("to_char(update_time,'yyyy-MM-dd hh:mm:ss')>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("DB2")) s.append("char(update_time)>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("SQLSERVER")) s.append("CONVERT(varchar(20),update_time,120)>='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("MYSQL") || ConstSetup.DATABASE.toUpperCase().equals("SYBASE")) s.append("update_time>='");
-			s.append(Utilities.getDateString("yyyy-MM-dd hh:mm:ss", queryConditionsBean.getUpdate_timeFrom())).append("' and ");
-		}
-		if(queryConditionsBean.getUpdate_timeTo()!=null){
-			if(ConstSetup.DATABASE.toUpperCase().equals("ORACLE")) s.append("to_char(update_time,'yyyy-MM-dd hh:mm:ss')<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("DB2")) s.append("char(update_time)<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("SQLSERVER")) s.append("CONVERT(varchar(20),update_time,120)<='");
-			else if(ConstSetup.DATABASE.toUpperCase().equals("MYSQL") || ConstSetup.DATABASE.toUpperCase().equals("SYBASE")) s.append("update_time<='");
-			s.append(Utilities.getDateString("yyyy-MM-dd hh:mm:ss", queryConditionsBean.getUpdate_timeTo())).append("' and ");
-		}
 
 		sql=s.toString().substring(0,s.toString().length()-5);
 		return sql;

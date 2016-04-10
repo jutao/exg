@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_task;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_taskAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -77,7 +73,8 @@ public class PageStatus implements Serializable{
 	 */
 	public void setControlsValues(V_taskAction v_taskAction){
 			InitPageControl.initTimestamp(v_taskAction);
-	
+			InitPageControl.initStatusMap(v_taskAction);
+			InitPageControl.initInvalidMap(v_taskAction);
 	}
 	
 	/**
@@ -393,7 +390,12 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_taskBean wrapperV_taskBean(V_taskAction v_taskAction,V_taskBean v_taskBean,String type){
-		
+		//s:select***************************************************************************
+		InitPageControl.initStatusMap(v_taskAction);
+		v_taskBean.setStatus(Utilities.getWrapperSelect(v_taskBean.getStatus(),v_taskAction.statusMap));
+		//s:select***************************************************************************
+		InitPageControl.initInvalidMap(v_taskAction);
+		v_taskBean.setInvalid(Utilities.getWrapperSelect(v_taskBean.getInvalid(),v_taskAction.invalidMap));
 		return v_taskBean;
 	}
 	
@@ -460,12 +462,6 @@ public class PageStatus implements Serializable{
 		if(v_taskBean.getSeat()!=null)
 			if(v_taskBean.getSeat().trim().length()>0) v_taskAction.setSeat(v_taskBean.getSeat());
 		//textfield
-		if(v_taskBean.getStatus()!=null)
-			if(v_taskBean.getStatus().trim().length()>0) v_taskAction.setStatus(v_taskBean.getStatus());
-		//textfield
-		if(v_taskBean.getInvalid()!=null)
-			if(v_taskBean.getInvalid().trim().length()>0) v_taskAction.setInvalid(v_taskBean.getInvalid());
-		//textfield
 		if(v_taskBean.getName()!=null)
 			if(v_taskBean.getName().trim().length()>0) v_taskAction.setName(v_taskBean.getName());
 		//textfield
@@ -477,7 +473,25 @@ public class PageStatus implements Serializable{
 		//textfield
 		if(v_taskBean.getServer_name()!=null)
 			if(v_taskBean.getServer_name().trim().length()>0) v_taskAction.setServer_name(v_taskBean.getServer_name());
-
+		
+		//select
+		if(v_taskBean.getStatus()!=null){
+			if(v_taskBean.getStatus().trim().length()>0){
+				if(!v_taskAction.action.equals("detail")){
+					v_taskAction.setStatus(v_taskBean.getStatus());
+					v_taskAction.setStatusSelect(v_taskBean.getStatus());
+				}else v_taskAction.setStatus(Utilities.getWrapperSelect(v_taskBean.getStatus(),v_taskAction.statusMap));
+			}
+		}
+		//select
+		if(v_taskBean.getInvalid()!=null){
+			if(v_taskBean.getInvalid().trim().length()>0){
+				if(!v_taskAction.action.equals("detail")){
+					v_taskAction.setInvalid(v_taskBean.getInvalid());
+					v_taskAction.setInvalidSelect(v_taskBean.getInvalid());
+				}else v_taskAction.setInvalid(Utilities.getWrapperSelect(v_taskBean.getInvalid(),v_taskAction.invalidMap));
+			}
+		}
 	}
 	
 	/**

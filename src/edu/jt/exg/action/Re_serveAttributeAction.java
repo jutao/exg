@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.re_serve.PageStatus;
 import edu.jt.exg.logic.re_serve.Re_serveBean;
-
-
 import edu.jt.exg.logic.re_serve.Re_serveBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -123,10 +124,15 @@ public class Re_serveAttributeAction extends ActionSupport{
 	/**
 	 * s:checkbox
 	 */
-			public String varieties="";
+		public String varieties="";
 		public String getVarieties(){return varieties;}
 		public void setVarieties(String varieties){this.varieties = varieties;}
-		
+		public LinkedHashMap<String, String> varietiesMap=null;
+		public LinkedHashMap<String, String> getVarietiesMap(){return varietiesMap;}
+		public void setVarietiesMap(LinkedHashMap<String, String> varietiesMap){this.varietiesMap = varietiesMap;}
+		public List<String> varietiesList=null;
+		public List<String> getVarietiesList(){return varietiesList;}
+		public void setVarietiesList(List<String> varietiesList){this.varietiesList = varietiesList;}
 
 	
 	/**

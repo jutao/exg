@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.v_order_master;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.V_order_masterAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -20,25 +20,22 @@ public class InitPageControl implements Serializable{
 		return tmp;
 	}
 
-	/**
-	 * 设置s:optiontransferselect集合初始化
-	 */
-	
-	
-	/**
-	 * s:combobox初始化
-	 */
-	
-	
-	/**
-	 * s:doubleselect初始化
-	 */
-	
 	
 	/**
 	 * s:select初始化,value和text显示项必须相同
 	 */
-	
+	public static void initStatusMap(V_order_masterAction v_order_masterAction){
+		if(v_order_masterAction.statusMap==null) v_order_masterAction.statusMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_order_masterAction.statusMap, "1007");//接单状态状态 区分：1007
+		v_order_masterAction.setStatusMap(v_order_masterAction.statusMap);
+		}
+
+	public static void initInvalidMap(V_order_masterAction v_order_masterAction){
+		if(v_order_masterAction.invalidMap==null) v_order_masterAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_order_masterAction.invalidMap, "1004");//有效无效 区分：1004
+		v_order_masterAction.setInvalidMap(v_order_masterAction.invalidMap);
+		}
+
 	
 	/**
 	 * timestamp初始化

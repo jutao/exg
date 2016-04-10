@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.v_order_task.PageStatus;
 import edu.jt.exg.logic.v_order_task.V_order_taskBean;
-
-
 import edu.jt.exg.logic.v_order_task.V_order_taskBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -97,10 +98,6 @@ public class V_order_taskAttributeAction extends ActionSupport{
 		public String getOrderkey(){return orderkey;}
 		public void setOrderkey(String orderkey){this.orderkey = orderkey;}
 		
-		public String invalid="";
-		public String getInvalid(){return invalid;}
-		public void setInvalid(String invalid){this.invalid = invalid;}
-		
 		public String req_name="";
 		public String getReq_name(){return req_name;}
 		public void setReq_name(String req_name){this.req_name = req_name;}
@@ -179,7 +176,15 @@ public class V_order_taskAttributeAction extends ActionSupport{
 	/**
 	 * s:select
 	 */
-	
+		public String invalid=null;
+		public String getInvalid(){return invalid;}
+		public void setInvalid(String invalid){this.invalid = invalid;}
+		public String invalidSelect=null;
+		public String getInvalidSelect(){return invalidSelect;}
+		public void setInvalidSelect(String invalidSelect){this.invalidSelect = invalidSelect;}
+		public LinkedHashMap<String, String> invalidMap=null;
+		public LinkedHashMap<String, String> getInvalidMap(){return invalidMap;}
+		public void setInvalidMap(LinkedHashMap<String, String> invalidMap){this.invalidMap = invalidMap;}
 	
 	/**
 	 * s:optiontransferselect

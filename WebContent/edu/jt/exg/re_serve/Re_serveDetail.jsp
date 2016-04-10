@@ -265,11 +265,11 @@ $(function(){
 													<span id="price_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
-											<div class="form_grid_6">
+												<div class="form_grid_6">
 												<label class="field_title"><s:text
 														name="Re_serve.Varieties" /> </label>
 												<div class="form_input">
-													<s:checkbox id="varieties" name="varieties"/>
+													<s:textfield id="varieties" name="varieties" readonly="true" />
 													<span id="varieties_valid" class="red">&nbsp;</span>
 												</div>
 											</div>

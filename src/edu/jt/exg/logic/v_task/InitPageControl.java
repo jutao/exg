@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.v_task;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.V_taskAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -21,24 +21,19 @@ public class InitPageControl implements Serializable{
 	}
 
 	/**
-	 * 设置s:optiontransferselect集合初始化
-	 */
-	
-	
-	/**
-	 * s:combobox初始化
-	 */
-	
-	
-	/**
-	 * s:doubleselect初始化
-	 */
-	
-	
-	/**
 	 * s:select初始化,value和text显示项必须相同
 	 */
-	
+	public static void initStatusMap(V_taskAction v_taskAction){
+		if(v_taskAction.statusMap==null) v_taskAction.statusMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_taskAction.statusMap, "1006");//任务状态 区分：1006
+		v_taskAction.setStatusMap(v_taskAction.statusMap);
+		}
+
+	public static void initInvalidMap(V_taskAction v_taskAction){
+		if(v_taskAction.invalidMap==null) v_taskAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_taskAction.invalidMap, "1004");//有效无效 区分：1004
+		v_taskAction.setInvalidMap(v_taskAction.invalidMap);
+		}
 	
 	/**
 	 * timestamp初始化

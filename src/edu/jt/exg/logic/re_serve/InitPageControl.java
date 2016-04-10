@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.re_serve;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.Re_serveAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -40,10 +40,7 @@ public class InitPageControl implements Serializable{
 	 */
 	public static void initInvalidMap(Re_serveAction re_serveAction){
 		if(re_serveAction.invalidMap==null) re_serveAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
-		re_serveAction.invalidMap.put("","");
-		re_serveAction.invalidMap.put("1","value1");
-		re_serveAction.invalidMap.put("2","value2");
-		re_serveAction.invalidMap.put("3","value3");
+		CommonMethod.getSelectMap(re_serveAction.invalidMap, "1004");//有效无效区分：1004
 		re_serveAction.setInvalidMap(re_serveAction.invalidMap);
 	}
 
@@ -78,7 +75,11 @@ public class InitPageControl implements Serializable{
 	/**
 	 * s:checkboxlist初始化
 	 */
-	
+	public static void initVarietiesMap(Re_serveAction re_serveAction){
+		if(re_serveAction.varietiesMap==null) re_serveAction.varietiesMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getCheckMap(re_serveAction.varietiesMap, "1005");//维修服务类型：1005
+		re_serveAction.setVarietiesMap(re_serveAction.varietiesMap);
+		}
 	
 	/**
 	 * s:radio初始化

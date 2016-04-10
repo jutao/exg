@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.v_order_master.PageStatus;
 import edu.jt.exg.logic.v_order_master.V_order_masterBean;
-
-
 import edu.jt.exg.logic.v_order_master.V_order_masterBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -113,13 +114,6 @@ public class V_order_masterAttributeAction extends ActionSupport{
 		public String getOutcome_image3(){return outcome_image3;}
 		public void setOutcome_image3(String outcome_image3){this.outcome_image3 = outcome_image3;}
 		
-		public String status="";
-		public String getStatus(){return status;}
-		public void setStatus(String status){this.status = status;}
-		
-		public String invalid="";
-		public String getInvalid(){return invalid;}
-		public void setInvalid(String invalid){this.invalid = invalid;}
 		
 		public String req_name="";
 		public String getReq_name(){return req_name;}
@@ -136,66 +130,27 @@ public class V_order_masterAttributeAction extends ActionSupport{
 
 	
 	/**
-	 * s:password
-	 */
-	
-	
-	/**
-	 * s:checkbox
-	 */
-	
-	
-	/**
-	 * s:textarea
-	 */
-	
-
-	/**
-	 * editor
-	 */
-	
-	
-	/**
-	 * s:hidden iframe use s:file(textarea,editor)
-	 */
-	
-	
-	/**
-	 * s:combobox
-	 */
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	/**
-	 * s:doubleselect
-	 */
-	
-	
-	/**
-	 * s:radio
-	 */
-	
-	
-	/**
-	 * s:checkboxlist
-	 */
-	
-	
-	/**
 	 * s:select
 	 */
-	
+		public String status=null;
+		public String getStatus(){return status;}
+		public void setStatus(String status){this.status = status;}
+		public String statusSelect=null;
+		public String getStatusSelect(){return statusSelect;}
+		public void setStatusSelect(String statusSelect){this.statusSelect = statusSelect;}
+		public LinkedHashMap<String, String> statusMap=null;
+		public LinkedHashMap<String, String> getStatusMap(){return statusMap;}
+		public void setStatusMap(LinkedHashMap<String, String> statusMap){this.statusMap = statusMap;}
+		
+		public String invalid=null;
+		public String getInvalid(){return invalid;}
+		public void setInvalid(String invalid){this.invalid = invalid;}
+		public String invalidSelect=null;
+		public String getInvalidSelect(){return invalidSelect;}
+		public void setInvalidSelect(String invalidSelect){this.invalidSelect = invalidSelect;}
+		public LinkedHashMap<String, String> invalidMap=null;
+		public LinkedHashMap<String, String> getInvalidMap(){return invalidMap;}
+		public void setInvalidMap(LinkedHashMap<String, String> invalidMap){this.invalidMap = invalidMap;}
 	
 	/**
 	 * s:optiontransferselect

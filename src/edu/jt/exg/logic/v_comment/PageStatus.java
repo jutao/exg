@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_comment;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_commentAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -77,7 +73,8 @@ public class PageStatus implements Serializable{
 	 */
 	public void setControlsValues(V_commentAction v_commentAction){
 			InitPageControl.initTimestamp(v_commentAction);
-	
+			InitPageControl.initInvalidMap(v_commentAction);
+			InitPageControl.initCategoryMap(v_commentAction);
 	}
 	
 	/**
@@ -325,7 +322,12 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_commentBean wrapperV_commentBean(V_commentAction v_commentAction,V_commentBean v_commentBean,String type){
-		
+		//s:select***************************************************************************
+		InitPageControl.initCategoryMap(v_commentAction);
+		v_commentBean.setCategory(Utilities.getWrapperSelect(v_commentBean.getCategory(),v_commentAction.categoryMap));
+		//s:select***************************************************************************
+		InitPageControl.initInvalidMap(v_commentAction);
+		v_commentBean.setInvalid(Utilities.getWrapperSelect(v_commentBean.getInvalid(),v_commentAction.invalidMap));
 		return v_commentBean;
 	}
 	
@@ -371,12 +373,6 @@ public class PageStatus implements Serializable{
 		if(v_commentBean.getPic3()!=null)
 			if(v_commentBean.getPic3().trim().length()>0) v_commentAction.setPic3(v_commentBean.getPic3());
 		//textfield
-		if(v_commentBean.getCategory()!=null)
-			if(v_commentBean.getCategory().trim().length()>0) v_commentAction.setCategory(v_commentBean.getCategory());
-		//textfield
-		if(v_commentBean.getInvalid()!=null)
-			if(v_commentBean.getInvalid().trim().length()>0) v_commentAction.setInvalid(v_commentBean.getInvalid());
-		//textfield
 		if(v_commentBean.getUser_key()!=null)
 			if(v_commentBean.getUser_key().trim().length()>0) v_commentAction.setUser_key(v_commentBean.getUser_key());
 		//textfield
@@ -394,6 +390,25 @@ public class PageStatus implements Serializable{
 		//textfield
 		if(v_commentBean.getTarget_name()!=null)
 			if(v_commentBean.getTarget_name().trim().length()>0) v_commentAction.setTarget_name(v_commentBean.getTarget_name());
+
+		//select
+				if(v_commentBean.getCategory()!=null){
+					if(v_commentBean.getCategory().trim().length()>0){
+						if(!v_commentAction.action.equals("detail")){
+							v_commentAction.setCategory(v_commentBean.getCategory());
+							v_commentAction.setCategorySelect(v_commentBean.getCategory());
+						}else v_commentAction.setCategory(Utilities.getWrapperSelect(v_commentBean.getCategory(),v_commentAction.categoryMap));
+					}
+				}		
+				//select
+				if(v_commentBean.getInvalid()!=null){
+					if(v_commentBean.getInvalid().trim().length()>0){
+						if(!v_commentAction.action.equals("detail")){
+							v_commentAction.setInvalid(v_commentBean.getInvalid());
+							v_commentAction.setInvalidSelect(v_commentBean.getInvalid());
+						}else v_commentAction.setInvalid(Utilities.getWrapperSelect(v_commentBean.getInvalid(),v_commentAction.invalidMap));
+					}
+				}
 
 	}
 	

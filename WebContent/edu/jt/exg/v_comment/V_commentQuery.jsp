@@ -209,15 +209,23 @@ $("#search").click(function() {
 							<li style="margin-right: 5px;"><s:textfield id="target_name"
 									name="target_name" cssClass="search_input1" style="width:100px;"
 									placeholder="请输入标的名字" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="category"
-									name="category" cssClass="search_input1" style="width:100px;"
-									placeholder="请输入区分" /></li>
 							<li style="margin-right: 5px;"><s:textfield id="display"
 									name="display" cssClass="search_input1" style="width:100px;"
 									placeholder="请输入显示顺序" /></li>
-							<li style="margin-right: 5px;"><s:textfield id="invalid"
-									name="invalid" cssClass="search_input1" style="width:100px;"
-									placeholder="请输入有效无效区分" /></li>
+							<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="category" name="category"></s:hidden>
+									<s:select id="categorySelect" name="categorySelect" list="categoryMap"  data-placeholder="请选择区分"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
+							<li style="margin-right: 5px;">
+								<div class="form_input">
+									<s:hidden id="invalid" name="invalid"></s:hidden>
+									<s:select id="invalidSelect" name="invalidSelect" list="invalidMap"  data-placeholder="有效无效区分"
+										style=" width:110px;" cssClass="chzn-select-deselect" />
+								</div>
+							</li>
 									
 							
 							<li style="margin-right: 5px;">

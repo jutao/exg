@@ -210,7 +210,7 @@
 												<label class="field_title"><s:text
 														name="Re_serve.Serveid" /><span class="req">*</span></label>
 												<div class="form_input">
-													<s:textfield id="serveid" name="serveid" readonly="true"/>
+													<s:textfield id="serveid" name="serveid"/>
 													<span id="serveid_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
@@ -224,18 +224,22 @@
 										</li>
 										<li class="clearfix">
 											<div class="form_grid_6">
-												<label class="field_title"><s:text name="Re_serve.Price" /></label>
+												<label class="field_title"><s:text
+														name="Re_serve.Invalid" /><span class="req">*</span></label>
 												<div class="form_input">
-													<s:textfield id="price" name="price" maxlength="100" />
-													<span id="price_valid" class="red">&nbsp;</span>
+													<s:hidden id="invalid" name="invalid"></s:hidden>
+													<s:select id="invalidSelect" name="invalidSelect"
+														list="invalidMap" cssClass="chzn-select"
+														value="0" style=" width:200px" />
+													<br> <span id="invalid_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
-											<div class="form_grid_6">
+										<div class="form_grid_6">
 												<label class="field_title"><s:text
 														name="Re_serve.Varieties" /><span class="req">*</span></label>
 												<div class="form_input">
 													<s:hidden id="varieties" name="varieties"></s:hidden>
-													<s:checkbox id="varieties" name="varieties"/>
+													<s:checkboxlist id="varietiescheck" name="varietiescheck" list="varietiesMap" value="varietiesList"/>
 													<span id="varieties_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
@@ -510,7 +514,16 @@
 													<span id="yubei3_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
-											<div class="form_grid_6">
+												<div class="form_grid_6">
+												<label class="field_title"><s:text name="Re_serve.Price" /></label>
+												<div class="form_input">
+													<s:textfield id="price" name="price" maxlength="100" />
+													<span id="price_valid" class="red">&nbsp;</span>
+												</div>
+											</div>
+										</li>
+										<li class="clearfix">
+										<div class="form_grid_6">
 												<label class="field_title"><s:text
 														name="Re_serve.Display" /></label>
 												<div class="form_input">
@@ -518,19 +531,7 @@
 													<span id="display_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
-										</li>
-										<li class="clearfix">
-											<div class="form_grid_6">
-												<label class="field_title"><s:text
-														name="Re_serve.Invalid" /><span class="req">*</span></label>
-												<div class="form_input">
-													<s:hidden id="invalid" name="invalid"></s:hidden>
-													<s:select id="invalidSelect" name="invalidSelect"
-														list="invalidMap" cssClass="chzn-select"
-														value="0" style=" width:200px" />
-													<br> <span id="invalid_valid" class="red">&nbsp;</span>
-												</div>
-											</div>
+									
 										</li>
 									</ul>
 								</fieldset>

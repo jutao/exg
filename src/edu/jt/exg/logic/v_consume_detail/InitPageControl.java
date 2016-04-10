@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.v_consume_detail;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.V_consume_detailAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -19,26 +19,15 @@ public class InitPageControl implements Serializable{
 		String tmp="Detailid|Taskkey|Quantity|Status|Invalid|Register_time|Update_time|User_name|User_id|User_icon";
 		return tmp;
 	}
-
-	/**
-	 * 设置s:optiontransferselect集合初始化
-	 */
-	
-	
-	/**
-	 * s:combobox初始化
-	 */
-	
-	
-	/**
-	 * s:doubleselect初始化
-	 */
-	
 	
 	/**
 	 * s:select初始化,value和text显示项必须相同
 	 */
-	
+	public static void initInvalidMap(V_consume_detailAction v_consume_detailAction){
+		if(v_consume_detailAction.invalidMap==null) v_consume_detailAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_consume_detailAction.invalidMap, "1004");//有效无效 区分：1004
+		v_consume_detailAction.setInvalidMap(v_consume_detailAction.invalidMap);
+	}
 	
 	/**
 	 * timestamp初始化

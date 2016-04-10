@@ -1,9 +1,9 @@
 package edu.jt.exg.logic.v_comment;
 import java.io.Serializable;
-import java.util.List;
+
+import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.V_commentAction;
-import core.ListKeyBean;
 
 //页面控件初始化设置
 public class InitPageControl implements Serializable{
@@ -21,25 +21,19 @@ public class InitPageControl implements Serializable{
 	}
 
 	/**
-	 * 设置s:optiontransferselect集合初始化
-	 */
-	
-	
-	/**
-	 * s:combobox初始化
-	 */
-	
-	
-	/**
-	 * s:doubleselect初始化
-	 */
-	
-	
-	/**
 	 * s:select初始化,value和text显示项必须相同
 	 */
-	
-	
+	public static void initCategoryMap(V_commentAction v_commentAction){
+		if(v_commentAction.categoryMap==null) v_commentAction.categoryMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_commentAction.categoryMap, "1008");//评价区分 区分：1008
+		v_commentAction.setCategoryMap(v_commentAction.categoryMap);
+	}
+
+	public static void initInvalidMap(V_commentAction v_commentAction){
+		if(v_commentAction.invalidMap==null) v_commentAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
+		CommonMethod.getSelectMap(v_commentAction.invalidMap, "1004");//有效无效 区分：1004
+		v_commentAction.setInvalidMap(v_commentAction.invalidMap);
+		}	
 	/**
 	 * timestamp初始化
 	 */

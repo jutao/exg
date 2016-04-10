@@ -1,18 +1,13 @@
 package edu.jt.exg.action;
-import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 import org.apache.struts2.ServletActionContext;
+
 import utility.Page;
 import utility.Utilities;
-import edu.jt.exg.logic.v_task.InitPageControl;
 import edu.jt.exg.logic.v_task.PageStatus;
-import edu.jt.exg.logic.v_task.V_taskBean;
-
-
 import edu.jt.exg.logic.v_task.V_taskBatisDao;
-
+import edu.jt.exg.logic.v_task.V_taskBean;
 import edu.jt.exg.logic.v_task.V_taskUtility;
 
 

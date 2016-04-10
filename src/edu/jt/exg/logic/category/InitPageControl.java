@@ -40,7 +40,7 @@ public class InitPageControl implements Serializable{
 	 */
 	public static void initInvalidMap(CategoryAction categoryAction){
 		if(categoryAction.invalidMap==null) categoryAction.invalidMap=Utilities.csi.getLinkedHashMap_String_String();
-		CommonMethod.getSelectMap(categoryAction.invalidMap, "1012");//有效无效 区分：1012
+		CommonMethod.getSelectMap(categoryAction.invalidMap, "1004");//有效无效 区分：1004
 		categoryAction.setInvalidMap(categoryAction.invalidMap);
 	}
 

@@ -1,15 +1,11 @@
 package edu.jt.exg.logic.v_order_master;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+
 import utility.ConstSetup;
 import utility.Utilities;
 import edu.jt.exg.action.V_order_masterAction;
-import core.ListKeyBean;
 
 public class PageStatus implements Serializable{
 	
@@ -77,7 +73,8 @@ public class PageStatus implements Serializable{
 	 */
 	public void setControlsValues(V_order_masterAction v_order_masterAction){
 			InitPageControl.initTimestamp(v_order_masterAction);
-	
+			InitPageControl.initStatusMap(v_order_masterAction);
+			InitPageControl.initInvalidMap(v_order_masterAction);
 	}
 	
 	/**
@@ -297,7 +294,13 @@ public class PageStatus implements Serializable{
 	 * @param type 控件类型
 	 */
 	public V_order_masterBean wrapperV_order_masterBean(V_order_masterAction v_order_masterAction,V_order_masterBean v_order_masterBean,String type){
-		
+		//s:select***************************************************************************
+				InitPageControl.initStatusMap(v_order_masterAction);
+				v_order_masterBean.setStatus(Utilities.getWrapperSelect(v_order_masterBean.getStatus(),v_order_masterAction.statusMap));
+				//s:select***************************************************************************
+				InitPageControl.initInvalidMap(v_order_masterAction);
+				v_order_masterBean.setInvalid(Utilities.getWrapperSelect(v_order_masterBean.getInvalid(),v_order_masterAction.invalidMap));
+
 		return v_order_masterBean;
 	}
 	
@@ -343,12 +346,6 @@ public class PageStatus implements Serializable{
 		if(v_order_masterBean.getOutcome_image3()!=null)
 			if(v_order_masterBean.getOutcome_image3().trim().length()>0) v_order_masterAction.setOutcome_image3(v_order_masterBean.getOutcome_image3());
 		//textfield
-		if(v_order_masterBean.getStatus()!=null)
-			if(v_order_masterBean.getStatus().trim().length()>0) v_order_masterAction.setStatus(v_order_masterBean.getStatus());
-		//textfield
-		if(v_order_masterBean.getInvalid()!=null)
-			if(v_order_masterBean.getInvalid().trim().length()>0) v_order_masterAction.setInvalid(v_order_masterBean.getInvalid());
-		//textfield
 		if(v_order_masterBean.getReq_name()!=null)
 			if(v_order_masterBean.getReq_name().trim().length()>0) v_order_masterAction.setReq_name(v_order_masterBean.getReq_name());
 		//textfield
@@ -358,6 +355,24 @@ public class PageStatus implements Serializable{
 		if(v_order_masterBean.getReq_icon()!=null)
 			if(v_order_masterBean.getReq_icon().trim().length()>0) v_order_masterAction.setReq_icon(v_order_masterBean.getReq_icon());
 
+		//select
+		if(v_order_masterBean.getStatus()!=null){
+			if(v_order_masterBean.getStatus().trim().length()>0){
+				if(!v_order_masterAction.action.equals("detail")){
+					v_order_masterAction.setStatus(v_order_masterBean.getStatus());
+					v_order_masterAction.setStatusSelect(v_order_masterBean.getStatus());
+				}else v_order_masterAction.setStatus(Utilities.getWrapperSelect(v_order_masterBean.getStatus(),v_order_masterAction.statusMap));
+			}
+		}
+		//select
+		if(v_order_masterBean.getInvalid()!=null){
+			if(v_order_masterBean.getInvalid().trim().length()>0){
+				if(!v_order_masterAction.action.equals("detail")){
+					v_order_masterAction.setInvalid(v_order_masterBean.getInvalid());
+					v_order_masterAction.setInvalidSelect(v_order_masterBean.getInvalid());
+				}else v_order_masterAction.setInvalid(Utilities.getWrapperSelect(v_order_masterBean.getInvalid(),v_order_masterAction.invalidMap));
+			}
+		}
 	}
 	
 	/**

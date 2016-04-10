@@ -3,17 +3,18 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import utility.SingleServletModel;
 import utility.ShowPage;
 import utility.Utilities;
 import edu.jt.exg.logic.v_consume_detail.PageStatus;
 import edu.jt.exg.logic.v_consume_detail.V_consume_detailBean;
-
-
 import edu.jt.exg.logic.v_consume_detail.V_consume_detailBatisDao;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import core.ExportFileName;
 import core.ListKeyBean;
 
@@ -101,10 +102,6 @@ public class V_consume_detailAttributeAction extends ActionSupport{
 		public String getStatus(){return status;}
 		public void setStatus(String status){this.status = status;}
 		
-		public String invalid="";
-		public String getInvalid(){return invalid;}
-		public void setInvalid(String invalid){this.invalid = invalid;}
-		
 		public String user_name="";
 		public String getUser_name(){return user_name;}
 		public void setUser_name(String user_name){this.user_name = user_name;}
@@ -117,49 +114,9 @@ public class V_consume_detailAttributeAction extends ActionSupport{
 		public String getUser_icon(){return user_icon;}
 		public void setUser_icon(String user_icon){this.user_icon = user_icon;}
 		
-
-	
-	/**
-	 * s:password
-	 */
-	
-	
-	/**
-	 * s:checkbox
-	 */
-	
-	
-	/**
-	 * s:textarea
-	 */
-	
-
-	/**
-	 * editor
-	 */
-	
-	
-	/**
-	 * s:hidden iframe use s:file(textarea,editor)
-	 */
-	
-	
-	/**
-	 * s:combobox
-	 */
-	
 	
 	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-	
-	
-	//s:textfield
-			public Double quantity=null;
+		public Double quantity=null;
 		public Double getQuantity(){return quantity;}
 		public void setQuantity(Double quantity){this.quantity = quantity;}
 		//for query
@@ -173,33 +130,17 @@ public class V_consume_detailAttributeAction extends ActionSupport{
 
 	
 	/**
-	 * s:doubleselect
-	 */
-	
-	
-	/**
-	 * s:radio
-	 */
-	
-	
-	/**
-	 * s:checkboxlist
-	 */
-	
-	
-	/**
 	 * s:select
 	 */
-	
-	
-	/**
-	 * s:optiontransferselect
-	 */
-	
-	
-	/**
-	 * sx:datetimepicker
-	 */
+		public String invalid=null;
+		public String getInvalid(){return invalid;}
+		public void setInvalid(String invalid){this.invalid = invalid;}
+		public String invalidSelect=null;
+		public String getInvalidSelect(){return invalidSelect;}
+		public void setInvalidSelect(String invalidSelect){this.invalidSelect = invalidSelect;}
+		public LinkedHashMap<String, String> invalidMap=null;
+		public LinkedHashMap<String, String> getInvalidMap(){return invalidMap;}
+		public void setInvalidMap(LinkedHashMap<String, String> invalidMap){this.invalidMap = invalidMap;}
 	
 	
 	/**
@@ -208,11 +149,6 @@ public class V_consume_detailAttributeAction extends ActionSupport{
 	public void setDateTimePickerNowDateShow(){
 	
 	}
-	
-	/**
-	 * manual timestamp
-	 */
-	
 
 	/**
 	 * auto timstamp

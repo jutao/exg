@@ -208,8 +208,7 @@
 													<th><s:text name="Re_serve.Serveid" /></th>
 													<th><s:text name="Re_serve.Name" /></th>
 													<th><s:text name="Re_serve.Price" /></th>
-													<th><s:text name="Re_serve.Varieties" /></th>
-													<th><s:text name="Re_serve.display" /></th>
+													<th><s:text name="Re_serve.Display" /></th>
 													<th><s:text name="Re_serve.Invalid" /></th>
 													<th><s:text name="Common.Control" /></th>
 												</tr>
@@ -230,7 +229,6 @@
 																href="Re_serveAction.action?action=initupdate&id=<s:property value="#R.id"/>"
 																	target="_blank"><s:property value="#R.name" /></a></td>
 														<td align="center"><s:property value="#R.price" /></td>
-														<td align="center"><s:property value="#R.varieties" /></td>
 														<td align="center"><s:property value="#R.display" /></td>
 														<td align="center"><s:property value="#R.invalid" /></td>
 														<td align="center">

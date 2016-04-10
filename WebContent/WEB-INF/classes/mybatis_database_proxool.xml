@@ -135,4 +135,10 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
       <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
       <property name="mapperInterface" value="edu.jt.exg.logic.mgr_user.IMgr_user" />
 </bean>
+<bean id="v_addressMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+      <!--sqlSessionFactory属性指定要用到的SqlSessionFactory实例-->
+      <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      <!--mapperInterface属性指定映射器接口，用于实现此接口并生成映射器对象--> 
+      <property name="mapperInterface" value="edu.jt.exg.logic.v_address.IV_address" />
+</bean>
 </beans>

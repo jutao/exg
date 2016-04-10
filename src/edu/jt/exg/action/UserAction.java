@@ -3,16 +3,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 import org.apache.struts2.ServletActionContext;
+
+import utility.CommonMethod;
 import utility.Page;
 import utility.Utilities;
 import edu.jt.exg.logic.user.InitPageControl;
 import edu.jt.exg.logic.user.PageStatus;
 import edu.jt.exg.logic.user.UserBean;
-
-
 import edu.jt.exg.logic.user.UserBatisDao;
-
 import edu.jt.exg.logic.user.UserUtility;
 
 
@@ -87,7 +87,7 @@ public class UserAction extends UserAttributeAction {
 		//从翻页得到隐藏域传递参数,否则从from得到参数
 		if(params!=null) ps.setRecordsRangeAndOrderByRules(this,params);
 		else ps.setRecordsRangeAndOrderByRules(this);
-		
+		this.setAdressJson(CommonMethod.getadressJson());
 		
 		batisDao=UserUtility.getIocHandel().getBean("UserBatisDao",UserBatisDao.class);
 		
@@ -173,7 +173,7 @@ public class UserAction extends UserAttributeAction {
 		ps.setControlsValues(this);//控件初始化
 		setDateTimePickerNowDateShow();//初始化显示日期控件的提示日期
 		//如果有多个s:optiontransferselect必须在这里都要初始化
-		
+		this.setAdressJson(CommonMethod.getadressJson());
 		return "initcreate";
 	}
 	
@@ -192,6 +192,7 @@ public class UserAction extends UserAttributeAction {
 	 * @return 返回初始化查询页面
 	 */
 	private String doCreateOrUpdate(){
+		this.usertype=this.usertype.substring(0, this.usertype.length()-1);
 		String errorMsg=ps.readControlsWrite2Datas(this);
 		setAction("initquery");//设置所有的动态传参
 		if(errorMsg.indexOf("ERROR")==-1) return "toinitquery";

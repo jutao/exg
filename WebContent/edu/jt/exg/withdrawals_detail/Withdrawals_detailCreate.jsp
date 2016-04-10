@@ -4,7 +4,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
@@ -26,8 +26,8 @@ String path = request.getContextPath();
 	type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/themes.css" rel="stylesheet"
 	type="text/css">
-<link href="<%=basePath%>edu/jt/exg//css/typography.css" rel="stylesheet"
-	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/typography.css"
+	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/styles.css" rel="stylesheet"
 	type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/shCore.css" rel="stylesheet"
@@ -38,8 +38,8 @@ String path = request.getContextPath();
 	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/jquery-ui-1.8.18.custom.css"
 	rel="stylesheet" type="text/css">
-<link href="<%=basePath%>edu/jt/exg//css/data-table.css" rel="stylesheet"
-	type="text/css">
+<link href="<%=basePath%>edu/jt/exg//css/data-table.css"
+	rel="stylesheet" type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/form.css" rel="stylesheet"
 	type="text/css">
 <link href="<%=basePath%>edu/jt/exg//css/ui-elements.css"
@@ -95,7 +95,8 @@ String path = request.getContextPath();
 <script src="<%=basePath%>edu/jt/exg//js/full-calendar.jquery.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/input-limiter.jquery.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/inputmask.jquery.js"></script>
-<script src="<%=basePath%>edu/jt/exg//js/iphone-style-checkbox.jquery.js"></script>
+<script
+	src="<%=basePath%>edu/jt/exg//js/iphone-style-checkbox.jquery.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/meta-data.jquery.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/quicksand.jquery.js"></script>
 <script src="<%=basePath%>edu/jt/exg//js/raty.jquery.js"></script>
@@ -142,32 +143,37 @@ String path = request.getContextPath();
 <%-- <script src="edu/jt/exg//js/common.js"></script> --%>
 
 <script language="javascript">
-    	$(function(){
-    		//等待加载editor控件
-   //************************************************************************************************************
-			var ajaxFlag=true;//通过所有ajax验证的标志位
-			$("#publish_new").click(function(){
-				if(checkFormForCreateOrUpdate()==true){
-			    			var data1="";
+	$(function() {
+		//等待加载editor控件
+		//************************************************************************************************************
+		var ajaxFlag = true;//通过所有ajax验证的标志位
+		$("#publish_new").click(function() {
+							if (checkFormForCreateOrUpdate() == true) {
+								var data1 = "";
 
-					//所有需要ajax验证的都要在这里完成
-					if(ajaxFlag==true){//只要=false就认为有验证不通过
-						//防止重复提交
-						ShowDiv('zzz');
-						$("#form1").attr("action", "Withdrawals_detailAction.action?action=create").submit();
-							}else alert('<s:text name="Common.ValidationFailAlert"/>');
-						}
-				$("#back").click(function(){
-					window.history.back(-1);
-							});		
+								//所有需要ajax验证的都要在这里完成
+								if (ajaxFlag == true) {//只要=false就认为有验证不通过
+									//防止重复提交
+									ShowDiv('zzz');
+									$("#form1")
+											.attr("action",
+													"Withdrawals_detailAction.action?action=create")
+											.submit();
+								} else
+									alert('<s:text name="Common.ValidationFailAlert"/>');
+							}});
+							$("#back").click(function() {
+								window.history.back(-1);
 							});
+						
+	});
 </script>
 </head>
 <body id="theme-default" class="full_block">
-<s:include value="../common/header.jsp" />
+	<s:include value="../common/header.jsp" />
 	<s:include value="../common/left_bar.jsp" />
 	<div id="container">
-		
+
 		<div style="overflow: hidden; background-color: #FFF;">
 			<div class="page_title gray_sai">
 				<div class="top_search">
@@ -186,7 +192,7 @@ String path = request.getContextPath();
 					</ul>
 				</div>
 			</div>
-		<div id="content">
+			<div id="content">
 				<div class="grid_container">
 					<div class="grid_12 form_container left_label field_set">
 						<s:form id="form1" name="form1" action="" namespace="/">
@@ -207,7 +213,7 @@ String path = request.getContextPath();
 												<label class="field_title"><s:text
 														name="Withdrawals_detail.Chargeid" /><span class="req">*</span></label>
 												<div class="form_input">
-													<s:textfield id="chargeid" name="chargeid" readonly="true"/>
+													<s:textfield id="chargeid" name="chargeid" />
 													<span id="chargeid_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
@@ -215,11 +221,10 @@ String path = request.getContextPath();
 												<label class="field_title"><s:text
 														name="Withdrawals_detail.Userkey" /><span class="req">*</span></label>
 												<div class="form_input">
-													<s:textfield id="userkey" name="userkey" readonly="true"/>
+													<s:textfield id="userkey" name="userkey"/>
 													<span id="userkey_valid" class="red">&nbsp;</span>
 												</div>
-											</div>
-										<%-- 	<div class="form_grid_6">
+											</div> <%-- 	<div class="form_grid_6">
 												<label class="field_title"><s:text
 														name="Withdrawals_detail.Userkey" /><span class="req">*</span></label>
 												<div class="form_input">
@@ -237,8 +242,8 @@ String path = request.getContextPath();
 												<label class="field_title"><s:text
 														name="Withdrawals_detail.Amount" /><span class="req">*</span></label>
 												<div class="form_input">
-													<s:textfield id="amount" name="amount"
-														cssClass="moneytype" maxlength="12" style="width:200">
+													<s:textfield id="amount" name="amount" cssClass="moneytype"
+														maxlength="12" style="width:200">
 														<s:param name="value">
 															<f:formatNumber type="number" value="${amount}"
 																pattern="#,##0.00#" />
@@ -266,12 +271,12 @@ String path = request.getContextPath();
 												<div class="form_input">
 													<s:hidden id="invalid" name="invalid"></s:hidden>
 													<s:select id="invalidSelect" name="invalidSelect"
-														list="invalidMap" cssClass="chzn-select"
-														value="0" style=" width:200px" />
+														list="invalidMap" cssClass="chzn-select" value="0"
+														style=" width:200px" />
 													<span id="invalid_valid" class="red">&nbsp;</span>
 												</div>
 											</div>
-										</li> 
+										</li>
 									</ul>
 								</fieldset>
 							</div>
@@ -281,17 +286,13 @@ String path = request.getContextPath();
 			</div>
 		</div>
 	</div>
-	<div id="zzz" class="black_overlay12" style="text-align: center;"><%-- 
+	<div id="zzz" class="black_overlay12" style="text-align: center;">
+		<%-- 
 		<img src="<%=basePath%>/edu/jt/exg//images/loading51.gif" width="124"
 			height="124" style="margin-top: 20%"> --%>
 	</div>
 </body>
 <script type="text/javascript">
-$(function(){
-	$("#userkeySelect").attr("value",$("#userkey").val());
 	
-	$("userkeySelect").prop("disabled", true);
-	$("#userkeySelect").trigger("liszt:updated");
-});
 </script>
-</html>	
+</html>

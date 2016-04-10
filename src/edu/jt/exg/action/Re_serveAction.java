@@ -192,6 +192,7 @@ public class Re_serveAction extends Re_serveAttributeAction {
 	 * @return 返回初始化查询页面
 	 */
 	private String doCreateOrUpdate(){
+		this.varieties=this.varieties.substring(0, this.varieties.length()-1);
 		String errorMsg=ps.readControlsWrite2Datas(this);
 		setAction("initquery");//设置所有的动态传参
 		if(errorMsg.indexOf("ERROR")==-1) return "toinitquery";

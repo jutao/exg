@@ -1,72 +1,14 @@
 function checkFormForCreateOrUpdate(){
-	//必填项
 
-	
-
-	//正整数
-	
-	
-
-	//正小数
-	
-	
-
-	//editor处理
-	
-	
-
-	//上传处理
-	
-	
-
-	//s:optiontransferselect处理
-	
-	
-	
-	//s:select处理
-	
-	
-	
-	//手动timestamp的时、分处理
 	
 	
 	return true;
 }
 
 function checkFormForQuery(){
-	//正整数
-	
-	
 
-	//正小数
-	
-	
-	
-	//s:optiontransferselect处理
-	
-	
-	
-	//s:select处理
-	
-	
-
-	//手动timestamp的时、分处理
-	
-	
-	
-	//自动timestamp的时、分处理
-	
-			$("#register_timeHourFrom").val($("#register_timeHourSelectFrom").find("option:selected").val());
-		$("#register_timeMinuteFrom").val($("#register_timeMinuteSelectFrom").find("option:selected").val());
-		$("#register_timeHourTo").val($("#register_timeHourSelectTo").find("option:selected").val());
-		$("#register_timeMinuteTo").val($("#register_timeMinuteSelectTo").find("option:selected").val());
-		
-		$("#update_timeHourFrom").val($("#update_timeHourSelectFrom").find("option:selected").val());
-		$("#update_timeMinuteFrom").val($("#update_timeMinuteSelectFrom").find("option:selected").val());
-		$("#update_timeHourTo").val($("#update_timeHourSelectTo").find("option:selected").val());
-		$("#update_timeMinuteTo").val($("#update_timeMinuteSelectTo").find("option:selected").val());
-		
-
+	$("#invalid").val($("#invalidSelect").find("option:selected").val());
+	$("#status").val($("#statusSelect").find("option:selected").val());
 	return true;
 }
 
@@ -85,3 +27,9 @@ function submit(formId,actionStr){
 		$("#load").css('display','');
 		$("#" + formId).attr("action", actionStr).submit();
 }
+$(function() {
+
+	$("#logout").click(function() {
+		window.location.href = 'LoginAction.action?action=logout';
+	});
+});
