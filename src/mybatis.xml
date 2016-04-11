@@ -26,9 +26,11 @@
 <typeAlias alias="Consume_detailBean" type="edu.jt.exg.logic.consume_detail.Consume_detailBean"/>
 <typeAlias alias="V_order_masterBean" type="edu.jt.exg.logic.v_order_master.V_order_masterBean"/>
 <typeAlias alias="V_order_taskBean" type="edu.jt.exg.logic.v_order_task.V_order_taskBean"/>
+<typeAlias alias="AdvertisementsBean" type="edu.jt.exg.logic.advertisements.AdvertisementsBean"/>
 <typeAlias alias="V_taskBean" type="edu.jt.exg.logic.v_task.V_taskBean"/>	</typeAliases>
 
 	<mappers>	
+<mapper resource="edu/jt/exg/logic/advertisements/AdvertisementsBatisMapper.xml"/>	   
 <mapper resource="edu/jt/exg/logic/category/CategoryBatisMapper.xml"/>
 <mapper resource="edu/jt/exg/logic/category_master/Category_masterBatisMapper.xml"/>
 <mapper resource="edu/jt/exg/logic/comment/CommentBatisMapper.xml"/>

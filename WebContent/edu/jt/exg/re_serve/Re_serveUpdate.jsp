@@ -315,7 +315,7 @@ $(function(){
 												    }
 														$('#box_icon_1').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 
@@ -364,7 +364,7 @@ $(function(){
 													    }
 														$('#box_icon1').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 
@@ -411,7 +411,7 @@ $(function(){
 													    }
 														$('#box_icon2').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 
@@ -458,7 +458,7 @@ $(function(){
 													    }
 														$('#box_icon3').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 
@@ -507,7 +507,7 @@ $(function(){
 													    }
 														$('#box_icon4').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 
@@ -554,7 +554,7 @@ $(function(){
 													    }
 														$('#box_icon5').diyUpload({
 															
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename='+dataSrc2[3],
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename='+dataSrc2[3],
 															success:function( data ) {
 															console.info( data );	
 															/*  var location = (window.location+'').split('/'); 

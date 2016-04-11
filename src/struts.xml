@@ -30,4 +30,6 @@
 <include file="consume_detail-struts.xml"/>	
 <include file="mgr_user-struts.xml" />
 <include file="login-struts.xml" />
+<include file="advertisements-struts.xml" />
+
 </struts>

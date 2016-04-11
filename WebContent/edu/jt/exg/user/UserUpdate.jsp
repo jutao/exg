@@ -211,7 +211,7 @@
 												    }
 													$('#box_icon').diyUpload({
 														
-														url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=icon&filename='+dataSrc2[3],
+														url:'http://localhost:8012/fileuploadserver/fileupload.php?category=icon&filename='+dataSrc2[3],
 														success:function( data ) {
 														console.info( data );	
 														/*  var location = (window.location+'').split('/'); 
@@ -347,7 +347,7 @@
 												    }
 													$('#box1_icon').diyUpload({
 														
-														url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=icon&filename='+dataSrc2[3],
+														url:'http://localhost:8012/fileuploadserver/fileupload.php?category=qualificat&filename='+dataSrc2[3],
 														success:function( data ) {
 														console.info( data );	
 														/*  var location = (window.location+'').split('/'); 
@@ -650,6 +650,13 @@
 </body>
 <script language="javascript">
 $(function(){
+	
+	var location = (window.location+'').split('/'); 
+	var bPath = location[0]+'//'+location[2]+'/'+location[3]; 
+
+	var dataSrc=bPath+$("#icon").val();
+	$("#mybox").append('<img src="'+dataSrc+'" >');
+	
 	var adressJson=$("#adressJson").val();
 	var obj = eval(adressJson);
 	

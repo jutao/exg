@@ -327,7 +327,7 @@ String path = request.getContextPath();
 												<div id="box1"><div id="box1_icon" ></div></div>
 											    <script type="text/javascript">
 													$('#box1_icon').diyUpload({
-														url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=icon&filename=',
+														url:'http://localhost:8012/fileuploadserver/fileupload.php?category=qualificat&filename=',
 														success:function( data ) {
 														console.info( data );	
 														 var location = (window.location+'').split('/'); 

@@ -27,6 +27,8 @@
 									name="MenuBar.CategorymasterList" /></a></li>
 						<li><a href="Withdrawals_detailAction.action?action=initquery"><s:text
 									name="MenuBar.Withdrawals_detailList" /></a></li>
+						<li><a href="AdvertisementsAction.action?action=initquery"><s:text
+									name="MenuBar.AdvertisementsList" /></a></li>
 						<li><a href="V_consume_detailAction.action?action=initquery"><s:text
 									name="MenuBar.V_consume_detailList" /></a></li>
 						<li><a href="V_order_masterAction.action?action=initquery"><s:text

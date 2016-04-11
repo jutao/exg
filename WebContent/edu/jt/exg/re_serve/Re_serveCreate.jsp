@@ -264,7 +264,7 @@
 													<div id="box_1"><div id="box_icon_1" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon_1').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 
@@ -303,7 +303,7 @@
 													<div id="box1"><div id="box_icon1" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon1').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 
@@ -340,7 +340,7 @@
 													<div id="box2"><div id="box_icon2" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon2').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 
@@ -377,7 +377,7 @@
 													<div id="box3"><div id="box_icon3" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon3').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 
@@ -416,7 +416,7 @@
 													<div id="box4"><div id="box_icon4" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon4').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 
@@ -453,7 +453,7 @@
 													<div id="box5"><div id="box_icon5" ></div></div>
 												    <script type="text/javascript">
 														$('#box_icon5').diyUpload({
-															url:'http://192.168.0.20/fileuploadserver/fileupload.php?category=product&filename=',
+															url:'http://localhost:8012/fileuploadserver/fileupload.php?category=re_serve&filename=',
 															success:function( data ) {
 															console.info( data );	
 															 var location = (window.location+'').split('/'); 

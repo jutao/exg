@@ -3,16 +3,17 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 import org.apache.struts2.ServletActionContext;
+
+import utility.CommonMethod;
 import utility.Page;
+import utility.PropertyUtil;
 import utility.Utilities;
 import edu.jt.exg.logic.re_serve.InitPageControl;
 import edu.jt.exg.logic.re_serve.PageStatus;
 import edu.jt.exg.logic.re_serve.Re_serveBean;
-
-
 import edu.jt.exg.logic.re_serve.Re_serveBatisDao;
-
 import edu.jt.exg.logic.re_serve.Re_serveUtility;
 
 
@@ -216,7 +217,31 @@ public class Re_serveAction extends Re_serveAttributeAction {
 		
 		
 		batisDao=Re_serveUtility.getIocHandel().getBean("Re_serveBatisDao",Re_serveBatisDao.class);
-		
+		Re_serveBean reBean=batisDao.findByKey(id);
+		if(reBean.getTop_pic1()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getTop_pic1();
+			CommonMethod.DeleteThis(path);
+		}
+		if(reBean.getPic1()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getPic1();
+			CommonMethod.DeleteThis(path);
+		}
+		if(reBean.getPic2()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getPic2();
+			CommonMethod.DeleteThis(path);
+		}
+		if(reBean.getPic3()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getPic3();
+			CommonMethod.DeleteThis(path);
+		}
+		if(reBean.getPic4()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getPic4();
+			CommonMethod.DeleteThis(path);
+		}
+		if(reBean.getPic5()!=null){
+			String path=PropertyUtil.getProperty("path.image")+reBean.getPic5();
+			CommonMethod.DeleteThis(path);
+		}
 		
 		
 		batisDao.deleteByKey(id);

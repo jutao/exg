@@ -8,6 +8,7 @@ import org.apache.struts2.ServletActionContext;
 
 import utility.CommonMethod;
 import utility.Page;
+import utility.PropertyUtil;
 import utility.Utilities;
 import edu.jt.exg.logic.user.InitPageControl;
 import edu.jt.exg.logic.user.PageStatus;
@@ -217,10 +218,16 @@ public class UserAction extends UserAttributeAction {
 		
 		batisDao=UserUtility.getIocHandel().getBean("UserBatisDao",UserBatisDao.class);
 		
-		
-		
+		UserBean user=batisDao.findByKey(id);
+		if(user.getIcon()!=null){
+			String path=PropertyUtil.getProperty("path.image")+user.getIcon();
+			CommonMethod.DeleteThis(path);
+		}
+		if(user.getQualificat()!=null){
+			String path=PropertyUtil.getProperty("path.image")+user.getQualificat();
+			CommonMethod.DeleteThis(path);
+		}
 		batisDao.deleteByKey(id);
-		
 		setAction("initquery");//设置所有的动态传参
 		return "toinitquery";
 	}
