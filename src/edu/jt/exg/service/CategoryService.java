@@ -25,5 +25,7 @@ public interface CategoryService extends Serializable {
     @GET
     @Path("/categorys/code")
     public List<Category> getData(@PathParam("code") String code);
+    
+    
 
 }

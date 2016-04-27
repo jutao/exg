@@ -7,9 +7,11 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd  
     http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 	<bean id="categoryService" class="edu.jt.exg.service.CategoryServiceImpl" />	
+	<bean id="userService" class="edu.jt.exg.service.UserServiceImpl" />	
 	<jaxrs:server id="exgService" address="/">
 	<jaxrs:serviceBeans>
 		<ref bean="categoryService" />	
+		<ref bean="userService" />	
 	</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
