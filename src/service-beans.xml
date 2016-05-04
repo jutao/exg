@@ -8,10 +8,12 @@
     http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 	<bean id="categoryService" class="edu.jt.exg.service.CategoryServiceImpl" />	
 	<bean id="userService" class="edu.jt.exg.service.UserServiceImpl" />	
+	<bean id="advertisementsService" class="edu.jt.exg.service.AdvertisementsServiceImpl" />	
 	<jaxrs:server id="exgService" address="/">
 	<jaxrs:serviceBeans>
 		<ref bean="categoryService" />	
 		<ref bean="userService" />	
+		<ref bean="advertisementsService" />	
 	</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
@@ -27,6 +29,7 @@
 				<property name="dropRootElement" value="true"/> 
         		<property name="dropCollectionWrapperElement" value="true"/> 
 				<property name="serializeAsArray" value="true"/> 
+				
 			</bean>
 			<bean class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter">
 				<property name="allowOrigins" value="*"/>

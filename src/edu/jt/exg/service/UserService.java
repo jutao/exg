@@ -22,9 +22,9 @@ import edu.jt.exg.dto.UserCheck;
 @Produces( { "application/javascript" }) 
 public interface UserService extends Serializable {
     
-    @GET
+    @POST
     @Path("/user/userid")
-    public User getUserByID(@QueryParam("userid") String userid);
+    public User getUserByID(User user);
     
     @POST
     @Path("/usercheck")
@@ -32,7 +32,11 @@ public interface UserService extends Serializable {
     
     @POST
     @Path("/createuser")
-    public Callback CreateUser(User user);
+    public UserCheck CreateUser(User user);
+    
+    @POST
+    @Path("/updateuser")
+    public UserCheck UpdateUser(User user);
     
     
     

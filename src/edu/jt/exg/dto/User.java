@@ -64,15 +64,30 @@ public class User implements Serializable {
 		public String getAddress_province(){return address_province;}
 		public void setAddress_province(String address_province){this.address_province = address_province;}
 		
+		private String address_provinceName="";
+		@XmlElement(name = "address_provinceName")
+		public String getAddress_provinceName(){return address_provinceName;}
+		public void setAddress_provinceName(String address_province){this.address_provinceName = address_provinceName;}
+		
 		private String address_city="";
 		@XmlElement(name = "address_city")
 		public String getAddress_city(){return address_city;}
 		public void setAddress_city(String address_city){this.address_city = address_city;}
 		
+		private String address_cityName="";
+		@XmlElement(name = "address_cityName")
+		public String getAddress_cityName(){return address_cityName;}
+		public void setAddress_cityName(String address_cityName){this.address_cityName = address_cityName;}
+		
 		private String address_area="";
 		@XmlElement(name = "address_area")
 		public String getAddress_area(){return address_area;}
 		public void setAddress_area(String address_area){this.address_area = address_area;}
+		
+		private String address_areaName="";
+		@XmlElement(name = "address_areaName")
+		public String getAddress_areaName(){return address_areaName;}
+		public void setAddress_areaName(String address_areaName){this.address_areaName = address_areaName;}
 		
 		private String address_details="";
 		@XmlElement(name = "address_details")
@@ -158,5 +173,21 @@ public class User implements Serializable {
 		@XmlElement(name = "invalid")
 		public String getInvalid(){return invalid;}
 		public void setInvalid(String invalid){this.invalid = invalid;}
+		
+		private String categoryName="";
+		@XmlElement(name = "categoryName")
+		public String getCategoryName(){return categoryName;}
+		public void setCategoryName(String categoryName){this.categoryName = categoryName;}
+		
+		private String genderName="";
+		@XmlElement(name = "genderName")
+		public String getGenderName(){return genderName;}
+		public void setGenderName(String genderName){this.genderName = genderName;}
+		
+		private String usertypeName="";
+		@XmlElement(name = "usertypeName")
+		public String getUsertypeName(){return usertypeName;}
+		public void setUsertypeName(String usertypeName){this.usertypeName = usertypeName;}
+		
 		
 }

@@ -555,10 +555,10 @@ String path = request.getContextPath();
 </body>
 <script language="javascript">
 $(function(){
-	var location = (window.location+'').split('/'); 
-	var bPath = location[0]+'//'+location[2]+'/'+location[3]; 
+ 	var location = (window.location+'').split('/'); 
+	var bPath = location[0]+'//'+location[2]+'/'+location[3];
 	var pic = document.getElementById("icon1");
-	pic.src = bPath+$("#icon").val();
+	pic.src = $("#icon").val();
 	
 	var pic = document.getElementById("qualificat1");
 	pic.src = bPath+$("#qualificat").val();

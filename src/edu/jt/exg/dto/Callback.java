@@ -18,4 +18,5 @@ public class Callback implements Serializable{
 	@XmlElement(name = "message")
 	public String getMessage(){return message;}
 	public void setMessage(String message){this.message = message;}
+	
 }
