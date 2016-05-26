@@ -7,6 +7,7 @@
 <result column="Taskid" property="taskid"/>
 <result column="Userkey" property="userkey"/>
 <result column="Serverkey" property="serverkey"/>
+<result column="Category" property="category"/>
 <result column="Tip" property="tip"/>
 <result column="Epson" property="epson"/>
 <result column="Pro_description" property="pro_description"/>
@@ -69,6 +70,7 @@
 		<if test="taskid!=null">taskid=#{taskid},</if>
 <if test="userkey!=null">userkey=#{userkey},</if>
 <if test="serverkey!=null">serverkey=#{serverkey},</if>
+<if test="category!=null">category=#{category},</if>
 <if test="tip!=null">tip=#{tip},</if>
 <if test="epson!=null">epson=#{epson},</if>
 <if test="pro_description!=null">pro_description=#{pro_description},</if>
@@ -96,6 +98,7 @@
 <if test="taskid!=null">taskid,</if>
 <if test="userkey!=null">userkey,</if>
 <if test="serverkey!=null">serverkey,</if>
+<if test="category!=null">category,</if>
 <if test="tip!=null">tip,</if>
 <if test="epson!=null">epson,</if>
 <if test="pro_description!=null">pro_description,</if>
@@ -118,6 +121,7 @@
 <if test="taskid!=null">#{taskid},</if>
 <if test="userkey!=null">#{userkey},</if>
 <if test="serverkey!=null">#{serverkey},</if>
+<if test="category!=null">#{category},</if>
 <if test="tip!=null">#{tip},</if>
 <if test="epson!=null">#{epson},</if>
 <if test="pro_description!=null">#{pro_description},</if>

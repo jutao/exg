@@ -275,7 +275,7 @@ public class V_taskBatisDao {
 	 */
 	private static String getWhereString(V_taskBean queryConditionsBean,String sql){
 		StringBuffer s=new StringBuffer(sql).append(ConstSetup.DATABASE_OWNER).append(".").append(TABLE).append(" where 1=1 and ");
-				if(queryConditionsBean.getTaskid().trim().length()>0)
+		if(queryConditionsBean.getTaskid().trim().length()>0)
 			s.append("taskid like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getTaskid().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getUserkey().trim().length()>0)
 			s.append("userkey like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getUserkey().trim())).append("%' escape '/' and ");

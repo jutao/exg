@@ -143,10 +143,10 @@ $(function(){
 	var location = (window.location+'').split('/'); 
 	var bPath = location[0]+'//'+location[2]+'/'+location[3]; 
 var pic = document.getElementById("icon1");
-	pic.src = bPath+$("#icon").val();
+	pic.src =$("#icon").val();
 	
 	var pic = document.getElementById("pro_image11");
-	pic.src = bPath+$("#pro_image1").val();
+	pic.src = $("#pro_image1").val();
 	
 	var pic = document.getElementById("pro_image21");
 	pic.src = bPath+$("#pro_image2").val();
@@ -159,7 +159,7 @@ var pic = document.getElementById("icon1");
 	var pic = document.getElementById("pro_image51");
 	pic.src = bPath+$("#pro_image5").val();
 	var pic = document.getElementById("solve_image11");
-	pic.src = bPath+$("#solve_image1").val();
+	pic.src = $("#solve_image1").val();
 	
 	var pic = document.getElementById("solve_image21");
 	pic.src = bPath+$("#solve_image2").val();

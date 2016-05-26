@@ -37,7 +37,6 @@ public class Category_masterBatisDao {
 		public static String UPDATE_TIME_ASC="update_time asc";
 		public static String UPDATE_TIME_DESC="update_time desc";
 
-
 	public Category_masterBatisDao(){super();}
 	
 	/**

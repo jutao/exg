@@ -71,33 +71,33 @@
 	</update>
 	
 	<!-- 插入记录 -->
-	<insert id="insert" parameterType="Mgr_userBean">
-		insert into mgr_user
-	    <trim prefix="(" suffix=")" suffixOverrides=",">
-<if test="id!=null">id,</if>
-<if test="usertype!=null">usertype,</if>
-<if test="userid!=null">userid,</if>
-<if test="name!=null">name,</if>
-<if test="login_password!=null">login_password,</if>
-<if test="yubei1!=null">yubei1,</if>
-<if test="yubei2!=null">yubei2,</if>
-<if test="yubei3!=null">yubei3,</if>
-<if test="invalid!=null">invalid,</if>
-<if test="register_time!=null">register_time,</if>
-<if test="update_time!=null">update_time,</if>
-	    </trim>
-	    <trim prefix="values (" suffix=")" suffixOverrides=",">
-<if test="id!=null">#{id},</if>
-<if test="usertype!=null">#{usertype},</if>
-<if test="userid!=null">#{userid},</if>
-<if test="name!=null">#{name},</if>
-<if test="login_password!=null">#{login_password},</if>
-<if test="yubei1!=null">#{yubei1},</if>
-<if test="yubei2!=null">#{yubei2},</if>
-<if test="yubei3!=null">#{yubei3},</if>
-<if test="invalid!=null">#{invalid},</if>
-<if test="register_time!=null">#{register_time},</if>
-<if test="update_time!=null">#{update_time},</if>
-	    </trim>
-	  </insert>
+<insert id="insert" parameterType="Mgr_userBean">
+	insert into mgr_user
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id!=null">id,</if>
+		<if test="usertype!=null">usertype,</if>
+		<if test="userid!=null">userid,</if>
+		<if test="name!=null">name,</if>
+		<if test="login_password!=null">login_password,</if>
+		<if test="yubei1!=null">yubei1,</if>
+		<if test="yubei2!=null">yubei2,</if>
+		<if test="yubei3!=null">yubei3,</if>
+		<if test="invalid!=null">invalid,</if>
+		<if test="register_time!=null">register_time,</if>
+		<if test="update_time!=null">update_time,</if>
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id!=null">#{id},</if>
+		<if test="usertype!=null">#{usertype},</if>
+		<if test="userid!=null">#{userid},</if>
+		<if test="name!=null">#{name},</if>
+		<if test="login_password!=null">#{login_password},</if>
+		<if test="yubei1!=null">#{yubei1},</if>
+		<if test="yubei2!=null">#{yubei2},</if>
+		<if test="yubei3!=null">#{yubei3},</if>
+		<if test="invalid!=null">#{invalid},</if>
+		<if test="register_time!=null">#{register_time},</if>
+		<if test="update_time!=null">#{update_time},</if>
+	</trim>
+</insert>
 </mapper>

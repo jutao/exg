@@ -236,7 +236,9 @@ public class TaskBatisDao {
 	public int updateByKey(TaskBean taskBean){
 		Integer result=new Integer(1);
 		try{getITask().updateByKey(taskBean);
-		}catch(Exception e){result=0;}
+		}catch(Exception e){
+			System.out.println(e.toString());
+			result=0;}
 		return result.intValue();
 	}
 	
@@ -247,9 +249,14 @@ public class TaskBatisDao {
 	 */
 	public int insert(TaskBean taskBean){
 		Integer result=new Integer(1);
-		try{taskBean.setId(Utilities.getRandomPK(true));
+		try{
+			if(taskBean.getId().isEmpty()){
+				taskBean.setId(Utilities.getRandomPK(true));
+			}
 			getITask().insert(taskBean);
-		}catch(Exception e){result=0;}
+		}catch(Exception e){
+			System.out.println(e.toString());
+			result=0;}
 		return result.intValue();
 	}
 	
@@ -261,10 +268,13 @@ public class TaskBatisDao {
 	 */
 	private static String getWhereString(TaskBean queryConditionsBean,String sql){
 		StringBuffer s=new StringBuffer(sql).append(ConstSetup.DATABASE_OWNER).append(".").append(TABLE).append(" where 1=1 and ");
-				if(queryConditionsBean.getTaskid().trim().length()>0)
+		
+		if(queryConditionsBean.getTaskid().trim().length()>0)
 			s.append("taskid like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getTaskid().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getUserkey().trim().length()>0)
 			s.append("userkey like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getUserkey().trim())).append("%' escape '/' and ");
+		if(queryConditionsBean.getCategory().trim().length()>0)
+			s.append("category like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getCategory().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getServerkey().trim().length()>0)
 			s.append("serverkey like '%").append(Utilities.percentMarkFilter(queryConditionsBean.getServerkey().trim())).append("%' escape '/' and ");
 		if(queryConditionsBean.getTipFrom()!=null)

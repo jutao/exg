@@ -9,11 +9,18 @@
 	<bean id="categoryService" class="edu.jt.exg.service.CategoryServiceImpl" />	
 	<bean id="userService" class="edu.jt.exg.service.UserServiceImpl" />	
 	<bean id="advertisementsService" class="edu.jt.exg.service.AdvertisementsServiceImpl" />	
+	<bean id="taskService" class="edu.jt.exg.service.TaskServiceImpl" />	
+	<bean id="order_masterService" class="edu.jt.exg.service.Order_masterServiceImpl" />	
+	<bean id="commentService" class="edu.jt.exg.service.CommentServiceImpl" />	
+	
 	<jaxrs:server id="exgService" address="/">
 	<jaxrs:serviceBeans>
 		<ref bean="categoryService" />	
 		<ref bean="userService" />	
 		<ref bean="advertisementsService" />	
+		<ref bean="taskService" />	
+		<ref bean="order_masterService" />	
+		<ref bean="commentService" />	
 	</jaxrs:serviceBeans>
 		<jaxrs:inInterceptors>
 			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>

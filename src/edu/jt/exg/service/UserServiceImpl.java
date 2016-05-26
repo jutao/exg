@@ -9,11 +9,8 @@ import org.springframework.util.StringUtils;
 import utility.CommonMethod;
 import utility.Utilities;
 import edu.jt.exg.action.UserAction;
-import edu.jt.exg.dto.Callback;
 import edu.jt.exg.dto.User;
 import edu.jt.exg.dto.UserCheck;
-import edu.jt.exg.logic.category_master.Category_masterBean;
-import edu.jt.exg.logic.user.InitPageControl;
 import edu.jt.exg.logic.user.UserBatisDao;
 import edu.jt.exg.logic.user.UserBean;
 import edu.jt.exg.logic.user.UserUtility;
@@ -80,6 +77,8 @@ public class UserServiceImpl implements UserService {
 			userbean.setInvalid("0");
 			userbean.setLevel(1);
 			userbean.setLogin_password(user.getLogin_password());
+			userbean.setRegister_time(Utilities.csi.getCurrentTimestamp());
+			userbean.setUpdate_time(Utilities.csi.getCurrentTimestamp());
 			if (dao.insert(userbean) == 0) {
 				callback.setCode(0);
 				callback.setMessage("fail");
@@ -103,6 +102,7 @@ public class UserServiceImpl implements UserService {
 					UserBatisDao.class);
 			if (null != user) {
 				BeanUtils.copyProperties(user, userbean);
+				userbean.setUpdate_time(Utilities.csi.getCurrentTimestamp());
 			}
 			int result=dao.updateByKey(userbean);
 			if(result==0){

@@ -314,6 +314,7 @@ public class UserBatisDao {
 		try {
 			getIUser().deleteByKey(key);
 		} catch (Exception e) {
+			
 			result = 0;
 		}
 		return result.intValue();

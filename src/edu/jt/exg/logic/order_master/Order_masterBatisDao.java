@@ -229,7 +229,10 @@ public class Order_masterBatisDao {
 	 */
 	public int insert(Order_masterBean order_masterBean){
 		Integer result=new Integer(1);
-		try{order_masterBean.setId(Utilities.getRandomPK(true));
+		try{
+			if(order_masterBean.getId().isEmpty()){
+				order_masterBean.setId(Utilities.getRandomPK(true));
+			}
 			getIOrder_master().insert(order_masterBean);
 		}catch(Exception e){result=0;}
 		return result.intValue();

@@ -221,7 +221,8 @@ public class Order_taskBatisDao {
 		Integer result=new Integer(1);
 		try{order_taskBean.setId(Utilities.getRandomPK(true));
 			getIOrder_task().insert(order_taskBean);
-		}catch(Exception e){result=0;}
+		}catch(Exception e){
+			result=0;}
 		return result.intValue();
 	}
 	

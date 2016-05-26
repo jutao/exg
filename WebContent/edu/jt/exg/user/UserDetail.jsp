@@ -561,7 +561,7 @@ $(function(){
 	pic.src = $("#icon").val();
 	
 	var pic = document.getElementById("qualificat1");
-	pic.src = bPath+$("#qualificat").val();
+	pic.src =$("#qualificat").val();
 	//等待加载editor控件
 	//************************************************************************************************************
 	var ajaxFlag=true;//通过所有ajax验证的标志位

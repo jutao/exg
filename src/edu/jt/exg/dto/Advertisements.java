@@ -1,7 +1,5 @@
 package edu.jt.exg.dto;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

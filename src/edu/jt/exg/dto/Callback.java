@@ -19,4 +19,12 @@ public class Callback implements Serializable{
 	public String getMessage(){return message;}
 	public void setMessage(String message){this.message = message;}
 	
+	private Boolean result = false;
+	@XmlElement(name = "result")
+	public Boolean getResult() {
+		return result;
+	}
+	public void setResult(Boolean result) {
+		this.result = result;
+	}
 }
